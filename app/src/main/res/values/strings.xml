@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">AndroidAndJava</string>
+    <string name="pa">Привет</string>
+    <string name="textButton">Изменить текст</string>
+    <string name="textButton1">Это Я</string>
+    <string name="textField">Напишите в поле</string>
 </resources>
