@@ -61,10 +61,8 @@ public class MainActivity extends AppCompatActivity {
         buttonOtherLayout.setOnClickListener ( new View.OnClickListener () {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent (this, SecondActivity.class);
+                Intent intent = new Intent (MainActivity.this, SecondActivity.class);
                 startActivity ( intent );
-                //делаем всплывающее сообщение в виде текста (выводим текст на экран)
-//                Toast.makeText ( MainActivity.this, "мы перешли на другой экран", Toast.LENGTH_SHORT ).show ();
             }
         } );
     }

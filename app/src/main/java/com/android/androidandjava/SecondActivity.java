@@ -23,6 +23,9 @@ public class SecondActivity extends AppCompatActivity {
         super.onCreate ( savedInstanceState ); // вызываем 1-й родительский модуль
         setContentView ( R.layout.activity_second ); // 2-й модуль
 
+        //делаем всплывающее сообщение в виде текста (выводим текст на экран) при открытии данного Activity
+        Toast.makeText ( SecondActivity.this, "мы перешли на другой экран", Toast.LENGTH_SHORT ).show ();
+
         //что бы воспользоватся кнопкой нужно ее поинециализировать
         buttonSecondText = findViewById ( R.id.buttonText2 );//проинецализировали кнопку для изменения текста
         editText2 = findViewById ( R.id.editText2 );//проинецализировали поле где вводится текст
@@ -36,7 +39,7 @@ public class SecondActivity extends AppCompatActivity {
                 String srcText2 = editText2.getText ().toString ();// создаем переменную, присваеваем поле для ввода и приобразуем его в текст
                 String result2 = srcText2.toUpperCase ();// создаем переменную, присваеваем поле с результатом view преобразуем сам текст
                 textView2.setText ( result2 ); //вставляем результат в поле view
-                Log.d ( "MainActivity", "увеличили текст " + srcText2 ); //сделали свой лог в данном классе. В данном случае лог можно посмотреть в Debug
+                Log.d ( "SecondActivity", "увеличили текст " + srcText2 ); //сделали свой лог в данном классе. В данном случае лог можно посмотреть в Debug
             }
         } );
     }
