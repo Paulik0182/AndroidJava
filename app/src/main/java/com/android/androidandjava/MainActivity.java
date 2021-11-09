@@ -28,11 +28,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView ( R.layout.activity_main ); // 2-й модуль
 
         //что бы воспользоватся кнопкой нужно ее поинециализировать
-        button1 = findViewById ( R.id.button1 ); //проинецализировали кнопку
-        buttonText = findViewById ( R.id.buttonText );//проинецализировали кнопку для изменения текста
-        editText = findViewById ( R.id.editText1 );//проинецализировали поле где вводится текст
-        textView = findViewById ( R.id.resultEditText1 );//проинецализировали поле где выводится текст
-        buttonOtherLayout = findViewById ( R.id.buttonOtherLayout ); //проинецализировали кнопку перехода на другой экран
+        button1 = findViewById ( R.id.button_1 ); //проинецализировали кнопку
+        buttonText = findViewById ( R.id.button_text );//проинецализировали кнопку для изменения текста
+        editText = findViewById ( R.id.edit_text_1 );//проинецализировали поле где вводится текст
+        textView = findViewById ( R.id.result_edit_text_1 );//проинецализировали поле где выводится текст
+        buttonOtherLayout = findViewById ( R.id.button_other_layout ); //проинецализировали кнопку перехода на другой экран
 
         //обращаемся к кнопке, установливаем слушатель нажатия
         button1.setOnClickListener ( new View.OnClickListener () {

@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:gravity="center"
-        android:text="@string/textOther"
+        android:text="@string/text_other"
         android:textSize="30sp">
 
     </TextView>
@@ -28,16 +28,16 @@
         android:orientation="horizontal">
 
         <EditText
-            android:id="@+id/editText2"
+            android:id="@+id/edit_text_2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="@string/textField"
+            android:hint="@string/text_field"
             android:inputType="text"
             android:textSize="30sp" />
 
         <TextView
-            android:id="@+id/resultEditText2"
+            android:id="@+id/result_edit_text_2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -48,9 +48,9 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/buttonText2"
+        android:id="@+id/button_text_2"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:text="@string/textButton" />
+        android:text="@string/text_button" />
 
 </LinearLayout>

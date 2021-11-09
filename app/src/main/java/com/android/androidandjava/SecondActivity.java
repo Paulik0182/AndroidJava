@@ -27,9 +27,9 @@ public class SecondActivity extends AppCompatActivity {
         Toast.makeText ( SecondActivity.this, "мы перешли на другой экран", Toast.LENGTH_SHORT ).show ();
 
         //что бы воспользоватся кнопкой нужно ее поинециализировать
-        buttonSecondText = findViewById ( R.id.buttonText2 );//проинецализировали кнопку для изменения текста
-        editText2 = findViewById ( R.id.editText2 );//проинецализировали поле где вводится текст
-        textView2 = findViewById ( R.id.resultEditText2 );//проинецализировали поле где выводится текст
+        buttonSecondText = findViewById ( R.id.button_text_2 );//проинецализировали кнопку для изменения текста
+        editText2 = findViewById ( R.id.edit_text_2 );//проинецализировали поле где вводится текст
+        textView2 = findViewById ( R.id.result_edit_text_2 );//проинецализировали поле где выводится текст
 
         buttonSecondText.setOnClickListener ( new View.OnClickListener () { //устанавливаем слушатель
             @Override

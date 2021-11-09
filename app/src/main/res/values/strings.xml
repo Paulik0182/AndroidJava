@@ -1,9 +1,10 @@
 <resources>
     <string name="app_name">AndroidAndJava</string>
     <string name="pa">Привет</string>
-    <string name="textButton">Изменить текст</string>
-    <string name="textButton1">Это Я</string>
-    <string name="textField">Напишите в поле</string>
-    <string name="textOther">Я другой экран</string>
-    <string name="buttonOtherLayout">переход на другой экран</string>
+    <string name="text_button">Изменить текст</string>
+    <string name="text_button_1">Это Я</string>
+    <string name="text_field">Напишите в поле</string>
+    <string name="text_other">Я другой экран</string>
+    <string name="button_other_layout">переход на другой экран</string>
+    <string name="button_test">Разделитель</string>
 </resources>
