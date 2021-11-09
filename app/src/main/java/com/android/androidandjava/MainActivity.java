@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 //это самый главный клас, с этого класса начинается собиратся приложение
 public class MainActivity extends AppCompatActivity {
@@ -33,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
         button1.setOnClickListener ( new View.OnClickListener () {
             @Override
             public void onClick(View v) { //нажатие, далее действие
+                //делаем всплывающее сообщение в виде текста (выводим текст на экран
+                Toast.makeText ( MainActivity.this, "меняем название кнопки", Toast.LENGTH_SHORT ).show ();
                 button1.setText ( "Изменить" ); //меняем название кнопки
             }
         } );
@@ -42,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
         buttonText.setOnClickListener ( new View.OnClickListener () { //устанавливаем слушатель
             @Override
             public void onClick(View v) { //нажимаем на кнопку
+                //делаем всплывающее сообщение в виде текста (выводим текст на экран
+                Toast.makeText ( MainActivity.this, "преобразуем текст в другом поле", Toast.LENGTH_SHORT ).show ();
                 String srcText = editText.getText ().toString ();// создаем переменную, присваеваем поле для ввода и приобразуем его в текст
                 String result = srcText.toUpperCase ();// создаем переменную, присваеваем поле с результатом view преобразуем сам текст
                 textView.setText ( result ); //вставляем результат в поле view
