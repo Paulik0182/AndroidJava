@@ -2,6 +2,7 @@ package com.android.androidandjava;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -10,7 +11,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-//это самый главный клас, с этого класса начинается собиратся приложение
+//это самый главный класc, с этого класса начинается собиратся приложение
 public class MainActivity extends AppCompatActivity {
 
     //для того что-бы обратится к кнопке надо ее создать (создать переменную)
@@ -18,6 +19,8 @@ public class MainActivity extends AppCompatActivity {
     private Button buttonText; //создаем кнопку для изменения текста
     private EditText editText; //переменная поля для ввода текста
     private TextView textView; //переменная поля для отображения текста после нажатия кнопки
+    private Button buttonOtherLayout; //переменная кнопки для перехода на другой экран (Activity)
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) { //здесь указываем сто нужно сделать при создании
@@ -29,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
         buttonText = findViewById ( R.id.buttonText );//проинецализировали кнопку для изменения текста
         editText = findViewById ( R.id.editText1 );//проинецализировали поле где вводится текст
         textView = findViewById ( R.id.resultEditText1 );//проинецализировали поле где выводится текст
+        buttonOtherLayout = findViewById ( R.id.buttonOtherLayout ); //проинецализировали кнопку перехода на другой экран
 
         //обращаемся к кнопке, установливаем слушатель нажатия
         button1.setOnClickListener ( new View.OnClickListener () {
@@ -39,18 +43,28 @@ public class MainActivity extends AppCompatActivity {
                 button1.setText ( "Изменить" ); //меняем название кнопки
             }
         } );
-        //с 32 по 37 строку можно упростить код, написать тоже самое, но короче
+        //с 38 по 45 строку можно упростить код, написать тоже самое, но короче
         //button1.setOnClickListener ( v -> button1.setText ( "Изменить" ) );
 
         buttonText.setOnClickListener ( new View.OnClickListener () { //устанавливаем слушатель
             @Override
             public void onClick(View v) { //нажимаем на кнопку
-                //делаем всплывающее сообщение в виде текста (выводим текст на экран
+                //делаем всплывающее сообщение в виде текста (выводим текст на экран)
                 Toast.makeText ( MainActivity.this, "преобразуем текст в другом поле", Toast.LENGTH_SHORT ).show ();
                 String srcText = editText.getText ().toString ();// создаем переменную, присваеваем поле для ввода и приобразуем его в текст
                 String result = srcText.toUpperCase ();// создаем переменную, присваеваем поле с результатом view преобразуем сам текст
                 textView.setText ( result ); //вставляем результат в поле view
                 Log.d ( "MainActivity", "увеличили текст " + srcText ); //сделали свой лог в данном классе. В данном случае лог можно посмотреть в Debug
+            }
+        } );
+
+        buttonOtherLayout.setOnClickListener ( new View.OnClickListener () {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent (this, SecondActivity.class);
+                startActivity ( intent );
+                //делаем всплывающее сообщение в виде текста (выводим текст на экран)
+//                Toast.makeText ( MainActivity.this, "мы перешли на другой экран", Toast.LENGTH_SHORT ).show ();
             }
         } );
     }

@@ -4,4 +4,6 @@
     <string name="textButton">Изменить текст</string>
     <string name="textButton1">Это Я</string>
     <string name="textField">Напишите в поле</string>
+    <string name="textOther">Я другой экран</string>
+    <string name="buttonOtherLayout">переход на другой экран</string>
 </resources>
