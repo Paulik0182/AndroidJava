@@ -9,12 +9,12 @@ android {
         applicationId "com.android.androidandjava"
         minSdk 21
         targetSdk 31
-        versionCode 1
-        versionName "1.0"
+        versionCode 1 //код версии. при выкладывании на PlayMarket, нельзя выложить одну и туже версию или версию ниже
+        versionName "1.0" //человеко читаемая версия
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+// Варианты сборки
     buildTypes {
         release {
             minifyEnabled false
