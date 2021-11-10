@@ -3,5 +3,6 @@
     <string name="button_frame_layout_1" translatable="false">Кнопка 1</string>
     <string name="button_frame_layout_2" translatable="false">Кнопка 2</string>
     <string name="button_frame_layout_3">Кнопка 3</string>
-    <string name="button_important_layout">Важная</string>
+    <string name="button_frame_layout_4">Кнопка 4</string>
+    <string name="button_important_layout">Важная кнопка</string>
 </resources>
