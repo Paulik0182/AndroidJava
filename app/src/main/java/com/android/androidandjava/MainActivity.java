@@ -1,26 +1,63 @@
 package com.android.androidandjava;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "@@@ MainActivity"; //@@@ пометка по каторой будем искать, далее файл в который будем писать
 
+    private TextView counterTextView;//переменная текстового поля
+    //    private Integer counter = 0;//переменная счетчика и иницализация ее
+    private int counter = 0;//переменная счетчика и иницализация ее
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate ( savedInstanceState );
         setContentView ( R.layout.activity_main );
-        findViewById ( R.id.button_activity2 ).setOnClickListener ( v -> {
+
+        counterTextView = findViewById ( R.id.counter_text_view );//получаем доступ к строке
+//        counterTextView.setText ( counter.toString () );//Вариант 1. обрабатываем результат, преобразуем в строку
+//        counterTextView.setText ( String.valueOf ( counter ) );// Вариант 2.
+//        counterTextView.setText ( String.format ( "Вы нажали %d раз", counter ) );//Вариант 3. преобразование в строку через формат
+
+        updateCounterView ();
+
+        findViewById ( R.id.button_activity2 ).setOnClickListener ( v -> { //обработка клика кнопки. открытие второй Активити
             Intent intent = new Intent ( this, SecondActivity.class );
             startActivity ( intent );
+            Log.d ( TAG, "Send Intent MainActivity -> SecondActivity" );//лог на вторую активити
+        } );
 
-            Log.d ( TAG, "Send Intent MainActivity -> SecondActivity" );
+        findViewById ( R.id.button_inc ).setOnClickListener ( v -> { //обработка клика кнопки. обработка текстовой строки
+            counter++;
+//            counterTextView.setText ( String.format ( "Вы нажали %d раз", counter ) );//Вариант 3.
+            updateCounterView ();
         } );
 
         Log.d ( TAG, "onCreate" );
+    }
+
+    @SuppressLint("DefaultLocale")
+    private void updateCounterView() {//  создали функцию которую будем вызывать при обработке кнопки и запуске активити
+        counterTextView.setText ( String.format ( "Вы нажали %d раз", counter ) );
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState ( savedInstanceState );
+        Log.d ( TAG, "onRestoreInstanceState" );
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState ( outState );
+        Log.d ( TAG, "onSaveInstanceState" );
     }
 
     @Override

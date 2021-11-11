@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">AndroidAndJava</string>
     <string name="second_activity">Second Activity</string>
+    <string name="inc">Inc</string>
 </resources>
