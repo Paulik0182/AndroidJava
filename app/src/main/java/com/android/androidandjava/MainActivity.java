@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         updateCounterView ();
 
         findViewById ( R.id.button_activity2 ).setOnClickListener ( v -> { //обработка клика кнопки. открытие второй Активити
+            Toast.makeText ( this, "перешли на второй экран", Toast.LENGTH_SHORT ).show ();
             Intent intent = new Intent ( this, SecondActivity.class );
             startActivity ( intent );
             Log.d ( TAG, "Send Intent MainActivity -> SecondActivity" );//лог на вторую активити
@@ -42,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
         findViewById ( R.id.button_inc ).setOnClickListener ( v -> { //обработка клика кнопки. обработка текстовой строки
             counter++;
+            Toast.makeText ( this, "Нажал", Toast.LENGTH_SHORT ).show ();
 //            counterTextView.setText ( String.format ( "Вы нажали %d раз", counter ) );//Вариант 3.
             updateCounterView ();
         } );
