@@ -29,7 +29,8 @@ public class MainActivity extends AppCompatActivity {
 //        counterTextView.setText ( String.format ( "Вы нажали %d раз", counter ) );//Вариант 3. преобразование в строку через формат
 
         if (savedInstanceState != null && savedInstanceState.containsKey ( "COUNTER_KEY" )) {//Проверяем то чтото есть на экране, не ровно нулю и проверяем наличее ключа
-            counter = (SuperCounter) savedInstanceState.getSerializable ( "COUNTER_KEY" );// сохраняем по ключу
+            counter = savedInstanceState.getParcelable ( "COUNTER_KEY" );// сохраняем по ключу implements Parcelable
+//            counter = (SuperCounter) savedInstanceState.getSerializable ( "COUNTER_KEY" );// сохраняем по ключу implements Serializable
 //            counter = savedInstanceState.getInt ( "COUNTER_KEY" );// сохраняем по ключу
         } else {
             counter = new SuperCounter ( "MainCuonter", 0 );// иницализация переменной счетчика
@@ -67,7 +68,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
-        outState.putSerializable ( "COUNTER_KEY", counter ); //изменили потамучто implements Serializable в классе SuperCounter
+        outState.putParcelable ( "COUNTER_KEY", counter ); //изменили потамучто implements Parcelable в классе SuperCounter
+//        outState.putSerializable ( "COUNTER_KEY", counter ); //изменили потамучто implements Serializable в классе SuperCounter
 //        outState.putInt ( "COUNTER_KEY", counter.getCounter () ); //использование ключа при сохранении. это ключ.
         super.onSaveInstanceState ( outState );
         Log.d ( TAG, "onSaveInstanceState" );

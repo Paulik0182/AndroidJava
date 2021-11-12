@@ -15,7 +15,8 @@ public class SecondActivity extends AppCompatActivity {
         super.onCreate ( savedInstanceState );
         setContentView ( R.layout.activity_second );
 
-        counter = getIntent ().getExtras ().getInt ( MainActivity.COUNTER_KEY );
+        SuperCounter counter = getIntent ().getExtras ().getParcelable ( MainActivity.COUNTER_KEY ); // передаем данные потаму что implements Parcelable
+//        counter = getIntent ().getExtras ().getInt ( MainActivity.COUNTER_KEY );
 
 //        if (MainActivity.COUNTER_KEY != null) {//запись не верная. Нужно проверить не является ли приходящее значение нулевым
 //            counter = getIntent ().getExtras ().getInt ( MainActivity.COUNTER_KEY );//дастали значение из класса MainActivity
@@ -23,7 +24,8 @@ public class SecondActivity extends AppCompatActivity {
 //            counter = 9;
 //        }
 
-        ((TextView) findViewById ( R.id.second_text_view )).setText ( String.valueOf ( counter ) );//положили значение в текст
+        ((TextView) findViewById ( R.id.second_text_view )).setText ( String.valueOf ( counter.getCounter () ) );//положили значение в текст
+//        ((TextView) findViewById ( R.id.second_text_view )).setText ( String.valueOf ( counter ) );//положили значение в текст
 
         Log.d ( TAG, "onCreate" );
     }
