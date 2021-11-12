@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "@@@ MainActivity"; //@@@ пометка по каторой будем искать, далее файл в который будем писать
 
     private TextView counterTextView;//переменная текстового поля
-    private static final String COUNTER_KEY = "counter_key";
+    public static final String COUNTER_KEY = "counter_key"; //ключь сделали константой
     //    private Integer counter = 0;//переменная счетчика и иницализация ее
     private int counter;//переменная счетчика
 
@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById ( R.id.button_activity2 ).setOnClickListener ( v -> { //обработка клика кнопки. открытие второй Активити
             Toast.makeText ( this, "перешли на второй экран", Toast.LENGTH_SHORT ).show ();
             Intent intent = new Intent ( this, SecondActivity.class );
+            intent.putExtra ( COUNTER_KEY, counter );// в переменную положили значение нажатий на кнопку
             startActivity ( intent );
             Log.d ( TAG, "Send Intent MainActivity -> SecondActivity" );//лог на вторую активити
         } );
