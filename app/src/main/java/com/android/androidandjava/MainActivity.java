@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView counterTextView;//переменная текстового поля
     public static final String COUNTER_KEY = "counter_key"; //ключь сделали константой
     //    private Integer counter = 0;//переменная счетчика и иницализация ее
-    private int counter;//переменная счетчика
+    private SuperCounter counter;//переменная счетчика
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,9 +29,10 @@ public class MainActivity extends AppCompatActivity {
 //        counterTextView.setText ( String.format ( "Вы нажали %d раз", counter ) );//Вариант 3. преобразование в строку через формат
 
         if (savedInstanceState != null && savedInstanceState.containsKey ( "COUNTER_KEY" )) {//Проверяем то чтото есть на экране, не ровно нулю и проверяем наличее ключа
-            counter = savedInstanceState.getInt ( "COUNTER_KEY" );// сохраняем по ключу
+            counter = (SuperCounter) savedInstanceState.getSerializable ( "COUNTER_KEY" );// сохраняем по ключу
+//            counter = savedInstanceState.getInt ( "COUNTER_KEY" );// сохраняем по ключу
         } else {
-            counter = 0;// иницализация переменной счетчика
+            counter = new SuperCounter ( "MainCuonter", 0 );// иницализация переменной счетчика
         }
         updateCounterView ();
 
@@ -44,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         } );
 
         findViewById ( R.id.button_inc ).setOnClickListener ( v -> { //обработка клика кнопки. обработка текстовой строки
-            counter++;
+            counter.increment ();
             Toast.makeText ( this, "Нажал", Toast.LENGTH_SHORT ).show ();
 //            counterTextView.setText ( String.format ( "Вы нажали %d раз", counter ) );//Вариант 3.
             updateCounterView ();
@@ -55,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
     @SuppressLint("DefaultLocale")
     private void updateCounterView() {//  создали функцию которую будем вызывать при обработке кнопки и запуске активити
-        counterTextView.setText ( String.format ( "Вы нажали %d раз", counter ) );
+        counterTextView.setText ( String.format ( "Вы нажали %d раз", counter.getCounter () ) );
     }
 
     @Override
@@ -66,7 +67,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
-        outState.putInt ( "COUNTER_KEY", counter ); //использование ключа при сохранении. это ключ.
+        outState.putSerializable ( "COUNTER_KEY", counter ); //изменили потамучто implements Serializable в классе SuperCounter
+//        outState.putInt ( "COUNTER_KEY", counter.getCounter () ); //использование ключа при сохранении. это ключ.
         super.onSaveInstanceState ( outState );
         Log.d ( TAG, "onSaveInstanceState" );
     }

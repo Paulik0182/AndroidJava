@@ -15,11 +15,13 @@ public class SecondActivity extends AppCompatActivity {
         super.onCreate ( savedInstanceState );
         setContentView ( R.layout.activity_second );
 
-        if (MainActivity.COUNTER_KEY != null) {//запись не верная. Нужно проверить не является ли приходящее значение нулевым
-            counter = getIntent ().getExtras ().getInt ( MainActivity.COUNTER_KEY );//дастали значение из класса MainActivity
-        } else {
-            counter = 9;
-        }
+        counter = getIntent ().getExtras ().getInt ( MainActivity.COUNTER_KEY );
+
+//        if (MainActivity.COUNTER_KEY != null) {//запись не верная. Нужно проверить не является ли приходящее значение нулевым
+//            counter = getIntent ().getExtras ().getInt ( MainActivity.COUNTER_KEY );//дастали значение из класса MainActivity
+//        } else {
+//            counter = 9;
+//        }
 
         ((TextView) findViewById ( R.id.second_text_view )).setText ( String.valueOf ( counter ) );//положили значение в текст
 
