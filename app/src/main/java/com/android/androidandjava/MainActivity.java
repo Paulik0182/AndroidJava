@@ -13,8 +13,9 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "@@@ MainActivity"; //@@@ пометка по каторой будем искать, далее файл в который будем писать
 
     private TextView counterTextView;//переменная текстового поля
+    private static final String COUNTER_KEY = "counter_key";
     //    private Integer counter = 0;//переменная счетчика и иницализация ее
-    private int counter = 0;//переменная счетчика и иницализация ее
+    private int counter;//переменная счетчика
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +27,11 @@ public class MainActivity extends AppCompatActivity {
 //        counterTextView.setText ( String.valueOf ( counter ) );// Вариант 2.
 //        counterTextView.setText ( String.format ( "Вы нажали %d раз", counter ) );//Вариант 3. преобразование в строку через формат
 
+        if (savedInstanceState != null && savedInstanceState.containsKey ( "COUNTER_KEY" )) {//Проверяем то чтото есть на экране, не ровно нулю и проверяем наличее ключа
+            counter = savedInstanceState.getInt ( "COUNTER_KEY" );// сохраняем по ключу
+        } else {
+            counter = 0;// иницализация переменной счетчика
+        }
         updateCounterView ();
 
         findViewById ( R.id.button_activity2 ).setOnClickListener ( v -> { //обработка клика кнопки. открытие второй Активити
@@ -56,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
+        outState.putInt ( "COUNTER_KEY", counter ); //использование ключа при сохранении. это ключ.
         super.onSaveInstanceState ( outState );
         Log.d ( TAG, "onSaveInstanceState" );
     }
