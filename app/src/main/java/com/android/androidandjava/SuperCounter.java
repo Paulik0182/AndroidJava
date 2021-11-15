@@ -5,17 +5,6 @@ import android.os.Parcelable;
 
 public class SuperCounter implements Parcelable {
 
-    public static final Creator<SuperCounter> CREATOR = new Creator<SuperCounter> () {
-        @Override
-        public SuperCounter createFromParcel(Parcel in) {
-            return new SuperCounter ( in );
-        }
-
-        @Override
-        public SuperCounter[] newArray(int size) {
-            return new SuperCounter[size];
-        }
-    };
     private final String name;//
     private int counter = 0;//
 
@@ -34,6 +23,18 @@ public class SuperCounter implements Parcelable {
         dest.writeInt ( counter );
         dest.writeString ( name );
     }
+
+    public static final Creator<SuperCounter> CREATOR = new Creator<SuperCounter> () {
+        @Override
+        public SuperCounter createFromParcel(Parcel in) {
+            return new SuperCounter ( in );
+        }
+
+        @Override
+        public SuperCounter[] newArray(int size) {
+            return new SuperCounter[size];
+        }
+    };
 
     @Override
     public int describeContents() {

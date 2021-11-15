@@ -33,11 +33,11 @@ public class MainActivity extends AppCompatActivity {
 //            counter = (SuperCounter) savedInstanceState.getSerializable ( "COUNTER_KEY" );// сохраняем по ключу implements Serializable
 //            counter = savedInstanceState.getInt ( "COUNTER_KEY" );// сохраняем по ключу
         } else {
-            counter = new SuperCounter ( "MainCuonter", 0 );// иницализация переменной счетчика
+            counter = new SuperCounter ( "MainCounter", 0 );// иницализация переменной счетчика
         }
         updateCounterView ();
 
-        findViewById ( R.id.button_activity2 ).setOnClickListener ( v -> { //обработка клика кнопки. открытие второй Активити
+        findViewById ( R.id.button_activity2 ).setOnClickListener ( v -> { //обработка клика кнопки. открытие второй Активити. заводить переменную для кнопки не обязательно все View сами по себе кликабельны
             Toast.makeText ( this, "перешли на второй экран", Toast.LENGTH_SHORT ).show ();
             Intent intent = new Intent ( this, SecondActivity.class );
             intent.putExtra ( COUNTER_KEY, counter );// в переменную положили значение нажатий на кнопку
@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
-        outState.putParcelable ( "COUNTER_KEY", counter ); //изменили потамучто implements Parcelable в классе SuperCounter
+        outState.putParcelable ( "COUNTER_KEY", counter ); //изменили потаму что implements Parcelable в классе SuperCounter
 //        outState.putSerializable ( "COUNTER_KEY", counter ); //изменили потамучто implements Serializable в классе SuperCounter
 //        outState.putInt ( "COUNTER_KEY", counter.getCounter () ); //использование ключа при сохранении. это ключ.
         super.onSaveInstanceState ( outState );
