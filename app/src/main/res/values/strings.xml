@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">AndroidAndJava</string>
+    <string name="greetings">Hello GB</string>
+    <string name="cancel_button">Cancel</string>
+    <string name="ok_button">Yes</string>
+    <string name="_1" translatable="false">1</string>
+    <string name="_2" translatable="false">2</string>
+    <string name="_3" translatable="false">3</string>
+    <string name="plus" translatable="false">+</string>
 </resources>
