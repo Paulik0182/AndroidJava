@@ -32,7 +32,7 @@
 
         <Button
             android:id="@+id/button_plus"
-            style="@style/number_button_style"
+            style="@style/operand_button_style"
             android:text="@string/plus" />
 
     </LinearLayout>
