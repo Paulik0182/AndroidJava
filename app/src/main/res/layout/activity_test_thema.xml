@@ -15,22 +15,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/button_1"
             style="@style/number_button_style"
             android:text="@string/_1" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/button_2"
             style="@style/number_button_style"
             android:text="@string/_2" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/button_3"
             style="@style/number_button_style"
             android:text="@string/_3" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/button_plus"
             style="@style/operand_button_style"
             android:text="@string/plus" />
