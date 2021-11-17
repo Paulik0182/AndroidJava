@@ -4,9 +4,6 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
-
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -16,10 +13,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView ( R.layout.activity_test_thema );
 
 
-        TextInputLayout textInputLayout = findViewById ( R.id.text_input_layout );
-        TextInputEditText textInputEditText = findViewById ( R.id.text_input_edit_text );
-
-        textInputEditText.setOnFocusChangeListener ( (v, hasFocus) -> textInputLayout.setError ( "Ошибка!" ) );
+//        TextInputLayout textInputLayout = findViewById ( R.id.text_input_layout );
+//        TextInputEditText textInputEditText = findViewById ( R.id.text_input_edit_text );
+//
+//        textInputEditText.setOnFocusChangeListener ( (v, hasFocus) -> textInputLayout.setError ( "Ошибка!" ) );
 
 //        textInputEditText.setOnFocusChangeListener ( new View.OnFocusChangeListener () {//до приобразовании в лямду. см.выше
 //            @Override
