@@ -7,4 +7,5 @@
     <string name="_2" translatable="false">2</string>
     <string name="_3" translatable="false">3</string>
     <string name="plus" translatable="false">+</string>
+    <string name="hint">Подсказка</string>
 </resources>
