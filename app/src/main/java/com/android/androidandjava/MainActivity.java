@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -53,9 +54,13 @@ public class MainActivity extends AppCompatActivity {
             String message = messageEditText.getText ().toString ();
             Intent intent = new Intent ();
             intent.setAction ( Intent.ACTION_SEND );
-            intent.setType ( "plain/text" );
+            intent.setType ( "plain/text" );//если закомитить эту строчку, то сработает проверка и выдаст сооющение toast
             intent.putExtra ( Intent.EXTRA_TEXT, message );
-            startActivity ( intent );
+            if (intent.resolveActivity ( getPackageManager () ) != null) {// проверяем есть ли приложение для его вызова. делать всегда
+                startActivity ( intent );
+            } else {
+                Toast.makeText ( this, "No Activity", Toast.LENGTH_SHORT ).show ();
+            }
         } );
 
     }
