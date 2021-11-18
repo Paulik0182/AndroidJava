@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText messageEditText;
     private Button nextButton;
     private Button sendButton;
+    private Button dispatchButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
         messageEditText = findViewById ( R.id.message_edit_text );
         nextButton = findViewById ( R.id.next_button );
         sendButton = findViewById ( R.id.send_button );
+        dispatchButton = findViewById ( R.id.dispatch_button );
 
         nextButton.setOnClickListener ( v -> {
             Intent intent = new Intent ( this, SecondActivity.class );//создали намерение
@@ -44,6 +46,15 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent ();//Вариант 2 . переход по ссылке
             intent.setAction ( Intent.ACTION_VIEW );//Вариант 2 . переход по ссылке
             intent.setData ( Uri.parse ( "http://www.yandex.ru" ) );//Вариант 2 . переход по ссылке
+            startActivity ( intent );
+        } );
+
+        dispatchButton.setOnClickListener ( v -> {
+            String message = messageEditText.getText ().toString ();
+            Intent intent = new Intent ();
+            intent.setAction ( Intent.ACTION_SEND );
+            intent.setType ( "plain/text" );
+            intent.putExtra ( Intent.EXTRA_TEXT, message );
             startActivity ( intent );
         } );
 
