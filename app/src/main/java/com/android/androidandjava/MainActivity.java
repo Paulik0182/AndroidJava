@@ -9,6 +9,9 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
+
+    public static final String MESSAGE_EXTRA_KEY = "message";
+
     private TextView echoTextView;
     private EditText messageEditText;
     private Button nextButton;
@@ -24,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
         nextButton.setOnClickListener ( v -> {
             Intent intent = new Intent ( this, SecondActivity.class );
+            intent.putExtra ( MESSAGE_EXTRA_KEY, messageEditText.getText ().toString () );
             this.startActivity ( intent );
         } );
 
