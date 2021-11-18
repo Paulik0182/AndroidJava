@@ -12,13 +12,13 @@
         android:id="@+id/echo_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="52sp" />
+        android:textSize="48dp" />
 
     <EditText
         android:id="@+id/message_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="48sp" />
+        android:textSize="48dp" />
 
     <Button
         android:id="@+id/next_button"

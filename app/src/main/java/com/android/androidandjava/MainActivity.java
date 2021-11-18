@@ -18,13 +18,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate ( savedInstanceState );
         setContentView ( R.layout.activity_main );
 
-        echoTextView.findViewById ( R.id.echo_text_view );
-        messageEditText.findViewById ( R.id.message_edit_text );
-        nextButton.findViewById ( R.id.next_button );
+        echoTextView = findViewById ( R.id.echo_text_view );
+        messageEditText = findViewById ( R.id.message_edit_text );
+        nextButton = findViewById ( R.id.next_button );
 
         nextButton.setOnClickListener ( v -> {
             Intent intent = new Intent ( this, SecondActivity.class );
-            startActivity ( intent );
+            this.startActivity ( intent );
         } );
 
     }
