@@ -1,6 +1,7 @@
 package com.android.androidandjava;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView echoTextView;
     private EditText messageEditText;
     private Button nextButton;
+    private Button sendButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         echoTextView = findViewById ( R.id.echo_text_view );
         messageEditText = findViewById ( R.id.message_edit_text );
         nextButton = findViewById ( R.id.next_button );
+        sendButton = findViewById ( R.id.send_button );
 
         nextButton.setOnClickListener ( v -> {
             Intent intent = new Intent ( this, SecondActivity.class );//создали намерение
@@ -35,6 +38,15 @@ public class MainActivity extends AppCompatActivity {
             startActivityForResult ( intent, ECHO_REQUEST_CODE );// заявили что запускаем активити чтобы получить результат
 //            this.startActivity ( intent );
         } );
+
+        sendButton.setOnClickListener ( v -> {
+//            Intent intent = new Intent (Intent.ACTION_VIEW, Uri.parse ("http://www.yandex.ru"));//нажатием на кнопку мы откроем браузер с помощью ссылки
+            Intent intent = new Intent ();//Вариант 2 . переход по ссылке
+            intent.setAction ( Intent.ACTION_VIEW );//Вариант 2 . переход по ссылке
+            intent.setData ( Uri.parse ( "http://www.yandex.ru" ) );//Вариант 2 . переход по ссылке
+            startActivity ( intent );
+        } );
+
     }
 
     @Override

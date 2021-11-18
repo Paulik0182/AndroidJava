@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/purple_700"
+    android:background="@color/purple_200"
     android:orientation="vertical"
     android:padding="16dp"
     tools:context=".MainActivity">
@@ -25,5 +25,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Next" />
+
+    <Button
+        android:id="@+id/send_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Send" />
 
 </LinearLayout>
