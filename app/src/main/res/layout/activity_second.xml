@@ -12,8 +12,13 @@
         android:id="@+id/echo_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
         android:textSize="40dp" />
+
+    <EditText
+        android:id="@+id/message_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="48dp" />
 
     <Button
         android:id="@+id/back_button"
