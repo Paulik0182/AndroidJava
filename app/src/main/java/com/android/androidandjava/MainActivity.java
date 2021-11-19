@@ -3,6 +3,7 @@ package com.android.androidandjava;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -13,8 +14,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final String ECHO_PREF_KEY = "echo";
+
     public static final String MESSAGE_EXTRA_KEY = "message";
     public static final String RESULT_EXTRA_KEY = "result";
+    public static final String PREF_NAME = "MainActivity.echo";
+    private static final String TAG = "@@@MainActivity";
 
     private static final int ECHO_REQUEST_CODE = 1111;
 
@@ -78,6 +83,42 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText ( this, "No Activity", Toast.LENGTH_SHORT ).show ();
             }
         } );
+    }
+
+    @Override
+    protected void onStop() {
+        String echoText = echoTextView.getText ().toString ();
+        if (!echoText.isEmpty ()) {
+            getSharedPreferences ( PREF_NAME, MODE_PRIVATE ).edit ().putString ( ECHO_PREF_KEY, echoText ).apply ();
+        }
+        super.onStop ();
+        Log.d ( TAG, "onStop" );
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart ();
+        Log.d ( TAG, "onStart" );
+        String echo = getSharedPreferences ( PREF_NAME, MODE_PRIVATE ).getString ( ECHO_PREF_KEY, null );
+        if (echo != null && !echo.isEmpty ()) {
+            echoTextView.setText ( echo );
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        //Для очистки значений используйте методы SharedPreferences.Editor.remove(String key) и SharedPreferences.Editor.clear().
+        Log.d ( TAG, "onDestroy" );
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+//            this.deleteSharedPreferences(ECHO_PREF_KEY);
+//        } else {
+//            try {
+//                FileUtils.cleanDirectory(new File (this.getCacheDir().getParent() + "/shared_prefs/"));
+//            } catch (IOException e) {
+//                Log.d(TAG, "Cannot delete files in shared pref directory", e);
+//            }
+//        }
+        super.onDestroy ();
     }
 
     @Override
