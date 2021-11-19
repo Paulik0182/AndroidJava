@@ -18,7 +18,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SecondActivity" />
+        <activity
+            android:name=".SecondActivity"
+            android:exported="true">// непонятная строка, почему без нее не работает?
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <data android:mimeType="plain/text" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
 
     </application>
 
