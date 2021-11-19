@@ -23,8 +23,14 @@ public class SecondActivity extends AppCompatActivity {
         messageEditText = findViewById ( R.id.message_edit_text );
         echoTextView = findViewById ( R.id.echo_text_view );
 
-        if (getIntent ().hasExtra ( MainActivity.MESSAGE_EXTRA_KEY )) {
-            echoTextView.setText ( getIntent ().getStringExtra ( MainActivity.MESSAGE_EXTRA_KEY ) );
+        Intent intent = getIntent ();
+        if (intent.hasExtra ( MainActivity.MESSAGE_EXTRA_KEY )) {
+            echoTextView.setText ( intent.getStringExtra ( MainActivity.MESSAGE_EXTRA_KEY ) );
+        }
+
+        if (intent.getAction ().equals ( Intent.ACTION_SEND ) && intent.getType ()
+                .equals ( "plain/text" ) && intent.hasExtra ( Intent.EXTRA_TEXT )) {
+            echoTextView.setText ( intent.getStringExtra ( Intent.EXTRA_TEXT ) );
         }
 
         findViewById ( R.id.back_button ).setOnClickListener ( v -> {//еще одна версия обработки кнопки
