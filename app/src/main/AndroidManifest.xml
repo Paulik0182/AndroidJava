@@ -26,6 +26,10 @@
                 <data android:mimeType="plain/text" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+            <intent-filter>
+                <action android:name="ru.gb.CALCULATE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
 
     </application>

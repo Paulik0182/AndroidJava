@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private Button sendButton;
     private Button dispatchButton;
     private Button dispatchWindButton;
+    private Button calculateButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         sendButton = findViewById ( R.id.send_button );
         dispatchButton = findViewById ( R.id.dispatch_button );
         dispatchWindButton = findViewById ( R.id.dispatch_wind_button );
+        calculateButton = findViewById ( R.id.calculate_button );
 
         nextButton.setOnClickListener ( v -> {
             Intent intent = new Intent ( this, SecondActivity.class );//создали намерение
@@ -83,6 +85,21 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText ( this, "No Activity", Toast.LENGTH_SHORT ).show ();
             }
         } );
+
+        calculateButton.setOnClickListener ( v -> {
+            String message = messageEditText.getText ().toString ();
+            Intent intent = new Intent ();
+            intent.setAction ( "ru.gb.CALCULATE" );
+//            intent.setType ( "plain/text" );//если закомитить эту строчку, то сработает проверка и выдаст сооющение toast
+            intent.putExtra ( Intent.EXTRA_TEXT, message );
+            if (intent.resolveActivity ( getPackageManager () ) != null) {// проверяем есть ли приложение для его вызова. делать всегда
+                Intent chooserIntent = Intent.createChooser ( intent, "Choose your destiny" );
+                startActivity ( chooserIntent );
+            } else {
+                Toast.makeText ( this, "No Activity", Toast.LENGTH_SHORT ).show ();
+            }
+        } );
+
     }
 
     @Override

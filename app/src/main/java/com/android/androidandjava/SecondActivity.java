@@ -28,10 +28,14 @@ public class SecondActivity extends AppCompatActivity {
             echoTextView.setText ( intent.getStringExtra ( MainActivity.MESSAGE_EXTRA_KEY ) );
         }
 
-        if (intent.getAction ().equals ( Intent.ACTION_SEND ) && intent.getType ()
-                .equals ( "plain/text" ) && intent.hasExtra ( Intent.EXTRA_TEXT )) {
+        if (intent.getAction ().equals ( "ru.gb.CALCULATE" )) {
             echoTextView.setText ( intent.getStringExtra ( Intent.EXTRA_TEXT ) );
         }
+
+//        if (intent.getAction ().equals ( Intent.ACTION_SEND ) && intent.getType ()
+//                .equals ( "plain/text" ) && intent.hasExtra ( Intent.EXTRA_TEXT )) {
+//            echoTextView.setText ( intent.getStringExtra ( Intent.EXTRA_TEXT ) );
+//        }
 
         findViewById ( R.id.back_button ).setOnClickListener ( v -> {//еще одна версия обработки кнопки
             String result = messageEditText.getText ().toString ();
