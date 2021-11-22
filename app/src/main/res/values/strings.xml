@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">AndroidAndJava</string>
+    <string name="surname">Фамилия</string>
+    <string name="name">Имя</string>
+    <string name="e_mail">E-mail</string>
+    <string name="button_save">Сохранить</string>
+    <string name="button_show">Show!</string>
 </resources>
