@@ -11,7 +11,7 @@ public class MainActivity extends AppCompatActivity {
     private final DossierEntity myDossier = new DossierEntity//задали данные в конструктор. конструктор в DossierEntity. если эту строку положить в обработчик кнопки , будет ошибка
             ( "Pavel", "Bob", "Bob@gmail.com" );
 
-    ProfileFragment profileFragment = new ProfileFragment ( myDossier );//кладем данные во фрагмент
+    ProfileFragment profileFragment = ProfileFragment.newInstance ( myDossier );//кладем данные во фрагмент
 
     private Button showButton;
 

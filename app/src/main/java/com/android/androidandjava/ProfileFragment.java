@@ -18,12 +18,25 @@ public class ProfileFragment extends Fragment {
     private EditText surnameEt;
     private EditText emailEt;
 
+    public static final String DOSSIER_ARGS_KEY = "DOSSIER_ARGS_KEY";
+
     private static final String TAG = "@@@ ProfileFragment";// константа для лога
 
+    //положили данные в аргумент
+    public static ProfileFragment newInstance(DossierEntity dossierEntity) {
+        ProfileFragment profileFragment = new ProfileFragment ();
+        Bundle args = new Bundle ();
 
-    public ProfileFragment(DossierEntity dossierEntity) {//создали конструктор в классе и присвоили данные конструктора DossierEntity
-        dossier = dossierEntity;
+        args.putParcelable ( DOSSIER_ARGS_KEY, dossierEntity );
+
+        profileFragment.setArguments ( args );
+        return profileFragment;
     }
+
+
+//    public ProfileFragment(DossierEntity dossierEntity) {//создали конструктор в классе и присвоили данные конструктора DossierEntity
+//        dossier = dossierEntity;
+//    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -93,6 +106,9 @@ public class ProfileFragment extends Fragment {
     public void onAttach(Context context) {
         Log.d ( TAG, "onAttach() called with: context = [" + context + "]" );
         super.onAttach ( context );
+        if (getArguments () != null) {
+            dossier = getArguments ().getParcelable ( DOSSIER_ARGS_KEY );
+        }
     }
 
     @Override
