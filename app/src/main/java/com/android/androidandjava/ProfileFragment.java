@@ -66,7 +66,7 @@ public class ProfileFragment extends Fragment {
         surnameEt = view.findViewById ( R.id.surname_edit_text );
         emailEt = view.findViewById ( R.id.email_edit_text );
 
-        // положили EditText в данные
+        // положили EditText в данные. dossier это наша созданная переменная с помощью конструктора в данном классе
         nameEt.setText ( dossier.name );
         surnameEt.setText ( dossier.surname );
         emailEt.setText ( dossier.email );
