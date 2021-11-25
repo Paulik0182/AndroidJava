@@ -34,6 +34,27 @@ public class ProfileFragment extends Fragment {
         return profileFragment;
     }
 
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        Log.d ( TAG, "onCreateView() called with: inflater = [" + inflater + "], " +
+                "container = [" + container + "], savedInstanceState = [" + savedInstanceState + "]" );
+        View view = inflater.inflate ( R.layout.fragment_profile, null );// обратились к фрагменту (создали фрагмент)
+
+        saveButton = view.findViewById ( R.id.save_button );
+
+        saveButton.setOnClickListener ( v -> {
+            // ((MainActivity)getActivity ()).resultTextView.setText ( "Привет" ); //так делать никогда нельзя!!!!!
+            Controller controller = (Controller) getActivity ();
+            assert controller != null;
+            controller.saveResult ( new DossierEntity (
+                    nameEt.getText ().toString (),
+                    surnameEt.getText ().toString (),
+                    emailEt.getText ().toString ()
+            ) );
+        } );
+        return view;
+    }
+
 
 //    public ProfileFragment(DossierEntity dossierEntity) {//создали конструктор в классе и присвоили данные конструктора DossierEntity
 //        dossier = dossierEntity;
@@ -52,28 +73,9 @@ public class ProfileFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        Log.d ( TAG, "onCreateView() called with: inflater = [" + inflater + "], container = [" + container + "], savedInstanceState = [" + savedInstanceState + "]" );
-        View view = inflater.inflate ( R.layout.fragment_profile, null );// обратились к фрагменту (создали фрагмент)
-
-        saveButton = view.findViewById ( R.id.save_button );
-
-        saveButton.setOnClickListener ( v -> {
-            // ((MainActivity)getActivity ()).resultTextView.setText ( "Привет" ); //так делать никогда нельзя!!!!!
-            ProfileController controller = (ProfileController) getActivity ();
-            assert controller != null;
-            controller.saveResult ( new DossierEntity (
-                    nameEt.getText ().toString (),
-                    surnameEt.getText ().toString (),
-                    emailEt.getText ().toString ()
-            ) );
-        } );
-        return view;
-    }
-
-    @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        Log.d ( TAG, "onViewCreated() called with: view = [" + view + "], savedInstanceState = [" + savedInstanceState + "]" );
+        Log.d ( TAG, "onViewCreated() called with: view = [" + view + "], savedInstanceState = " +
+                "[" + savedInstanceState + "]" );
 
         // инициализировали EditText
         nameEt = view.findViewById ( R.id.name_edit_text );
@@ -84,6 +86,19 @@ public class ProfileFragment extends Fragment {
         nameEt.setText ( dossier.name );
         surnameEt.setText ( dossier.surname );
         emailEt.setText ( dossier.email );
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        Log.d ( TAG, "onAttach() called with: context = [" + context + "]" );
+        super.onAttach ( context );
+        if (!(context instanceof Controller)) {
+            throw new RuntimeException ( "Activity must implement ProfileFragment" );
+        }
+
+        if (getArguments () != null) {
+            dossier = getArguments ().getParcelable ( DOSSIER_ARGS_KEY );
+        }
     }
 
     @Override
@@ -116,17 +131,8 @@ public class ProfileFragment extends Fragment {
         super.onStop ();
     }
 
-    @Override
-    public void onAttach(Context context) {
-        Log.d ( TAG, "onAttach() called with: context = [" + context + "]" );
-        super.onAttach ( context );
-        if (!(context instanceof ProfileController)) {
-            throw new RuntimeException ( "Activity must implement ProfileController" );
-        }
-
-        if (getArguments () != null) {
-            dossier = getArguments ().getParcelable ( DOSSIER_ARGS_KEY );
-        }
+    public interface Controller {
+        void saveResult(DossierEntity dossier);
     }
 
     @Override

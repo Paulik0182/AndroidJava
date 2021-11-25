@@ -7,7 +7,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class MainActivity extends AppCompatActivity implements ProfileController {
+public class MainActivity extends AppCompatActivity implements ProfileFragment.Controller {
 
     private static final String TAG = "@@@ MainActivity";// константа для лога
     public TextView resultTextView;

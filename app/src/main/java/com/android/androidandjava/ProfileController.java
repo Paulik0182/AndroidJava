@@ -1,7 +1,7 @@
-package com.android.androidandjava;
-
-public interface ProfileController {
-
-    void saveResult(DossierEntity dossier);
-
-}
+//package com.android.androidandjava;
+//
+//public interface ProfileController {
+//
+//    void saveResult(DossierEntity dossier);
+//
+//}
