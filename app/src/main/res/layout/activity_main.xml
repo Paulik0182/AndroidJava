@@ -7,6 +7,16 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
+    <TextView
+        android:id="@+id/result_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/layout"
+        android:text="@string/my_tex"
+        android:textAlignment="center"
+        android:textSize="@dimen/result_text_view"
+        android:textStyle="bold" />
+
     <Button
         android:id="@+id/show_fragment_button"
         android:layout_width="match_parent"

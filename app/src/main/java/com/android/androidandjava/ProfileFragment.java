@@ -6,21 +6,22 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.fragment.app.Fragment;
 
 public class ProfileFragment extends Fragment {
 
+    public static final String DOSSIER_ARGS_KEY = "DOSSIER_ARGS_KEY";
+    private static final String TAG = "@@@ ProfileFragment";// константа для лога
+
     private DossierEntity dossier = null;//созданна переменная конструктора
 
     private EditText nameEt;
     private EditText surnameEt;
     private EditText emailEt;
-
-    public static final String DOSSIER_ARGS_KEY = "DOSSIER_ARGS_KEY";
-
-    private static final String TAG = "@@@ ProfileFragment";// константа для лога
+    private Button saveButton;
 
     //положили данные в аргумент
     public static ProfileFragment newInstance(DossierEntity dossierEntity) {
@@ -54,6 +55,19 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Log.d ( TAG, "onCreateView() called with: inflater = [" + inflater + "], container = [" + container + "], savedInstanceState = [" + savedInstanceState + "]" );
         View view = inflater.inflate ( R.layout.fragment_profile, null );// обратились к фрагменту (создали фрагмент)
+
+        saveButton = view.findViewById ( R.id.save_button );
+
+        saveButton.setOnClickListener ( v -> {
+            // ((MainActivity)getActivity ()).resultTextView.setText ( "Привет" ); //так делать никогда нельзя!!!!!
+            ProfileController controller = (ProfileController) getActivity ();
+            assert controller != null;
+            controller.saveResult ( new DossierEntity (
+                    nameEt.getText ().toString (),
+                    surnameEt.getText ().toString (),
+                    emailEt.getText ().toString ()
+            ) );
+        } );
         return view;
     }
 
@@ -106,6 +120,10 @@ public class ProfileFragment extends Fragment {
     public void onAttach(Context context) {
         Log.d ( TAG, "onAttach() called with: context = [" + context + "]" );
         super.onAttach ( context );
+        if (!(context instanceof ProfileController)) {
+            throw new RuntimeException ( "Activity must implement ProfileController" );
+        }
+
         if (getArguments () != null) {
             dossier = getArguments ().getParcelable ( DOSSIER_ARGS_KEY );
         }
