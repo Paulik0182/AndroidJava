@@ -131,6 +131,7 @@ public class ProfileFragment extends Fragment {
         super.onStop ();
     }
 
+    //Интерфейс (ложный класс)
     public interface Controller {
         void saveResult(DossierEntity dossier);
     }
