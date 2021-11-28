@@ -55,7 +55,6 @@ public class ProfileFragment extends Fragment {
         return view;
     }
 
-
 //    public ProfileFragment(DossierEntity dossierEntity) {//создали конструктор в классе и присвоили данные конструктора DossierEntity
 //        dossier = dossierEntity;
 //    }
@@ -92,8 +91,8 @@ public class ProfileFragment extends Fragment {
     public void onAttach(Context context) {
         Log.d ( TAG, "onAttach() called with: context = [" + context + "]" );
         super.onAttach ( context );
-        if (!(context instanceof Controller)) {
-            throw new RuntimeException ( "Activity must implement ProfileFragment" );
+        if (!(context instanceof ProfileFragment.Controller)) {
+            throw new RuntimeException ( "Activity must implement ProfileFragment.Controller" );
         }
 
         if (getArguments () != null) {

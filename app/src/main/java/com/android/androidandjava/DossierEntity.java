@@ -3,11 +3,19 @@ package com.android.androidandjava;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
+
 public class DossierEntity implements Parcelable {
 
     public String name;
     public String surname;
     public String email;
+
+    @NonNull
+    @Override
+    public String toString() {
+        return name + " " + surname + ", " + email;
+    }
 
     public DossierEntity(String name, String surname, String email) {
         this.name = name;

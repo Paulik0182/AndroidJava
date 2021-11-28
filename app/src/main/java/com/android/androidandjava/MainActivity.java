@@ -1,75 +1,44 @@
 package com.android.androidandjava;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Button;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class MainActivity extends AppCompatActivity implements ProfileFragment.Controller {
+public class MainActivity extends AppCompatActivity implements ProfileFragment.Controller, ProfileListFragment.Controller {
 
     private static final String TAG = "@@@ MainActivity";// константа для лога
-    public TextView resultTextView;
-    private DossierEntity myDossier = new DossierEntity//задали данные в конструктор. конструктор в DossierEntity. если эту строку положить в обработчик кнопки , будет ошибка
-            ( "Pavel", "Bob", "Bob@gmail.com" );
-    private Button showButton;
-    private final ProfileFragment profileFragment = ProfileFragment.newInstance ( myDossier );//кладем данные во фрагмент
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d ( TAG, "onCreate() called with: savedInstanceState = [" + savedInstanceState + "]" );
         super.onCreate ( savedInstanceState );
         setContentView ( R.layout.activity_main );
 
-        resultTextView = findViewById ( R.id.result_text_view );
+        getSupportFragmentManager ()
+                .beginTransaction ()
+                .add ( R.id.container, new ProfileListFragment () )
+                .commit ();
 
-        showButton = findViewById ( R.id.show_fragment_button );
-        Log.d ( TAG, "onCreate() called with: savedInstanceState = [" + savedInstanceState + "]" );
-        showButton.setOnClickListener ( v -> {
-            getSupportFragmentManager ()
-                    .beginTransaction ()
-                    .add ( R.id.fragment_container, profileFragment )
-                    .commit ();
-        } );
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart ();
-        Log.d ( TAG, "onStart() called" );
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume ();
-        Log.d ( TAG, "onResume() called" );
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause ();
-        Log.d ( TAG, "onPause() called" );
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop ();
-        Log.d ( TAG, "onStop() called" );
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy ();
-        Log.d ( TAG, "onDestroy() called" );
     }
 
     @Override
     public void saveResult(DossierEntity dossier) {
-        myDossier = dossier;
-        resultTextView.setText ( String.format ( "%s %s %s",
-                dossier.name,
-                dossier.surname,
-                dossier.email
-        ) );
+        //todo
+    }
+
+    @Override
+    public void openProfileScreen(DossierEntity dossier) {
+        boolean isLandscape = getResources ()
+                .getConfiguration ()
+                .orientation == Configuration
+                .ORIENTATION_LANDSCAPE;
+        getSupportFragmentManager ()
+                .beginTransaction ()
+                .add ( isLandscape ? R.id.detail_container : R.id.container,
+                        ProfileFragment.newInstance ( dossier ) )
+                .addToBackStack ( null )
+                .commit ();
     }
 }
