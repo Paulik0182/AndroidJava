@@ -1,13 +1,14 @@
 package com.android.androidandjava;
 
 public class Entity {
-    private String title;
-    private String detail;
 
     Entity(String title, String detail) {
         this.title = title;
         this.detail = detail;
     }
+
+    private String title;
+    private String detail;
 
     public String getTitle() {
         return title;
@@ -24,4 +25,5 @@ public class Entity {
     public void setDetail(String detail) {
         this.detail = detail;
     }
+
 }

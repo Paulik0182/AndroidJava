@@ -1,24 +1,54 @@
 package com.android.androidandjava;
 
+import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class EntityListAdapter extends RecyclerView.Adapter<> {
+import com.android.androidandjava.databinding.ItemEntityBinding;
+
+import java.util.ArrayList;
+import java.util.List;
+
+
+public class EntityListAdapter extends RecyclerView.Adapter<EntityItemHolder> {
+
+    private final ArrayList<Entity> entities;
+    private final InteractionListener listener;
+
+
+    EntityListAdapter(List<Entity> entities, InteractionListener listener) {
+        this.entities = new ArrayList<> ( entities );
+        this.listener = listener;
+    }
+
     @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+    public EntityItemHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        ItemEntityBinding binding = ItemEntityBinding.inflate ( LayoutInflater.from ( parent.getContext () ),
+                parent,
+                false );
+        return new EntityItemHolder ( binding, listener );
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-
+    public void onBindViewHolder(@NonNull EntityItemHolder holder, int position) {
+        holder.bind ( entities.get ( position ) );
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return entities.size ();
     }
+
+    public interface InteractionListener {
+
+        void onItemShotClickListener(Entity entity);
+
+        void onItemLongClickListener(Entity entity, View anchor);
+
+    }
+
 }
