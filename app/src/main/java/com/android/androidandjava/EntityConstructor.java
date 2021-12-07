@@ -1,8 +1,8 @@
 package com.android.androidandjava;
 
-public class Entity {
+public class EntityConstructor {
 
-    Entity(String title, String detail) {
+    EntityConstructor(String title, String detail) {
         this.title = title;
         this.detail = detail;
     }

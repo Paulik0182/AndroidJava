@@ -15,11 +15,11 @@ import java.util.List;
 
 public class EntityListAdapter extends RecyclerView.Adapter<EntityItemHolder> {
 
-    private final ArrayList<Entity> entities;
+    private final ArrayList<EntityConstructor> entities;
     private final InteractionListener listener;
 
 
-    EntityListAdapter(List<Entity> entities, InteractionListener listener) {
+    EntityListAdapter(List<EntityConstructor> entities, InteractionListener listener) {
         this.entities = new ArrayList<> ( entities );
         this.listener = listener;
     }
@@ -27,9 +27,9 @@ public class EntityListAdapter extends RecyclerView.Adapter<EntityItemHolder> {
     @NonNull
     @Override
     public EntityItemHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ItemEntityBinding binding = ItemEntityBinding.inflate ( LayoutInflater.from ( parent.getContext () ),
-                parent,
-                false );
+        ItemEntityBinding binding = ItemEntityBinding.inflate ( LayoutInflater.from
+                        ( parent.getContext () ),
+                parent, false );
         return new EntityItemHolder ( binding, listener );
     }
 
@@ -43,11 +43,11 @@ public class EntityListAdapter extends RecyclerView.Adapter<EntityItemHolder> {
         return entities.size ();
     }
 
-    public interface InteractionListener {
+    public interface InteractionListener {//определили интерфей для взаимодействия данных и экрана (view)
 
-        void onItemShotClickListener(Entity entity);
+        void onItemShotClickListener(EntityConstructor entityConstructor);
 
-        void onItemLongClickListener(Entity entity, View anchor);
+        void onItemLongClickListener(EntityConstructor entityConstructor, View anchor);
 
     }
 
