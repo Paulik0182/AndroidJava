@@ -1,6 +1,7 @@
 package com.android.androidandjava;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -14,6 +15,21 @@ public class MainActivity extends AppCompatActivity {
     private final ArrayList<EntityConstructor> entities = new ArrayList<> ();// определяем список
 
     private ActivityMainBinding binding;
+
+    //создали экземпляр ананимного класса (слушателя)
+    private final OnItemInteractionListener listener = new OnItemInteractionListener () {
+        @Override
+        public void onItemShotClickListener(EntityConstructor entityConstructor) {
+            Toast.makeText ( MainActivity.this, "onItemShotClickListener ->" +
+                    entityConstructor.getTitle (), Toast.LENGTH_LONG ).show ();
+        }
+
+        @Override
+        public void onItemLongClickListener(EntityConstructor entityConstructor) {
+            Toast.makeText ( MainActivity.this, "onItemLongClickListener ->" +
+                    entityConstructor.getTitle (), Toast.LENGTH_LONG ).show ();
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         //устанавливаем layout. Раздуваем вертикальный или горизонтальный список
         binding.listEntityRecyclerView.setLayoutManager ( new LinearLayoutManager ( this ) );
         //устанавливаем адаптер. Вызываем конструктор адаптера
-        binding.listEntityRecyclerView.setAdapter ( new EntityListAdapter ( entities ) );
+        binding.listEntityRecyclerView.setAdapter ( new EntityListAdapter ( entities, listener ) );
     }
 
     //наполняем список
