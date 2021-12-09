@@ -14,9 +14,12 @@ import java.util.List;
 public class EntityListAdapter extends RecyclerView.Adapter<EntityItemHolder> {
 
     private final ArrayList<EntityConstructor> entities; //определили список наших сущьностей
+    private final OnItemInteractionListener listener;//слушатель
 
-    EntityListAdapter(List<EntityConstructor> entities) {
+    //вместе со списком entities, передаем объект listener
+    EntityListAdapter(List<EntityConstructor> entities, OnItemInteractionListener listener) {
         this.entities = new ArrayList<> ( entities );
+        this.listener = listener;
     }
 
     @NonNull
@@ -26,7 +29,7 @@ public class EntityListAdapter extends RecyclerView.Adapter<EntityItemHolder> {
         ItemEntityBinding binding = ItemEntityBinding.inflate ( LayoutInflater.from ( parent.getContext () ),
                 parent,
                 false );
-        return new EntityItemHolder ( binding );
+        return new EntityItemHolder ( binding, listener );
     }
 
     @Override
