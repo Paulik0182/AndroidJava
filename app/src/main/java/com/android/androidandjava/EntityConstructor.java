@@ -1,6 +1,10 @@
 package com.android.androidandjava;
 
+import android.util.Log;
+
 public class EntityConstructor {
+
+    private static final String TAG = "@@@EntityConstructor";
 
     private String title;
     private String detail;
@@ -11,6 +15,7 @@ public class EntityConstructor {
     }
 
     public String getTitle() {
+        Log.d ( TAG, "getTitle" );
         return title;
     }
 
@@ -19,6 +24,7 @@ public class EntityConstructor {
     }
 
     public String getDetail() {
+        Log.d ( TAG, "getDetail" );
         return detail;
     }
 

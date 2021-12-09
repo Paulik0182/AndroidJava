@@ -1,5 +1,6 @@
 package com.android.androidandjava;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -13,6 +14,8 @@ import java.util.List;
 
 public class EntityListAdapter extends RecyclerView.Adapter<EntityItemHolder> {
 
+    private static final String TAG = "@@@EntityListAdapter";
+
     private final ArrayList<EntityConstructor> entities; //определили список наших сущьностей
     private final OnItemInteractionListener listener;//слушатель
 
@@ -20,11 +23,13 @@ public class EntityListAdapter extends RecyclerView.Adapter<EntityItemHolder> {
     EntityListAdapter(List<EntityConstructor> entities, OnItemInteractionListener listener) {
         this.entities = new ArrayList<> ( entities );
         this.listener = listener;
+        Log.d ( TAG, "EntityListAdapter: entities = [" + entities + "], listener = [" + listener + "]" );
     }
 
     @NonNull
     @Override
     public EntityItemHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        Log.d ( TAG, "onCreateViewHolder: parent = [" + parent + "], viewType = [" + viewType + "]" );
         //для возможности использовать binding
         ItemEntityBinding binding = ItemEntityBinding.inflate ( LayoutInflater.from ( parent.getContext () ),
                 parent,
@@ -34,11 +39,13 @@ public class EntityListAdapter extends RecyclerView.Adapter<EntityItemHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull EntityItemHolder holder, int position) {
+        Log.d ( TAG, "onBindViewHolder: holder = [" + holder + "], position = [" + position + "]" );
         holder.bind ( entities.get ( position ) );//свызываем элементы списка (entities). Счетчик - position, счетчик необходим для класса RecyclerView
     }
 
     @Override
     public int getItemCount() {
+        Log.d ( TAG, "getItemCount: size" );
         return entities.size ();//Возвращаем количество элементов в списк (size)
     }
 }

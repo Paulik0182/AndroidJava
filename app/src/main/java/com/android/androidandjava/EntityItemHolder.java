@@ -1,5 +1,6 @@
 package com.android.androidandjava;
 
+import android.util.Log;
 import android.view.View;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -7,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.androidandjava.databinding.ItemEntityBinding;
 
 public class EntityItemHolder extends RecyclerView.ViewHolder {
+
+    private static final String TAG = "@@@EntityItemHolder";
 
     private final ItemEntityBinding binding;
     private EntityConstructor entityConstructor;
@@ -20,6 +23,7 @@ public class EntityItemHolder extends RecyclerView.ViewHolder {
             @Override
             public void onClick(View v) {
                 listener.onItemShotClickListener ( entityConstructor );
+                Log.d ( TAG, "onClick: Shot" );
             }
         } );
 
@@ -28,6 +32,7 @@ public class EntityItemHolder extends RecyclerView.ViewHolder {
             @Override
             public boolean onLongClick(View v) {
                 listener.onItemLongClickListener ( entityConstructor );
+                Log.d ( TAG, "onLongClick" );
                 return true;
             }
         } );
@@ -41,5 +46,6 @@ public class EntityItemHolder extends RecyclerView.ViewHolder {
         this.entityConstructor = entityConstructor;
         binding.titleTextView.setText ( entityConstructor.getTitle () );
         binding.detailTextView.setText ( entityConstructor.getDetail () );
+        Log.d ( TAG, "bind(): entityConstructor = [" + entityConstructor + "]" );
     }
 }
