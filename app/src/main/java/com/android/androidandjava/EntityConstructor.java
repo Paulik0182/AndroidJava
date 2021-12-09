@@ -7,7 +7,7 @@ public class EntityConstructor {
 
     EntityConstructor(String title, String detail) {
         this.title = title;
-        this.detail = title;
+        this.detail = detail;
     }
 
     public String getTitle() {
