@@ -17,6 +17,9 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "@@@MainActivity";
+    public static final String SAVE_TITLE_KEY = "save_title_key";
+    private static final String SAVE_DETAIL_KEY = "save_detail_key";
+    private static final String SAVE_ENTITIES_KEY = "save_entities_key";
 
     private final ArrayList<EntityConstructor> entities = new ArrayList<> ();// определяем список
 
@@ -42,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
                     entityConstructor.getTitle (), Toast.LENGTH_LONG ).show ();
 
             Intent intent = new Intent ( MainActivity.this, SecondActivity.class );
+            intent.putExtra ( SAVE_TITLE_KEY, entities.indexOf ( listener ) );
+//            intent.putExtra ( SAVE_TITLE_KEY, (Parcelable) listener );
             startActivity ( intent );
 
             Log.d ( TAG, "Listener Long" );
@@ -54,6 +59,9 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate ( getLayoutInflater () );
         setContentView ( binding.getRoot () );
         Log.d ( TAG, "onCreate" );
+//        binding.listEntityRecyclerView.setAdapter ( entities.indexOf ( listener ) );
+//        binding.listEntityRecyclerView.setAdapter ( getPackageManager ().getPackagesHoldingPermissions (entities) );
+//        binding.listEntityRecyclerView.setAdapter ( (RecyclerView.Adapter) listener );
 
         fillEntities ();
         initRecyclerView ();
@@ -94,11 +102,16 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
+//        outState.putInt(SAVE_TITLE_KEY,  );
         super.onSaveInstanceState ( outState );
     }
 
     @Override
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+//        if (savedInstanceState.containsKey(SAVE_TITLE_KEY)) {
+//            entities = savedInstanceState.getParcelable ( SAVE_TITLE_KEY );
+//        }
+//        binding.listEntityRecyclerView.setAdapter ( new EntityListAdapter (listener) );
         super.onRestoreInstanceState ( savedInstanceState );
     }
 

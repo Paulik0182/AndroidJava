@@ -48,7 +48,7 @@
         жанры литературы Род: публицистические жанры" />
 
         <Button
-            android:id="@+id/OK_button"
+            android:id="@+id/ok_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="OK" />
