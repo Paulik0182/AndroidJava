@@ -29,10 +29,14 @@ public class SecondActivity extends AppCompatActivity {
         binding = ActivitySecondBinding.inflate ( getLayoutInflater () );
         setContentView ( binding.getRoot () );
 
+
+//        if (getIntent ().hasExtra ( MainActivity.SAVE_TITLE_KEY )) {
+//            binding.echoTextView.setText ( getIntent ().getStringExtra ( MainActivity.SAVE_TITLE_KEY ) );
+//        }
+
         Intent intent = getIntent ();
         receiveTitle = intent.getParcelableExtra ( MainActivity.SAVE_TITLE_KEY );
-
-        binding.echoTextView.setText ( String.valueOf ( receiveTitle ) );
+        binding.echoTextView.setText ( getIntent ().getStringExtra ( receiveTitle ) );
 
         binding.okButton.setOnClickListener ( new View.OnClickListener () {
             @Override

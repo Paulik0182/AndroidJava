@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
                     entityConstructor.getTitle (), Toast.LENGTH_LONG ).show ();
 
             Intent intent = new Intent ( MainActivity.this, SecondActivity.class );
-            intent.putExtra ( SAVE_TITLE_KEY, entities.indexOf ( listener ) );
+            intent.putExtra ( SAVE_TITLE_KEY, entities.toString () );
 //            intent.putExtra ( SAVE_TITLE_KEY, (Parcelable) listener );
             startActivity ( intent );
 
