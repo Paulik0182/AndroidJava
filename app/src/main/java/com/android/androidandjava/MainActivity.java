@@ -2,11 +2,13 @@ package com.android.androidandjava;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -17,16 +19,17 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "@@@MainActivity";
-    public static final String SAVE_TITLE_KEY = "save_title_key";
+    public static final String TITLE_EXTRA_KEY = "title_extra_key";
+    public static final String DETAIL_EXTRA_KEY = "save_detail_key";
     private static final String SAVE_DETAIL_KEY = "save_detail_key";
+    private static final String SAVE_TITLE_KEY = "save_title_key";
     private static final String SAVE_ENTITIES_KEY = "save_entities_key";
 
     private final ArrayList<EntityConstructor> entities = new ArrayList<> ();// определяем список
 
     private ActivityMainBinding binding;
 
-    private EntityConstructor titleMainActivity = null;
-
+    //    private EntityConstructor titleMainActivity = extraTitle ();
     //создали экземпляр ананимного класса (слушателя)
     private final OnItemInteractionListener listener = new OnItemInteractionListener () {
         @SuppressLint("LongLogTag")
@@ -40,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
             Log.d ( TAG, "Listener Sort" );
         }
 
+
         @SuppressLint("LongLogTag")
         @Override
         public void onItemLongClickListener(EntityConstructor entityConstructor) {
@@ -47,20 +51,30 @@ public class MainActivity extends AppCompatActivity {
                     entityConstructor.getTitle (), Toast.LENGTH_LONG ).show ();
 
             Intent intent = new Intent ( MainActivity.this, SecondActivity.class );
-            intent.putExtra ( SAVE_TITLE_KEY, entities.toString () );
+            intent.putExtra ( TITLE_EXTRA_KEY, entityConstructor.getTitle () );
+            intent.putExtra ( DETAIL_EXTRA_KEY, entityConstructor.getDetail () );
+//            intent.putExtra ( SAVE_TITLE_KEY, entities.toString () );
 //            intent.putExtra ( SAVE_TITLE_KEY, (Parcelable) listener );
             startActivity ( intent );
-
             Log.d ( TAG, "Listener Long" );
         }
     };
 
+    public String extraTitle(EntityConstructor entityConstructorTitle) {
+        String title;
+        title = entityConstructorTitle.getTitle ();
+        return title;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate ( savedInstanceState );
         binding = ActivityMainBinding.inflate ( getLayoutInflater () );
         setContentView ( binding.getRoot () );
         Log.d ( TAG, "onCreate" );
+        binding.listEntityRecyclerView.setTooltipText ( String.valueOf ( getTitle () ) );
+//        binding.listEntityRecyclerView.setTooltipText ( String.valueOf ( getDetail () ) );
 //        binding.listEntityRecyclerView.setAdapter ( entities.indexOf ( listener ) );
 //        binding.listEntityRecyclerView.setAdapter ( getPackageManager ().getPackagesHoldingPermissions (entities) );
 //        binding.listEntityRecyclerView.setAdapter ( (RecyclerView.Adapter) listener );
@@ -104,16 +118,17 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
-        outState.putString ( SAVE_TITLE_KEY, String.valueOf ( titleMainActivity ) );
+        outState.putString ( SAVE_TITLE_KEY, String.valueOf ( getTitle () ) );
         super.onSaveInstanceState ( outState );
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
-        if (savedInstanceState.containsKey ( SAVE_TITLE_KEY )) {
-            titleMainActivity = savedInstanceState.getParcelable ( SAVE_TITLE_KEY );
-        }
-        binding.listEntityRecyclerView.setTextDirection ( Integer.parseInt ( String.valueOf ( titleMainActivity ) ) );
+//        if (savedInstanceState.containsKey ( SAVE_TITLE_KEY )) {
+//            titleMainActivity = savedInstanceState.getParcelable ( SAVE_TITLE_KEY );
+//        }
+        binding.listEntityRecyclerView.setTooltipText ( String.valueOf ( getTitle () ) );
         super.onRestoreInstanceState ( savedInstanceState );
     }
 

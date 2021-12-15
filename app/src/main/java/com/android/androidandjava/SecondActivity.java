@@ -22,6 +22,7 @@ public class SecondActivity extends AppCompatActivity {
     private ActivitySecondBinding binding;
 
     private String receiveTitleSecondActivity = null;
+    private String receiveDetailSecondActivity = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +37,10 @@ public class SecondActivity extends AppCompatActivity {
 //        }
 
         Intent intent = getIntent ();
-        receiveTitleSecondActivity = intent.getParcelableExtra ( MainActivity.SAVE_TITLE_KEY );
-        binding.echoTextView.setText ( getIntent ().getStringExtra ( String.valueOf ( receiveTitleSecondActivity ) ) );
+        receiveTitleSecondActivity = intent.getStringExtra ( MainActivity.TITLE_EXTRA_KEY );
+        receiveDetailSecondActivity = intent.getStringExtra ( MainActivity.DETAIL_EXTRA_KEY );
+        binding.echoTextView.setText ( String.valueOf ( receiveTitleSecondActivity ) );
+        binding.messageEditText.setText ( String.valueOf ( receiveDetailSecondActivity ) );
 
         binding.okButton.setOnClickListener ( new View.OnClickListener () {
             @Override
@@ -62,7 +65,7 @@ public class SecondActivity extends AppCompatActivity {
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         Log.d ( TAG, "onRestoreInstanceState() called with: savedInstanceState = [" + savedInstanceState + "]" );
         if (savedInstanceState.containsKey ( SAVE_RECEIVE_TITLE_KEY )) {
-            receiveTitleSecondActivity = savedInstanceState.getString ( SAVE_RECEIVE_TITLE_KEY, String.valueOf ( receiveTitleSecondActivity ) );
+            receiveTitleSecondActivity = savedInstanceState.getParcelable ( SAVE_RECEIVE_TITLE_KEY );
         }
         binding.echoTextView.setText ( String.valueOf ( receiveTitleSecondActivity ) );
         super.onRestoreInstanceState ( savedInstanceState );
@@ -70,26 +73,31 @@ public class SecondActivity extends AppCompatActivity {
 
     @Override
     protected void onStart() {
+        Log.d ( TAG, "onStart() called" );
         super.onStart ();
     }
 
     @Override
     protected void onResume() {
+        Log.d ( TAG, "onResume() called" );
         super.onResume ();
     }
 
     @Override
     protected void onPause() {
+        Log.d ( TAG, "onPause() called" );
         super.onPause ();
     }
 
     @Override
     protected void onStop() {
+        Log.d ( TAG, "onStop() called" );
         super.onStop ();
     }
 
     @Override
     protected void onDestroy() {
+        Log.d ( TAG, "onDestroy() called" );
         super.onDestroy ();
     }
 
