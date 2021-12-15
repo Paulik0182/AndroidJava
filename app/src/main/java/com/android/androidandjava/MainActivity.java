@@ -25,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
 
+    private EntityConstructor titleMainActivity = null;
+
     //создали экземпляр ананимного класса (слушателя)
     private final OnItemInteractionListener listener = new OnItemInteractionListener () {
         @SuppressLint("LongLogTag")
@@ -102,41 +104,46 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
-//        outState.putInt(SAVE_TITLE_KEY,  );
+        outState.putString ( SAVE_TITLE_KEY, String.valueOf ( titleMainActivity ) );
         super.onSaveInstanceState ( outState );
     }
 
     @Override
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
-//        if (savedInstanceState.containsKey(SAVE_TITLE_KEY)) {
-//            entities = savedInstanceState.getParcelable ( SAVE_TITLE_KEY );
-//        }
-//        binding.listEntityRecyclerView.setAdapter ( new EntityListAdapter (listener) );
+        if (savedInstanceState.containsKey ( SAVE_TITLE_KEY )) {
+            titleMainActivity = savedInstanceState.getParcelable ( SAVE_TITLE_KEY );
+        }
+        binding.listEntityRecyclerView.setTextDirection ( Integer.parseInt ( String.valueOf ( titleMainActivity ) ) );
         super.onRestoreInstanceState ( savedInstanceState );
     }
 
     @Override
     protected void onStart() {
+        Log.d ( TAG, "onStart() called" );
         super.onStart ();
     }
 
     @Override
     protected void onResume() {
+        Log.d ( TAG, "onResume() called" );
         super.onResume ();
     }
 
     @Override
     protected void onPause() {
+        Log.d ( TAG, "onPause() called" );
         super.onPause ();
     }
 
     @Override
     protected void onStop() {
+        Log.d ( TAG, "onStop() called" );
         super.onStop ();
     }
 
     @Override
     protected void onDestroy() {
+        Log.d ( TAG, "onDestroy() called" );
         super.onDestroy ();
     }
 
