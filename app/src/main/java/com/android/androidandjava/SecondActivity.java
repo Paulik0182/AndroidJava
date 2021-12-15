@@ -1,6 +1,7 @@
 package com.android.androidandjava;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,10 +21,22 @@ public class SecondActivity extends AppCompatActivity {
     public static final String DETAIL_OUT_EXTRA_KEY = "detail_out_extra_key";
     public static final String ENTITIES_OUT_EXTRA_KEY = "entities_out_extra_key";
 
+    private static final String TITLE_EXTRA_KEY = "title_extra_key";
+    private static final String DETAIL_EXTRA_KEY = "save_detail_key";
+
     private ActivitySecondBinding binding;
 
     private String receiveTitleSecondActivity = null;
     private String receiveDetailSecondActivity = null;
+
+    public static void launch(Context context, EntityConstructor entityConstructor) {
+        Intent intent = new Intent ( context, SecondActivity.class );
+
+        intent.putExtra ( TITLE_EXTRA_KEY, entityConstructor.getTitle () );
+        intent.putExtra ( DETAIL_EXTRA_KEY, entityConstructor.getDetail () );
+
+        context.startActivity ( intent );
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +51,8 @@ public class SecondActivity extends AppCompatActivity {
 //        }
 
         Intent intent = getIntent ();
-        receiveTitleSecondActivity = intent.getStringExtra ( MainActivity.TITLE_EXTRA_KEY );
-        receiveDetailSecondActivity = intent.getStringExtra ( MainActivity.DETAIL_EXTRA_KEY );
+        receiveTitleSecondActivity = intent.getStringExtra ( TITLE_EXTRA_KEY );
+        receiveDetailSecondActivity = intent.getStringExtra ( DETAIL_EXTRA_KEY );
         binding.echoTextView.setText ( String.valueOf ( receiveTitleSecondActivity ) );
         binding.messageEditText.setText ( String.valueOf ( receiveDetailSecondActivity ) );
 

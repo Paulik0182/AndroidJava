@@ -1,10 +1,10 @@
 package com.android.androidandjava;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -19,8 +19,8 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "@@@MainActivity";
-    public static final String TITLE_EXTRA_KEY = "title_extra_key";
-    public static final String DETAIL_EXTRA_KEY = "save_detail_key";
+    //    public static final String TITLE_EXTRA_KEY = "title_extra_key";
+//    public static final String DETAIL_EXTRA_KEY = "save_detail_key";
     private static final String SAVE_DETAIL_KEY = "save_detail_key";
     private static final String SAVE_TITLE_KEY = "save_title_key";
     private static final String SAVE_ENTITIES_KEY = "save_entities_key";
@@ -51,12 +51,14 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText ( MainActivity.this, "onItemLongClickListener ->" +
                     entityConstructor.getTitle (), Toast.LENGTH_LONG ).show ();
 
-            Intent intent = new Intent ( MainActivity.this, SecondActivity.class );
+//            SecondActivity.launch ( Context, entityConstructor.getTitle () );
 
-            intent.putExtra ( TITLE_EXTRA_KEY, entityConstructor.getTitle () );
-            intent.putExtra ( DETAIL_EXTRA_KEY, entityConstructor.getDetail () );
-
-            startActivity ( intent );
+//            Intent intent = new Intent ( MainActivity.this, SecondActivity.class );
+//
+//            intent.putExtra ( TITLE_EXTRA_KEY, entityConstructor.getTitle () );
+//            intent.putExtra ( DETAIL_EXTRA_KEY, entityConstructor.getDetail () );
+//
+//            startActivity ( intent );
             Log.d ( TAG, "Listener Long" );
         }
     };
@@ -79,6 +81,14 @@ public class MainActivity extends AppCompatActivity {
 //        binding.listEntityRecyclerView.setAdapter ( entities.indexOf ( listener ) );
 //        binding.listEntityRecyclerView.setAdapter ( getPackageManager ().getPackagesHoldingPermissions (entities) );
 //        binding.listEntityRecyclerView.setAdapter ( (RecyclerView.Adapter) listener );
+
+        binding.listEntityRecyclerView.setOnClickListener ( new View.OnClickListener () {
+            @Override
+            public void onClick(View v) {
+                SecondActivity.launch ( v.getContext (), (EntityConstructor) getTitle () );
+//                SecondActivity.launch(v.getContext(), (EntityConstructor) getDetail ());
+            }
+        } );
 
         fillEntities ();
         initRecyclerView ();
