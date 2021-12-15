@@ -16,6 +16,7 @@ public class SecondActivity extends AppCompatActivity {
 
     public static final String TITLE_OUT_EXTRA_KEY = "title_out_extra_key";
     private static final String SAVE_RECEIVE_TITLE_KEY = "save_receive_title_key";
+    private static final String SAVE_RECEIVE_DETAIL_KEY = "save_receive_title_key";
     public static final String DETAIL_OUT_EXTRA_KEY = "detail_out_extra_key";
     public static final String ENTITIES_OUT_EXTRA_KEY = "entities_out_extra_key";
 
@@ -48,6 +49,7 @@ public class SecondActivity extends AppCompatActivity {
                 Log.d ( TAG, "onClick() called with: v = [" + v + "]" );
                 Intent intent = new Intent ();
                 intent.putExtra ( TITLE_OUT_EXTRA_KEY, String.valueOf ( receiveTitleSecondActivity ) );
+                intent.putExtra ( DETAIL_OUT_EXTRA_KEY, String.valueOf ( receiveDetailSecondActivity ) );
                 setResult ( Activity.RESULT_OK, intent );
                 finish ();
             }
@@ -57,7 +59,8 @@ public class SecondActivity extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         Log.d ( TAG, "onSaveInstanceState() called with: outState = [" + outState + "]" );
-        outState.putString ( SAVE_RECEIVE_TITLE_KEY, String.valueOf ( receiveTitleSecondActivity ) );
+//        outState.putString ( SAVE_RECEIVE_TITLE_KEY, String.valueOf ( receiveTitleSecondActivity ) );
+//        outState.putString ( SAVE_RECEIVE_DETAIL_KEY, String.valueOf ( receiveDetailSecondActivity ) );
         super.onSaveInstanceState ( outState );
     }
 
@@ -106,6 +109,7 @@ public class SecondActivity extends AppCompatActivity {
         Log.d ( TAG, "onBackPressed() called" );
         Intent intent = new Intent ();
         intent.putExtra ( TITLE_OUT_EXTRA_KEY, String.valueOf ( receiveTitleSecondActivity ) );
+        intent.putExtra ( DETAIL_OUT_EXTRA_KEY, String.valueOf ( receiveDetailSecondActivity ) );
         setResult ( Activity.RESULT_OK, intent );
         finish ();
     }

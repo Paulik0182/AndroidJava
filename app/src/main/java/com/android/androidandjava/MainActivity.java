@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
 
     //    private EntityConstructor titleMainActivity = extraTitle ();
+
     //создали экземпляр ананимного класса (слушателя)
     private final OnItemInteractionListener listener = new OnItemInteractionListener () {
         @SuppressLint("LongLogTag")
@@ -51,10 +52,10 @@ public class MainActivity extends AppCompatActivity {
                     entityConstructor.getTitle (), Toast.LENGTH_LONG ).show ();
 
             Intent intent = new Intent ( MainActivity.this, SecondActivity.class );
+
             intent.putExtra ( TITLE_EXTRA_KEY, entityConstructor.getTitle () );
             intent.putExtra ( DETAIL_EXTRA_KEY, entityConstructor.getDetail () );
-//            intent.putExtra ( SAVE_TITLE_KEY, entities.toString () );
-//            intent.putExtra ( SAVE_TITLE_KEY, (Parcelable) listener );
+
             startActivity ( intent );
             Log.d ( TAG, "Listener Long" );
         }
@@ -73,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate ( getLayoutInflater () );
         setContentView ( binding.getRoot () );
         Log.d ( TAG, "onCreate" );
-        binding.listEntityRecyclerView.setTooltipText ( String.valueOf ( getTitle () ) );
+//        binding.listEntityRecyclerView.setTooltipText ( String.valueOf ( getTitle () ) );
 //        binding.listEntityRecyclerView.setTooltipText ( String.valueOf ( getDetail () ) );
 //        binding.listEntityRecyclerView.setAdapter ( entities.indexOf ( listener ) );
 //        binding.listEntityRecyclerView.setAdapter ( getPackageManager ().getPackagesHoldingPermissions (entities) );
@@ -119,6 +120,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         outState.putString ( SAVE_TITLE_KEY, String.valueOf ( getTitle () ) );
+
         super.onSaveInstanceState ( outState );
     }
 
