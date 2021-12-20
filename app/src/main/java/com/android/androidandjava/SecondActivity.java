@@ -21,13 +21,22 @@ public class SecondActivity extends AppCompatActivity {
     public static final String DETAIL_OUT_EXTRA_KEY = "detail_out_extra_key";
     public static final String ENTITIES_OUT_EXTRA_KEY = "entities_out_extra_key";
 
-    private static final String TITLE_EXTRA_KEY = "title_extra_key";
-    private static final String DETAIL_EXTRA_KEY = "save_detail_key";
+    public static final String TITLE_EXTRA_KEY = "title_extra_key";
+    public static final String DETAIL_EXTRA_KEY = "save_detail_key";
+
+    public static final int ACTIVITY_REQUEST_CODE = 1111;
+
 
     private ActivitySecondBinding binding;
 
     private String receiveTitleSecondActivity = null;
     private String receiveDetailSecondActivity = null;
+
+    public static Intent getLaunchIntent(Context context, EntityConstructor entityCons) {
+        Intent intent = new Intent ( context, SecondActivity.class );
+        intent.putExtra ( DETAIL_EXTRA_KEY, entityCons );
+        return intent;
+    }
 
     public static void launch(Context context, EntityConstructor entityConstructor) {
         Intent intent = new Intent ( context, SecondActivity.class );
@@ -57,7 +66,7 @@ public class SecondActivity extends AppCompatActivity {
                 Log.d ( TAG, "onClick() called with: v = [" + v + "]" );
                 Intent intent = new Intent ();
                 intent.putExtra ( TITLE_OUT_EXTRA_KEY, String.valueOf ( receiveTitleSecondActivity ) );
-                intent.putExtra ( DETAIL_OUT_EXTRA_KEY, String.valueOf ( receiveDetailSecondActivity ) );
+                intent.putExtra ( MainActivity.RESULT_EXTRA_KEY, String.valueOf ( receiveDetailSecondActivity ) );
                 setResult ( Activity.RESULT_OK, intent );
                 finish ();
             }
@@ -120,7 +129,7 @@ public class SecondActivity extends AppCompatActivity {
 
         Intent intent = new Intent ();
         intent.putExtra ( TITLE_OUT_EXTRA_KEY, String.valueOf ( receiveTitleSecondActivity ) );
-        intent.putExtra ( DETAIL_OUT_EXTRA_KEY, String.valueOf ( receiveDetailSecondActivity ) );
+        intent.putExtra ( MainActivity.RESULT_EXTRA_KEY, String.valueOf ( receiveDetailSecondActivity ) );
         setResult ( Activity.RESULT_OK, intent );
         finish ();
     }

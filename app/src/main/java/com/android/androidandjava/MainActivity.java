@@ -1,6 +1,7 @@
 package com.android.androidandjava;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -25,12 +27,13 @@ public class MainActivity extends AppCompatActivity {
     private static final String SAVE_DETAIL_KEY = "save_detail_key";
     private static final String SAVE_TITLE_KEY = "save_title_key";
     private static final String SAVE_ENTITIES_KEY = "save_entities_key";
+    public static final String RESULT_EXTRA_KEY = "result";
 
     private final ArrayList<EntityConstructor> entities = new ArrayList<> ();// определяем список
 
     private ActivityMainBinding binding;
 
-    private final EntityConstructor entityCons = null;
+    public final EntityConstructor entityCons = null;
 
     //создали экземпляр ананимного класса (слушателя)
     private final OnItemInteractionListener listener = new OnItemInteractionListener () {
@@ -48,7 +51,8 @@ public class MainActivity extends AppCompatActivity {
             intent.putExtra ( TITLE_EXTRA_KEY, entityConstructor.getTitle () );
             intent.putExtra ( DETAIL_EXTRA_KEY, entityConstructor.getDetail () );
 
-            startActivity ( intent );
+//            startActivity ( intent );
+            startActivityForResult ( intent, SecondActivity.ACTIVITY_REQUEST_CODE );
 
             Log.d ( TAG, "Listener Sort" );
         }
@@ -63,6 +67,9 @@ public class MainActivity extends AppCompatActivity {
             Log.d ( TAG, "Listener Long" );
         }
     };
+
+    public MainActivity() {
+    }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -80,8 +87,10 @@ public class MainActivity extends AppCompatActivity {
         binding.listEntityRecyclerView.setOnClickListener ( new View.OnClickListener () {
             @Override
             public void onClick(View v) {
-                SecondActivity.launch ( v.getContext (), (EntityConstructor) getTitle () );
-//                SecondActivity.launch(v.getContext(), (EntityConstructor) getDetail ());
+//                SecondActivity.launch ( v.getContext (), (EntityConstructor) getTitle () );
+//                Intent intent = SecondActivity.getLaunchIntent(v.getContext(),  );
+//                startActivityForResult(intent, SecondActivity.ACTIVITY_REQUEST_CODE);
+
             }
         } );
 
@@ -170,6 +179,18 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         Log.d ( TAG, "onDestroy() called" );
         super.onDestroy ();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {//функция для того, чтобы вытинуть из второй активити сохнаненные там значения
+        super.onActivityResult ( requestCode, resultCode, data );
+        if (requestCode == SecondActivity.ACTIVITY_REQUEST_CODE && resultCode == Activity.RESULT_OK) { // проверили, что ECHO_REQUEST_CODE соответствует запуску конкретной активити. RESULT_OK о том что все хорошо
+            if (data != null && data.hasExtra ( RESULT_EXTRA_KEY )) { //проверяем на то что данные которые пришли не равны null, и есть такой ключь RESULT_EXTRA_KEY
+                String echoStr = data.getStringExtra ( RESULT_EXTRA_KEY );//получаем ключ
+                binding.listEntityRecyclerView.setTooltipText ( echoStr );//и выводим его
+            }
+        }
     }
 
 }
