@@ -45,11 +45,6 @@ public class SecondActivity extends AppCompatActivity {
         binding = ActivitySecondBinding.inflate ( getLayoutInflater () );
         setContentView ( binding.getRoot () );
 
-
-//        if (getIntent ().hasExtra ( MainActivity.SAVE_TITLE_KEY )) {
-//            binding.echoTextView.setText ( getIntent ().getStringExtra ( MainActivity.SAVE_TITLE_KEY ) );
-//        }
-
         Intent intent = getIntent ();
         receiveTitleSecondActivity = intent.getStringExtra ( TITLE_EXTRA_KEY );
         receiveDetailSecondActivity = intent.getStringExtra ( DETAIL_EXTRA_KEY );
@@ -72,6 +67,7 @@ public class SecondActivity extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         Log.d ( TAG, "onSaveInstanceState() called with: outState = [" + outState + "]" );
+
 //        outState.putString ( SAVE_RECEIVE_TITLE_KEY, String.valueOf ( receiveTitleSecondActivity ) );
 //        outState.putString ( SAVE_RECEIVE_DETAIL_KEY, String.valueOf ( receiveDetailSecondActivity ) );
         super.onSaveInstanceState ( outState );
@@ -80,6 +76,7 @@ public class SecondActivity extends AppCompatActivity {
     @Override
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         Log.d ( TAG, "onRestoreInstanceState() called with: savedInstanceState = [" + savedInstanceState + "]" );
+
         if (savedInstanceState.containsKey ( SAVE_RECEIVE_TITLE_KEY )) {
             receiveTitleSecondActivity = savedInstanceState.getParcelable ( SAVE_RECEIVE_TITLE_KEY );
         }
@@ -120,6 +117,7 @@ public class SecondActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         Log.d ( TAG, "onBackPressed() called" );
+
         Intent intent = new Intent ();
         intent.putExtra ( TITLE_OUT_EXTRA_KEY, String.valueOf ( receiveTitleSecondActivity ) );
         intent.putExtra ( DETAIL_OUT_EXTRA_KEY, String.valueOf ( receiveDetailSecondActivity ) );
