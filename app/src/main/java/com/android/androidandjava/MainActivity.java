@@ -28,7 +28,10 @@ public class MainActivity extends AppCompatActivity {
     private static final String SAVE_DETAIL_KEY = "save_detail_key";
     private static final String SAVE_TITLE_KEY = "save_title_key";
     private static final String SAVE_ENTITIES_KEY = "save_entities_key";
-    public static final String RESULT_EXTRA_KEY = "result";
+
+    private static final String TITLE_SAVE_OUT_EXTRA_KEY = "title_save_out_extra_key";
+    private static final String DETAIL_SAVE_OUT_EXTRA_KEY = "detail_save_out_extra_key";
+
 
     private final ArrayList<EntityConstructor> entities = new ArrayList<> ();// определяем список
 
@@ -36,8 +39,8 @@ public class MainActivity extends AppCompatActivity {
 
 //    public EntityConstructor entityCons = new EntityConstructor ();
 
-    private final String title = "";
-    private final String detail = "";
+    private String receiveTitleMainActivity = "";
+    private String receiveDetailMainActivity = "";
 
     //создали экземпляр ананимного класса (слушателя)
     private final OnItemInteractionListener listener = new OnItemInteractionListener () {
@@ -83,11 +86,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView ( binding.getRoot () );
 
         fillEntities ();
-
-//        entityCons.getDetail ();
-//        Toast.makeText ( MainActivity.this, entities.get ( 1 ).getDetail (), Toast.LENGTH_SHORT ).show ();
-
         Log.d ( TAG, "onCreate" );
+
+        Intent intent = getIntent ();
+        receiveTitleMainActivity = intent.getStringExtra ( TITLE_SAVE_OUT_EXTRA_KEY );
+        receiveDetailMainActivity = intent.getStringExtra ( DETAIL_SAVE_OUT_EXTRA_KEY );
+        entities.add ( new EntityConstructor ( receiveTitleMainActivity, receiveDetailMainActivity ) );//выводим данные
+
+
+        Toast.makeText ( MainActivity.this,
+                entities.get ( 1 ).getDetail (), Toast.LENGTH_SHORT ).show ();
+
 //        binding.listEntityRecyclerView.setTooltipText ( String.valueOf ( getTitle () ) );
 //        binding.listEntityRecyclerView.setTooltipText ( String.valueOf ( getDetail () ) );
 //        binding.listEntityRecyclerView.setAdapter ( entities.indexOf ( listener ) );
@@ -140,8 +149,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
-        outState.putString ( SAVE_TITLE_KEY, title );
-        outState.putString ( SAVE_TITLE_KEY, detail );
+        outState.putString ( SAVE_TITLE_KEY, receiveTitleMainActivity );
+        outState.putString ( SAVE_TITLE_KEY, receiveDetailMainActivity );
 
         Log.d ( TAG, "onSaveInstanceState() called with: outState = [" + outState + "]" );
         super.onSaveInstanceState ( outState );
