@@ -92,6 +92,12 @@ public class SecondActivity extends AppCompatActivity {
             receiveTitleSecondActivity = savedInstanceState.getParcelable ( SAVE_RECEIVE_TITLE_KEY );
         }
         binding.echoTextView.setText ( receiveTitleSecondActivity );
+
+        if (savedInstanceState.containsKey ( SAVE_RECEIVE_DETAIL_KEY )) {
+            receiveDetailSecondActivity = savedInstanceState.getParcelable ( SAVE_RECEIVE_DETAIL_KEY );
+        }
+        binding.messageEditText.setText ( receiveDetailSecondActivity );
+
         super.onRestoreInstanceState ( savedInstanceState );
     }
 
