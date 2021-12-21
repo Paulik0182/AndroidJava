@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "@@@MainActivity";
     public static final String TITLE_EXTRA_KEY = "title_extra_key";
+
     public static final String DETAIL_EXTRA_KEY = "save_detail_key";
     private static final String SAVE_DETAIL_KEY = "save_detail_key";
     private static final String SAVE_TITLE_KEY = "save_title_key";
@@ -33,7 +34,10 @@ public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
 
-    public final EntityConstructor entityCons = null;
+//    public EntityConstructor entityCons = new EntityConstructor ();
+
+    private final String title = "";
+    private final String detail = "";
 
     //создали экземпляр ананимного класса (слушателя)
     private final OnItemInteractionListener listener = new OnItemInteractionListener () {
@@ -77,13 +81,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate ( savedInstanceState );
         binding = ActivityMainBinding.inflate ( getLayoutInflater () );
         setContentView ( binding.getRoot () );
+
+        fillEntities ();
+
+//        entityCons.getDetail ();
+//        Toast.makeText ( MainActivity.this, entities.get ( 1 ).getDetail (), Toast.LENGTH_SHORT ).show ();
+
         Log.d ( TAG, "onCreate" );
 //        binding.listEntityRecyclerView.setTooltipText ( String.valueOf ( getTitle () ) );
 //        binding.listEntityRecyclerView.setTooltipText ( String.valueOf ( getDetail () ) );
 //        binding.listEntityRecyclerView.setAdapter ( entities.indexOf ( listener ) );
 //        binding.listEntityRecyclerView.setAdapter ( getPackageManager ().getPackagesHoldingPermissions (entities) );
 //        binding.listEntityRecyclerView.setAdapter ( (RecyclerView.Adapter) listener );
-
         binding.listEntityRecyclerView.setOnClickListener ( new View.OnClickListener () {
             @Override
             public void onClick(View v) {
@@ -93,8 +102,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         } );
-
-        fillEntities ();
         initRecyclerView ();
     }
 
@@ -133,8 +140,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
-//        outState.putString ( SAVE_TITLE_KEY, String.valueOf ( getTitle () ) );
-//        outState.putString ( SAVE_TITLE_KEY, entityCons.getTitle () );
+        outState.putString ( SAVE_TITLE_KEY, title );
+        outState.putString ( SAVE_TITLE_KEY, detail );
 
         Log.d ( TAG, "onSaveInstanceState() called with: outState = [" + outState + "]" );
         super.onSaveInstanceState ( outState );
@@ -185,10 +192,16 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {//функция для того, чтобы вытинуть из второй активити сохнаненные там значения
         super.onActivityResult ( requestCode, resultCode, data );
+
         if (requestCode == SecondActivity.ACTIVITY_REQUEST_CODE && resultCode == Activity.RESULT_OK) { // проверили, что ECHO_REQUEST_CODE соответствует запуску конкретной активити. RESULT_OK о том что все хорошо
-            if (data != null && data.hasExtra ( RESULT_EXTRA_KEY )) { //проверяем на то что данные которые пришли не равны null, и есть такой ключь RESULT_EXTRA_KEY
-                String echoStr = data.getStringExtra ( RESULT_EXTRA_KEY );//получаем ключ
-                binding.listEntityRecyclerView.setTooltipText ( echoStr );//и выводим его
+
+            if (data != null && data.hasExtra ( SecondActivity.TITLE_OUT_EXTRA_KEY ) &&
+                    data.hasExtra ( SecondActivity.DETAIL_OUT_EXTRA_KEY )) { //проверяем на то что данные которые пришли не равны null, и есть такой ключь RESULT_EXTRA_KEY
+
+                String echoTitle = data.getStringExtra ( SecondActivity.TITLE_OUT_EXTRA_KEY );//получаем данные по ключу
+                String echoDetail = data.getStringExtra ( SecondActivity.DETAIL_OUT_EXTRA_KEY );//получаем данные по ключу
+
+                entities.add ( new EntityConstructor ( echoTitle, echoDetail ) );//выводим данные
             }
         }
     }

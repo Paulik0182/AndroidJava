@@ -16,6 +16,10 @@ public class EntityConstructor implements Parcelable {
         this.detail = detail;
     }
 
+    EntityConstructor() {
+
+    }
+
     public static final Creator<EntityConstructor> CREATOR = new Creator<EntityConstructor> () {
         @Override
         public EntityConstructor createFromParcel(Parcel in) {

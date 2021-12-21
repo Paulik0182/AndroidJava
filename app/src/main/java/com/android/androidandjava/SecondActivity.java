@@ -16,9 +16,11 @@ public class SecondActivity extends AppCompatActivity {
     private static final String TAG = "@@@SecondActivity";
 
     public static final String TITLE_OUT_EXTRA_KEY = "title_out_extra_key";
+    public static final String DETAIL_OUT_EXTRA_KEY = "detail_out_extra_key";
+
     private static final String SAVE_RECEIVE_TITLE_KEY = "save_receive_title_key";
     private static final String SAVE_RECEIVE_DETAIL_KEY = "save_receive_title_key";
-    public static final String DETAIL_OUT_EXTRA_KEY = "detail_out_extra_key";
+
     public static final String ENTITIES_OUT_EXTRA_KEY = "entities_out_extra_key";
 
     public static final String TITLE_EXTRA_KEY = "title_extra_key";
@@ -29,8 +31,8 @@ public class SecondActivity extends AppCompatActivity {
 
     private ActivitySecondBinding binding;
 
-    private String receiveTitleSecondActivity = null;
-    private String receiveDetailSecondActivity = null;
+    private String receiveTitleSecondActivity = "";
+    private String receiveDetailSecondActivity = "";
 
     public static Intent getLaunchIntent(Context context, EntityConstructor entityCons) {
         Intent intent = new Intent ( context, SecondActivity.class );
@@ -57,16 +59,16 @@ public class SecondActivity extends AppCompatActivity {
         Intent intent = getIntent ();
         receiveTitleSecondActivity = intent.getStringExtra ( TITLE_EXTRA_KEY );
         receiveDetailSecondActivity = intent.getStringExtra ( DETAIL_EXTRA_KEY );
-        binding.echoTextView.setText ( String.valueOf ( receiveTitleSecondActivity ) );
-        binding.messageEditText.setText ( String.valueOf ( receiveDetailSecondActivity ) );
+        binding.echoTextView.setText ( receiveTitleSecondActivity );
+        binding.messageEditText.setText ( receiveDetailSecondActivity );
 
         binding.okButton.setOnClickListener ( new View.OnClickListener () {
             @Override
             public void onClick(View v) {
                 Log.d ( TAG, "onClick() called with: v = [" + v + "]" );
                 Intent intent = new Intent ();
-                intent.putExtra ( TITLE_OUT_EXTRA_KEY, String.valueOf ( receiveTitleSecondActivity ) );
-                intent.putExtra ( MainActivity.RESULT_EXTRA_KEY, String.valueOf ( receiveDetailSecondActivity ) );
+                intent.putExtra ( TITLE_OUT_EXTRA_KEY, receiveTitleSecondActivity );
+                intent.putExtra ( DETAIL_OUT_EXTRA_KEY, receiveDetailSecondActivity );
                 setResult ( Activity.RESULT_OK, intent );
                 finish ();
             }
@@ -77,8 +79,8 @@ public class SecondActivity extends AppCompatActivity {
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         Log.d ( TAG, "onSaveInstanceState() called with: outState = [" + outState + "]" );
 
-//        outState.putString ( SAVE_RECEIVE_TITLE_KEY, String.valueOf ( receiveTitleSecondActivity ) );
-//        outState.putString ( SAVE_RECEIVE_DETAIL_KEY, String.valueOf ( receiveDetailSecondActivity ) );
+        outState.putString ( SAVE_RECEIVE_TITLE_KEY, receiveTitleSecondActivity );
+        outState.putString ( SAVE_RECEIVE_DETAIL_KEY, receiveDetailSecondActivity );
         super.onSaveInstanceState ( outState );
     }
 
@@ -89,7 +91,7 @@ public class SecondActivity extends AppCompatActivity {
         if (savedInstanceState.containsKey ( SAVE_RECEIVE_TITLE_KEY )) {
             receiveTitleSecondActivity = savedInstanceState.getParcelable ( SAVE_RECEIVE_TITLE_KEY );
         }
-        binding.echoTextView.setText ( String.valueOf ( receiveTitleSecondActivity ) );
+        binding.echoTextView.setText ( receiveTitleSecondActivity );
         super.onRestoreInstanceState ( savedInstanceState );
     }
 
@@ -128,8 +130,8 @@ public class SecondActivity extends AppCompatActivity {
         Log.d ( TAG, "onBackPressed() called" );
 
         Intent intent = new Intent ();
-        intent.putExtra ( TITLE_OUT_EXTRA_KEY, String.valueOf ( receiveTitleSecondActivity ) );
-        intent.putExtra ( MainActivity.RESULT_EXTRA_KEY, String.valueOf ( receiveDetailSecondActivity ) );
+        intent.putExtra ( TITLE_OUT_EXTRA_KEY, receiveTitleSecondActivity );
+        intent.putExtra ( DETAIL_OUT_EXTRA_KEY, receiveDetailSecondActivity );
         setResult ( Activity.RESULT_OK, intent );
         finish ();
     }
