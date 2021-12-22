@@ -34,17 +34,20 @@ public class SecondActivity extends AppCompatActivity {
     private String receiveTitleSecondActivity = "";
     private String receiveDetailSecondActivity = "";
 
-    public static Intent getLaunchIntent(Context context, EntityConstructor entityCons) {
-        Intent intent = new Intent ( context, SecondActivity.class );
-        intent.putExtra ( DETAIL_EXTRA_KEY, entityCons );
-        return intent;
-    }
-
-    public static void launch(Context context, EntityConstructor entityConstructor) {
+    public static Intent getLaunchIntent(Context context, EntityConstructor entityConstructor) {
         Intent intent = new Intent ( context, SecondActivity.class );
 
         intent.putExtra ( TITLE_EXTRA_KEY, entityConstructor.getTitle () );
         intent.putExtra ( DETAIL_EXTRA_KEY, entityConstructor.getDetail () );
+
+        return intent;
+    }
+
+    public static void launch(Context context, String title, String detail) {
+        Intent intent = new Intent ( context, SecondActivity.class );
+
+        intent.putExtra ( TITLE_EXTRA_KEY, title );
+        intent.putExtra ( DETAIL_EXTRA_KEY, detail );
 
         context.startActivity ( intent );
     }

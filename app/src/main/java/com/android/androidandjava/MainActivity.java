@@ -53,13 +53,20 @@ public class MainActivity extends AppCompatActivity {
                             + entityConstructor.getDetail (),
                     Toast.LENGTH_LONG ).show ();
 
-            Intent intent = new Intent ( MainActivity.this, SecondActivity.class );
+            //Обращение ко второй активити SecondActivity через метот во втором классе
+            SecondActivity.launch ( binding.listEntityRecyclerView.getContext (),
+                    entityConstructor.getTitle (),
+                    entityConstructor.getDetail () );//как правильно обратится к методу в классе SecondActivity
 
-            intent.putExtra ( TITLE_EXTRA_KEY, entityConstructor.getTitle () );
-            intent.putExtra ( DETAIL_EXTRA_KEY, entityConstructor.getDetail () );
 
-//            startActivity ( intent );
-            startActivityForResult ( intent, SecondActivity.ACTIVITY_REQUEST_CODE );
+            //Обращение ко второй активити SecondActivity
+//            Intent intent = new Intent ( MainActivity.this, SecondActivity.class );
+//
+//            intent.putExtra ( SecondActivity.TITLE_EXTRA_KEY, entityConstructor.getTitle () );
+//            intent.putExtra ( SecondActivity.DETAIL_EXTRA_KEY, entityConstructor.getDetail () );
+//
+////            startActivity ( intent );
+//            startActivityForResult ( intent, SecondActivity.ACTIVITY_REQUEST_CODE );
 
             Log.d ( TAG, "Listener Sort" );
         }
