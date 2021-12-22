@@ -150,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         outState.putString ( SAVE_TITLE_KEY, receiveTitleMainActivity );
-        outState.putString ( SAVE_TITLE_KEY, receiveDetailMainActivity );
+        outState.putString ( SAVE_DETAIL_KEY, receiveDetailMainActivity );
 
         Log.d ( TAG, "onSaveInstanceState() called with: outState = [" + outState + "]" );
         super.onSaveInstanceState ( outState );
@@ -159,10 +159,16 @@ public class MainActivity extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
-//        if (savedInstanceState.containsKey ( SAVE_TITLE_KEY )) {
-//            titleMainActivity = savedInstanceState.getParcelable ( SAVE_TITLE_KEY );
-//        }
-//        binding.listEntityRecyclerView.setTooltipText ( String.valueOf ( getTitle () ) );
+        if (savedInstanceState.containsKey ( SAVE_TITLE_KEY )) {
+            receiveTitleMainActivity = savedInstanceState.getString ( SAVE_TITLE_KEY );
+        }
+
+        if (savedInstanceState.containsKey ( SAVE_DETAIL_KEY )) {
+            receiveDetailMainActivity = savedInstanceState.getString ( SAVE_DETAIL_KEY );
+        }
+
+        entities.add ( new EntityConstructor ( receiveTitleMainActivity, receiveDetailMainActivity ) );
+
         Log.d ( TAG, "onRestoreInstanceState() called with: savedInstanceState = [" + savedInstanceState + "]" );
         super.onRestoreInstanceState ( savedInstanceState );
     }

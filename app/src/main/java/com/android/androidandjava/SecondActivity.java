@@ -66,7 +66,7 @@ public class SecondActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.d ( TAG, "onClick() called with: v = [" + v + "]" );
-                Intent intent = new Intent ();
+                Intent intent = new Intent ( v.getContext (), MainActivity.class );
                 intent.putExtra ( TITLE_OUT_EXTRA_KEY, receiveTitleSecondActivity );
                 intent.putExtra ( DETAIL_OUT_EXTRA_KEY, receiveDetailSecondActivity );
                 setResult ( Activity.RESULT_OK, intent );
