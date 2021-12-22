@@ -21,12 +21,12 @@ public class SecondActivity extends AppCompatActivity {
     private static final String SAVE_RECEIVE_TITLE_KEY = "save_receive_title_key";
     private static final String SAVE_RECEIVE_DETAIL_KEY = "save_receive_title_key";
 
-    public static final String ENTITIES_OUT_EXTRA_KEY = "entities_out_extra_key";
+//    public static final String ENTITIES_OUT_EXTRA_KEY = "entities_out_extra_key";
 
     public static final String TITLE_EXTRA_KEY = "title_extra_key";
     public static final String DETAIL_EXTRA_KEY = "save_detail_key";
 
-    public static final int ACTIVITY_REQUEST_CODE = 1111;
+    public static final int ACTIVITY_REQUEST_CODE = 1111; //константа кода запроса
 
 
     private ActivitySecondBinding binding;
@@ -34,15 +34,17 @@ public class SecondActivity extends AppCompatActivity {
     private String receiveTitleSecondActivity = "";
     private String receiveDetailSecondActivity = "";
 
-    public static Intent getLaunchIntent(Context context, EntityConstructor entityConstructor) {
+    //метод для вызова данной активити с возможностью вернуть обработанные данные
+    public static Intent getLaunchIntent(Context context, String title, String detail) {
         Intent intent = new Intent ( context, SecondActivity.class );
 
-        intent.putExtra ( TITLE_EXTRA_KEY, entityConstructor.getTitle () );
-        intent.putExtra ( DETAIL_EXTRA_KEY, entityConstructor.getDetail () );
+        intent.putExtra ( TITLE_EXTRA_KEY, title );
+        intent.putExtra ( DETAIL_EXTRA_KEY, detail );
 
         return intent;
     }
 
+    //метод для вызова данной активити
     public static void launch(Context context, String title, String detail) {
         Intent intent = new Intent ( context, SecondActivity.class );
 

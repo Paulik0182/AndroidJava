@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -37,8 +36,6 @@ public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
 
-//    public EntityConstructor entityCons = new EntityConstructor ();
-
     private String receiveTitleMainActivity = "";
     private String receiveDetailMainActivity = "";
 
@@ -53,10 +50,17 @@ public class MainActivity extends AppCompatActivity {
                             + entityConstructor.getDetail (),
                     Toast.LENGTH_LONG ).show ();
 
-            //Обращение ко второй активити SecondActivity через метот во втором классе
-            SecondActivity.launch ( binding.listEntityRecyclerView.getContext (),
+
+            //Обращение к второй активити SecondActivity через метот во втором классе с возможностью возврата обработаных данных
+            Intent intent = SecondActivity.getLaunchIntent ( binding.listEntityRecyclerView.getContext (),
                     entityConstructor.getTitle (),
                     entityConstructor.getDetail () );//как правильно обратится к методу в классе SecondActivity
+            startActivityForResult ( intent, SecondActivity.ACTIVITY_REQUEST_CODE );
+
+            //Обращение к второй активити SecondActivity через метот во втором классе
+//            SecondActivity.launch ( binding.listEntityRecyclerView.getContext (),
+//                    entityConstructor.getTitle (),
+//                    entityConstructor.getDetail () );//как правильно обратится к методу в классе SecondActivity
 
 
             //Обращение ко второй активити SecondActivity
@@ -93,7 +97,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView ( binding.getRoot () );
 
         fillEntities ();
-        Log.d ( TAG, "onCreate" );
 
         Intent intent = getIntent ();
         receiveTitleMainActivity = intent.getStringExtra ( TITLE_SAVE_OUT_EXTRA_KEY );
@@ -102,23 +105,12 @@ public class MainActivity extends AppCompatActivity {
 
 
         Toast.makeText ( MainActivity.this,
-                entities.get ( 1 ).getDetail (), Toast.LENGTH_SHORT ).show ();
+                entities.get ( 1 ).getDetail (),
+                Toast.LENGTH_SHORT ).show ();
 
-//        binding.listEntityRecyclerView.setTooltipText ( String.valueOf ( getTitle () ) );
-//        binding.listEntityRecyclerView.setTooltipText ( String.valueOf ( getDetail () ) );
-//        binding.listEntityRecyclerView.setAdapter ( entities.indexOf ( listener ) );
-//        binding.listEntityRecyclerView.setAdapter ( getPackageManager ().getPackagesHoldingPermissions (entities) );
-//        binding.listEntityRecyclerView.setAdapter ( (RecyclerView.Adapter) listener );
-        binding.listEntityRecyclerView.setOnClickListener ( new View.OnClickListener () {
-            @Override
-            public void onClick(View v) {
-//                SecondActivity.launch ( v.getContext (), (EntityConstructor) getTitle () );
-//                Intent intent = SecondActivity.getLaunchIntent(v.getContext(),  );
-//                startActivityForResult(intent, SecondActivity.ACTIVITY_REQUEST_CODE);
-
-            }
-        } );
         initRecyclerView ();
+
+        Log.d ( TAG, "onCreate" );
     }
 
     private void initRecyclerView() {
@@ -226,6 +218,13 @@ public class MainActivity extends AppCompatActivity {
                 entities.add ( new EntityConstructor ( echoTitle, echoDetail ) );//выводим данные
             }
         }
+//        if (requestCode == SecondActivity.ACTIVITY_REQUEST_CODE && data != null && resultCode == Activity.RESULT_OK) {
+//            receiveTitleMainActivity = data.getStringExtra (SecondActivity.TITLE_EXTRA_KEY);
+//            receiveDetailMainActivity = data.getStringExtra (SecondActivity.DETAIL_EXTRA_KEY);
+//            entities.add ( new EntityConstructor ( receiveTitleMainActivity, receiveDetailMainActivity ) );//выводим данные
+//        } else {
+//            super.onActivityResult(requestCode, resultCode, data);
+//        }
     }
 
 }
