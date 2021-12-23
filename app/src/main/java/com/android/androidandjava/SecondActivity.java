@@ -21,8 +21,6 @@ public class SecondActivity extends AppCompatActivity {
     private static final String SAVE_RECEIVE_TITLE_KEY = "save_receive_title_key";
     private static final String SAVE_RECEIVE_DETAIL_KEY = "save_receive_title_key";
 
-//    public static final String ENTITIES_OUT_EXTRA_KEY = "entities_out_extra_key";
-
     public static final String TITLE_EXTRA_KEY = "title_extra_key";
     public static final String DETAIL_EXTRA_KEY = "save_detail_key";
 

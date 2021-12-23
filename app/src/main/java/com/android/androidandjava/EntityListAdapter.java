@@ -1,5 +1,6 @@
 package com.android.androidandjava;
 
+import android.annotation.SuppressLint;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -16,13 +17,15 @@ public class EntityListAdapter extends RecyclerView.Adapter<EntityItemHolder> {
 
     private static final String TAG = "@@@EntityListAdapter";
 
-    private final ArrayList<EntityConstructor> entities; //определили список наших сущьностей
+    private ArrayList<EntityConstructor> entities; //определили список наших сущьностей
     private final OnItemInteractionListener listener;//слушатель
 
     //вместе со списком entities, передаем объект listener
+    @SuppressLint("NotifyDataSetChanged")
     EntityListAdapter(List<EntityConstructor> entities, OnItemInteractionListener listener) {
         this.entities = new ArrayList<> ( entities );
         this.listener = listener;
+//        notifyDataSetChanged();
         Log.d ( TAG, "EntityListAdapter: entities = [" + entities + "], listener = [" + listener + "]" );
     }
 
@@ -47,6 +50,11 @@ public class EntityListAdapter extends RecyclerView.Adapter<EntityItemHolder> {
     public int getItemCount() {
         Log.d ( TAG, "getItemCount: size" );
         return entities.size ();//Возвращаем количество элементов в списк (size)
+    }
+
+    public void setData(ArrayList<EntityConstructor> entities) {// метод для обновления списка
+        this.entities = entities;
+        notifyDataSetChanged ();
     }
 }
 //Вышеуказанные три метода необходимо переопределить обязательно
