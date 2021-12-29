@@ -40,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
     private String receiveTitleMainActivity = "";
     private String receiveDetailMainActivity = "";
 
+    private EntityListAdapter adapter;
+
     //создали экземпляр ананимного класса (слушателя)
     private final OnItemInteractionListener listener = new OnItemInteractionListener () {
         @SuppressLint("LongLogTag")
@@ -87,9 +89,6 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-    public MainActivity() {
-    }
-
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,12 +103,12 @@ public class MainActivity extends AppCompatActivity {
         receiveDetailMainActivity = intent.getStringExtra ( DETAIL_SAVE_OUT_EXTRA_KEY );
         entities.add ( new EntityConstructor ( receiveTitleMainActivity, receiveDetailMainActivity ) );//выводим данные
 
-
         Toast.makeText ( MainActivity.this,
                 entities.get ( 1 ).getDetail (),
                 Toast.LENGTH_SHORT ).show ();
 
         initRecyclerView ();
+        inUpdate ();
 
         secondActivityLauncher = registerForActivityResult ( new ActivityResultContracts.StartActivityForResult (), new ActivityResultCallback<ActivityResult> () {
             @Override
@@ -120,10 +119,9 @@ public class MainActivity extends AppCompatActivity {
                     assert data != null;
                     receiveTitleMainActivity = data.getStringExtra ( SecondActivity.TITLE_OUT_EXTRA_KEY );
                     receiveDetailMainActivity = data.getStringExtra ( SecondActivity.DETAIL_OUT_EXTRA_KEY );
-//                    EntityListAdapter.setData();
-//                    binding.listEntityRecyclerView.setAdapter ( receiveTitleMainActivity, receiveDetailMainActivity );
-//                    notifyDataSetChanged(entities);
-//                    binding.listEntityRecyclerView.setAdapter ( new EntityListAdapter ( entities, listener ) );
+                    inUpdate ();
+//                    adapter = new EntityListAdapter(entities, listener);
+//                    binding.listEntityRecyclerView.setAdapter ( adapter );
                 }
             }
         } );
@@ -131,17 +129,13 @@ public class MainActivity extends AppCompatActivity {
         Log.d ( TAG, "onCreate" );
     }
 
-//    private void notifyDataSetChanged(ArrayList<EntityConstructor> entities){// метод для обновления списка
-//        this.entities = entities;
-//        notifyDataSetChanged(entities);
-//    }
-
     private void initRecyclerView() {
         Log.d ( TAG, "initRecyclerView()" );
         //устанавливаем layout. Раздуваем вертикальный или горизонтальный список
         binding.listEntityRecyclerView.setLayoutManager ( new LinearLayoutManager ( this ) );
+        adapter = new EntityListAdapter ( entities, listener );
         //устанавливаем адаптер. Вызываем конструктор адаптера
-        binding.listEntityRecyclerView.setAdapter ( new EntityListAdapter ( entities, listener ) );
+        binding.listEntityRecyclerView.setAdapter ( adapter );
     }
 
     //наполняем список
@@ -181,6 +175,8 @@ public class MainActivity extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        Log.d ( TAG, "onRestoreInstanceState() called with: savedInstanceState = [" + savedInstanceState + "]" );
+
         if (savedInstanceState.containsKey ( SAVE_TITLE_KEY )) {
             receiveTitleMainActivity = savedInstanceState.getString ( SAVE_TITLE_KEY );
         }
@@ -190,8 +186,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
         entities.add ( new EntityConstructor ( receiveTitleMainActivity, receiveDetailMainActivity ) );
+        inUpdate ();
 
-        Log.d ( TAG, "onRestoreInstanceState() called with: savedInstanceState = [" + savedInstanceState + "]" );
         super.onRestoreInstanceState ( savedInstanceState );
     }
 
@@ -239,7 +235,7 @@ public class MainActivity extends AppCompatActivity {
 //                String echoDetail = data.getStringExtra ( SecondActivity.DETAIL_OUT_EXTRA_KEY );//получаем данные по ключу
 //
 //                entities.add ( new EntityConstructor ( echoTitle, echoDetail ) );//выводим данные
-//                binding.listEntityRecyclerView.setAdapter ( new EntityListAdapter ( entities, listener ) );
+//                inUpdate ();
 //            }
 //        }
     //Вариант 2
@@ -252,4 +248,7 @@ public class MainActivity extends AppCompatActivity {
 //        }
 //    }
 
+    private void inUpdate() {
+        adapter.setData ( entities );
+    }
 }

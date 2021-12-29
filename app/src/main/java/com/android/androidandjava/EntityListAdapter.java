@@ -25,7 +25,6 @@ public class EntityListAdapter extends RecyclerView.Adapter<EntityItemHolder> {
     EntityListAdapter(List<EntityConstructor> entities, OnItemInteractionListener listener) {
         this.entities = new ArrayList<> ( entities );
         this.listener = listener;
-//        notifyDataSetChanged();
         Log.d ( TAG, "EntityListAdapter: entities = [" + entities + "], listener = [" + listener + "]" );
     }
 
@@ -52,8 +51,9 @@ public class EntityListAdapter extends RecyclerView.Adapter<EntityItemHolder> {
         return entities.size ();//Возвращаем количество элементов в списк (size)
     }
 
-    public void setData(ArrayList<EntityConstructor> entities) {// метод для обновления списка
-        this.entities = entities;
+    @SuppressLint("NotifyDataSetChanged")
+    public void setData(List<EntityConstructor> entities) {// метод для обновления списка
+        this.entities = new ArrayList<> ( entities );
         notifyDataSetChanged ();
     }
 }
