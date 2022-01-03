@@ -54,7 +54,7 @@ public class EntityListAdapter extends RecyclerView.Adapter<EntityItemHolder> {
     @SuppressLint("NotifyDataSetChanged")
     public void setData(List<EntityConstructor> entities) {// метод для обновления списка
         this.entities = new ArrayList<> ( entities );
-        notifyDataSetChanged ();
+//        notifyDataSetChanged ();
     }
 }
 //Вышеуказанные три метода необходимо переопределить обязательно

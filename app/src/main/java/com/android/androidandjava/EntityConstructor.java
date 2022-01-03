@@ -8,10 +8,17 @@ public class EntityConstructor implements Parcelable {
 
     private static final String TAG = "@@@EntityConstructor";
 
+    private String uid;// id - обязателен для EntityDiffUtils
     private String title;
     private String detail;
 
-    EntityConstructor(String title, String detail) {
+//    EntityConstructor(String title, String detail) {
+//        this.title = title;
+//        this.detail = detail;
+//    }
+
+    EntityConstructor(String uid, String title, String detail) {
+        this.uid = uid;
         this.title = title;
         this.detail = detail;
     }
@@ -31,6 +38,10 @@ public class EntityConstructor implements Parcelable {
     protected EntityConstructor(Parcel in) {
         title = in.readString ();
         detail = in.readString ();
+    }
+
+    public String getUid() {
+        return uid;
     }
 
     public String getTitle() {

@@ -18,11 +18,14 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.android.androidandjava.databinding.ActivityMainBinding;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -40,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     private ActivityResultLauncher<Intent> secondActivityLauncher;
 
+    private final String receiveUidMainActivity = "";
     private String receiveTitleMainActivity = "";
     private String receiveDetailMainActivity = "";
 
@@ -55,7 +59,6 @@ public class MainActivity extends AppCompatActivity {
                             + "\n"
                             + entityConstructor.getDetail (),
                     Toast.LENGTH_LONG ).show ();
-
 
             //Обращение к второй активити SecondActivity через метот во втором классе с возможностью возврата обработаных данных
             Intent intent = SecondActivity.getLaunchIntent ( binding.listEntityRecyclerView.getContext (),
@@ -96,20 +99,20 @@ public class MainActivity extends AppCompatActivity {
                 //проверяем какой элемент нажат и выполняем действия (логика)
                 if (itemId == R.id.menu_entity_add) {//добавляем элемент
                     Toast.makeText ( MainActivity.this, "Menu: Add", Toast.LENGTH_SHORT ).show ();
-                    addEntity ( entityConstructor );
-                    inUpdate ();
+                    addEntity ();
+//                    inUpdate ();
                     return true;
 
                 } else if (itemId == R.id.menu_entity_delete) {//удаляем элемент
                     Toast.makeText ( MainActivity.this, "Menu: Delete", Toast.LENGTH_SHORT ).show ();
                     deleteEntity ( entityConstructor );
-                    inUpdate ();
+//                    inUpdate ();
                     return true;
 
                 } else if (itemId == R.id.menu_entity_delete_all) {//удаляем все элементы
                     Toast.makeText ( MainActivity.this, "Menu: Delete_all", Toast.LENGTH_SHORT ).show ();
                     deleteAllEntity ();
-                    inUpdate ();
+//                    inUpdate ();
                     return true;
 
                 }
@@ -127,21 +130,29 @@ public class MainActivity extends AppCompatActivity {
         popupMenu.show ();
     }
 
-    private void addEntity(EntityConstructor entityConstructor) {
-        entities.add ( entityConstructor );
-
-//        entities.add ( SecondActivity.LaunchIntent ( binding.listEntityRecyclerView.getContext (),
-//                entityConstructor.getTitle (),
-//                entityConstructor.getDetail () ) );
-
+    private void addEntity() {
+        ArrayList<EntityConstructor> oldEntities = new ArrayList<> ( entities );
+        entities.add ( new EntityConstructor ( "test", "addTest", "Text_test" ) );
+        entityListUpdate ( oldEntities, entities );
     }
 
     private void deleteEntity(EntityConstructor entityConstructor) {
+        ArrayList<EntityConstructor> oldEntities = new ArrayList<> ( entities );
         entities.remove ( entityConstructor );
+        entityListUpdate ( oldEntities, entities );
     }
 
     private void deleteAllEntity() {
+        ArrayList<EntityConstructor> oldEntities = new ArrayList<> ( entities );
         entities.clear ();
+        entityListUpdate ( oldEntities, entities );
+    }
+
+    private void entityListUpdate(List<EntityConstructor> oldEntities, List<EntityConstructor> newEntities) {
+        EntityDiffUtil entityDiffUtil = new EntityDiffUtil ( oldEntities, newEntities );
+        DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff ( entityDiffUtil, true );
+        diffResult.dispatchUpdatesTo ( adapter );
+        adapter.setData ( newEntities );
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -151,19 +162,19 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate ( getLayoutInflater () );
         setContentView ( binding.getRoot () );
 
-        fillEntities ();
+        fillEntities ( 20 );
 
         Intent intent = getIntent ();
         receiveTitleMainActivity = intent.getStringExtra ( TITLE_SAVE_OUT_EXTRA_KEY );
         receiveDetailMainActivity = intent.getStringExtra ( DETAIL_SAVE_OUT_EXTRA_KEY );
-        entities.add ( new EntityConstructor ( receiveTitleMainActivity, receiveDetailMainActivity ) );//выводим данные
+        entities.add ( new EntityConstructor ( receiveUidMainActivity, receiveTitleMainActivity, receiveDetailMainActivity ) );//выводим данные
 
-        Toast.makeText ( MainActivity.this,
-                entities.get ( 1 ).getDetail (),
-                Toast.LENGTH_SHORT ).show ();
+//        Toast.makeText ( MainActivity.this,
+//                entities.get ( 1 ).getDetail (),
+//                Toast.LENGTH_SHORT ).show ();
 
         initRecyclerView ();
-        inUpdate ();
+//        inUpdate ();
 
         secondActivityLauncher = registerForActivityResult ( new ActivityResultContracts.StartActivityForResult (), new ActivityResultCallback<ActivityResult> () {
             @Override
@@ -174,7 +185,7 @@ public class MainActivity extends AppCompatActivity {
                     assert data != null;
                     receiveTitleMainActivity = data.getStringExtra ( SecondActivity.TITLE_OUT_EXTRA_KEY );
                     receiveDetailMainActivity = data.getStringExtra ( SecondActivity.DETAIL_OUT_EXTRA_KEY );
-                    inUpdate ();
+//                    inUpdate ();
                 }
             }
         } );
@@ -191,30 +202,41 @@ public class MainActivity extends AppCompatActivity {
         binding.listEntityRecyclerView.setAdapter ( adapter );
     }
 
-    //наполняем список
-    private void fillEntities() {
-        entities.add ( new EntityConstructor ( "Title_1", "Text" ) );
-        entities.add ( new EntityConstructor ( "Title_2", "Text" ) );
-        entities.add ( new EntityConstructor ( "Title_3", "Text" ) );
-        entities.add ( new EntityConstructor ( "Title_4", "Text" ) );
-        entities.add ( new EntityConstructor ( "Title_5", "Text" ) );
-        entities.add ( new EntityConstructor ( "Title_6", "Text" ) );
-        entities.add ( new EntityConstructor ( "Title_7", "Text" ) );
-        entities.add ( new EntityConstructor ( "Title_8", "Text" ) );
-        entities.add ( new EntityConstructor ( "Title_9", "Text" ) );
-        entities.add ( new EntityConstructor ( "Title_10", "Text" ) );
-        entities.add ( new EntityConstructor ( "Title_11", "Text" ) );
-        entities.add ( new EntityConstructor ( "Title_12", "Text" ) );
-        entities.add ( new EntityConstructor ( "Title_13", "Text" ) );
-        entities.add ( new EntityConstructor ( "Title_14", "Text" ) );
-        entities.add ( new EntityConstructor ( "Title_15", "Text" ) );
-        entities.add ( new EntityConstructor ( "Title_16", "Text" ) );
-        entities.add ( new EntityConstructor ( "Title_17", "Text" ) );
-        entities.add ( new EntityConstructor ( "Title_18", "Text" ) );
-        entities.add ( new EntityConstructor ( "Title_19", "Text" ) );
-        entities.add ( new EntityConstructor ( "Title_20", "Text" ) );
+    private void fillEntities(int numberItems) {
+        StringBuilder sb = new StringBuilder ();
+        sb.append ( "Title  " );
+        for (int i = 1; i <= numberItems; i++) {
+            sb.delete ( 6, 8 );
+            sb.append ( i );
+            String uid = UUID.randomUUID ().toString ();
+            entities.add ( new EntityConstructor ( uid, sb.toString (), "Text" ) );
 
+        }
     }
+    //наполняем список
+//    private void fillEntities() {
+//        entities.add ( new EntityConstructor ( "1","Title_1", "Text" ) );
+//        entities.add ( new EntityConstructor ( "2","Title_2", "Text" ) );
+//        entities.add ( new EntityConstructor ( "3","Title_3", "Text" ) );
+//        entities.add ( new EntityConstructor ( "4","Title_4", "Text" ) );
+//        entities.add ( new EntityConstructor ( "5","Title_5", "Text" ) );
+//        entities.add ( new EntityConstructor ( "6","Title_6", "Text" ) );
+//        entities.add ( new EntityConstructor ( "7","Title_7", "Text" ) );
+//        entities.add ( new EntityConstructor ( "8","Title_8", "Text" ) );
+//        entities.add ( new EntityConstructor ( "9","Title_9", "Text" ) );
+//        entities.add ( new EntityConstructor ( "10","Title_10", "Text" ) );
+//        entities.add ( new EntityConstructor ( "11","Title_11", "Text" ) );
+//        entities.add ( new EntityConstructor ( "12","Title_12", "Text" ) );
+//        entities.add ( new EntityConstructor ( "13","Title_13", "Text" ) );
+//        entities.add ( new EntityConstructor ( "14","Title_14", "Text" ) );
+//        entities.add ( new EntityConstructor ( "15","Title_15", "Text" ) );
+//        entities.add ( new EntityConstructor ( "16","Title_16", "Text" ) );
+//        entities.add ( new EntityConstructor ( "17","Title_17", "Text" ) );
+//        entities.add ( new EntityConstructor ( "18","Title_18", "Text" ) );
+//        entities.add ( new EntityConstructor ( "19","Title_19", "Text" ) );
+//        entities.add ( new EntityConstructor ( "20","Title_20", "Text" ) );
+//
+//    }
 
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
@@ -238,8 +260,8 @@ public class MainActivity extends AppCompatActivity {
             receiveDetailMainActivity = savedInstanceState.getString ( SAVE_DETAIL_KEY );
         }
 
-        entities.add ( new EntityConstructor ( receiveTitleMainActivity, receiveDetailMainActivity ) );
-        inUpdate ();
+        entities.add ( new EntityConstructor ( receiveUidMainActivity, receiveTitleMainActivity, receiveDetailMainActivity ) );
+//        inUpdate ();
 
         super.onRestoreInstanceState ( savedInstanceState );
     }
@@ -301,7 +323,7 @@ public class MainActivity extends AppCompatActivity {
 //        }
 //    }
 
-    private void inUpdate() {
-        adapter.setData ( entities );
-    }
+//    private void inUpdate() {
+//        adapter.setData ( entities );
+//    }
 }
