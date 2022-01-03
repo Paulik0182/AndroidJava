@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
                 //проверяем какой элемент нажат и выполняем действия (логика)
                 if (itemId == R.id.menu_entity_add) {//добавляем элемент
                     Toast.makeText ( MainActivity.this, "Menu: Add", Toast.LENGTH_SHORT ).show ();
-                    addEntity ();
+                    addEntity ( entityConstructor );
 //                    inUpdate ();
                     return true;
 
@@ -130,10 +130,19 @@ public class MainActivity extends AppCompatActivity {
         popupMenu.show ();
     }
 
-    private void addEntity() {
-        ArrayList<EntityConstructor> oldEntities = new ArrayList<> ( entities );
-        entities.add ( new EntityConstructor ( "test", "addTest", "Text_test" ) );
-        entityListUpdate ( oldEntities, entities );
+    private void addEntity(EntityConstructor entityConstructor) {
+        //Обращение ко второй активити SecondActivity
+        Intent intent = new Intent ( MainActivity.this, SecondActivity.class );
+
+//        intent.putExtra ( SecondActivity.TITLE_EXTRA_KEY, entityConstructor.getTitle () );
+//        intent.putExtra ( SecondActivity.DETAIL_EXTRA_KEY, entityConstructor.getDetail () );
+//
+////            startActivity ( intent );
+        startActivityForResult ( intent, SecondActivity.ACTIVITY_REQUEST_CODE );
+
+//        ArrayList<EntityConstructor> oldEntities = new ArrayList<> ( entities );
+//        entities.add ( new EntityConstructor ( "test", "addTest", "Text_test" ) );
+//        entityListUpdate ( oldEntities, entities );
     }
 
     private void deleteEntity(EntityConstructor entityConstructor) {
@@ -148,11 +157,12 @@ public class MainActivity extends AppCompatActivity {
         entityListUpdate ( oldEntities, entities );
     }
 
+    //в метод передается два массива, старый и новый
     private void entityListUpdate(List<EntityConstructor> oldEntities, List<EntityConstructor> newEntities) {
-        EntityDiffUtil entityDiffUtil = new EntityDiffUtil ( oldEntities, newEntities );
-        DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff ( entityDiffUtil, true );
-        diffResult.dispatchUpdatesTo ( adapter );
-        adapter.setData ( newEntities );
+        EntityDiffUtil entityDiffUtil = new EntityDiffUtil ( oldEntities, newEntities );//инициализация списков через класс EntityDiffUtil
+        DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff ( entityDiffUtil, true );//вычисление разницы между двумя масивами
+        diffResult.dispatchUpdatesTo ( adapter );//формируется новый список данных (массив данных)
+        adapter.setData ( newEntities );//передаем новый список
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
