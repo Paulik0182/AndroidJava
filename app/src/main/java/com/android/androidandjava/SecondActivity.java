@@ -42,6 +42,15 @@ public class SecondActivity extends AppCompatActivity {
         return intent;
     }
 
+    public static Intent LaunchIntent(Context context, String title, String detail) {
+        Intent intent = new Intent ( context, SecondActivity.class );
+
+        intent.putExtra ( TITLE_EXTRA_KEY, title );
+        intent.putExtra ( DETAIL_EXTRA_KEY, detail );
+
+        return intent;
+    }
+
     //метод для вызова данной активити
     public static void launch(Context context, String title, String detail) {
         Intent intent = new Intent ( context, SecondActivity.class );

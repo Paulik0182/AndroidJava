@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
                 //проверяем какой элемент нажат и выполняем действия (логика)
                 if (itemId == R.id.menu_entity_add) {//добавляем элемент
                     Toast.makeText ( MainActivity.this, "Menu: Add", Toast.LENGTH_SHORT ).show ();
-
+                    addEntity ( entityConstructor );
                     inUpdate ();
                     return true;
 
@@ -125,6 +125,15 @@ public class MainActivity extends AppCompatActivity {
         } );
 
         popupMenu.show ();
+    }
+
+    private void addEntity(EntityConstructor entityConstructor) {
+        entities.add ( entityConstructor );
+
+//        entities.add ( SecondActivity.LaunchIntent ( binding.listEntityRecyclerView.getContext (),
+//                entityConstructor.getTitle (),
+//                entityConstructor.getDetail () ) );
+
     }
 
     private void deleteEntity(EntityConstructor entityConstructor) {
