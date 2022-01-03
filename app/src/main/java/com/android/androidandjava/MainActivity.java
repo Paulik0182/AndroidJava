@@ -6,6 +6,9 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResult;
@@ -58,36 +61,68 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = SecondActivity.getLaunchIntent ( binding.listEntityRecyclerView.getContext (),
                     entityConstructor.getTitle (),
                     entityConstructor.getDetail () );//как правильно обратится к методу в классе SecondActivity
-//            startActivityForResult ( intent, SecondActivity.ACTIVITY_REQUEST_CODE );//
             secondActivityLauncher.launch ( intent );
-
-            //Обращение к второй активити SecondActivity через метот во втором классе
-//            SecondActivity.launch ( binding.listEntityRecyclerView.getContext (),
-//                    entityConstructor.getTitle (),
-//                    entityConstructor.getDetail () );//как правильно обратится к методу в классе SecondActivity
-
-
-            //Обращение ко второй активити SecondActivity
-//            Intent intent = new Intent ( MainActivity.this, SecondActivity.class );
-//
-//            intent.putExtra ( SecondActivity.TITLE_EXTRA_KEY, entityConstructor.getTitle () );
-//            intent.putExtra ( SecondActivity.DETAIL_EXTRA_KEY, entityConstructor.getDetail () );
-//
-////            startActivity ( intent );
-//            startActivityForResult ( intent, SecondActivity.ACTIVITY_REQUEST_CODE );
 
             Log.d ( TAG, "Listener Sort" );
         }
 
         @SuppressLint("LongLogTag")
         @Override
-        public void onItemLongClickListener(EntityConstructor entityConstructor) {
+        public void onItemLongClickListener(EntityConstructor entityConstructor, View anchor) {// anchor - это элемент в меню на который мы нажимаем
+
+            Log.d ( TAG, "onItemLongClickListener() called with: entityConstructor = " +
+                    "[" + entityConstructor + "], anchor = [" + anchor + "]" );
+
             Toast.makeText ( MainActivity.this, "onItemLongClickListener ->" +
                     entityConstructor.getTitle (), Toast.LENGTH_LONG ).show ();
 
-            Log.d ( TAG, "Listener Long" );
+            showItemEntityPopupMenu ( entityConstructor, anchor );//вызов метода. Всплывающее меню
         }
     };
+
+
+    //метод всплывающего меню (и реализация нажатия кнопок: добавить, удалить, удалить все)
+    private void showItemEntityPopupMenu(EntityConstructor entityConstructor, View anchor) {//передаем entityConstructor - это запись, anchor - это элемент на который мы нажимаем
+        PopupMenu popupMenu = new PopupMenu ( this, anchor );//создали меню, в него передали контекст и view
+        popupMenu.inflate ( R.menu.menu_entity );// раздули view (layout menu)
+
+        //слушатель нажатий меню (выбор меню)
+        popupMenu.setOnMenuItemClickListener ( new PopupMenu.OnMenuItemClickListener () {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {//передается нажатый элемент (item)
+
+                int itemId = item.getItemId ();
+
+                //проверяем какой элемент нажат и выполняем действия (логика)
+                if (itemId == R.id.menu_entity_add) {//добавляем элемент
+                    Toast.makeText ( MainActivity.this, "Menu: Add", Toast.LENGTH_SHORT ).show ();
+                    inUpdate ();
+                    return true;
+
+                } else if (itemId == R.id.menu_entity_delete) {//удаляем элемент
+                    Toast.makeText ( MainActivity.this, "Menu: Delete", Toast.LENGTH_SHORT ).show ();
+                    inUpdate ();
+                    return true;
+
+                } else if (itemId == R.id.menu_entity_delete_all) {//удаляем все элементы
+                    Toast.makeText ( MainActivity.this, "Menu: Delete_all", Toast.LENGTH_SHORT ).show ();
+                    inUpdate ();
+                    return true;
+
+                }
+                return false;
+            }
+        } );
+
+        popupMenu.setOnDismissListener ( new PopupMenu.OnDismissListener () {
+            @Override
+            public void onDismiss(PopupMenu menu) {//завершение обработки нажатия, как правило не используется
+                Toast.makeText ( MainActivity.this, "Menu: on dismiss", Toast.LENGTH_SHORT ).show ();
+            }
+        } );
+
+        popupMenu.show ();
+    }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override

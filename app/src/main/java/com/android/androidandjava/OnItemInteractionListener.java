@@ -8,10 +8,12 @@ package com.android.androidandjava;
 Обеспечивается единообразная работа с разными источниками данных.
  */
 
+import android.view.View;
+
 public interface OnItemInteractionListener {
 
     void onItemShotClickListener(EntityConstructor entityConstructor);
 
-    void onItemLongClickListener(EntityConstructor entityConstructor);
+    void onItemLongClickListener(EntityConstructor entityConstructor, View anchor);// anchor - это элемент в меню на который мы нажимаем
 
 }

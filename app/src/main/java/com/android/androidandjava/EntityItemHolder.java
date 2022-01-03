@@ -31,7 +31,7 @@ public class EntityItemHolder extends RecyclerView.ViewHolder {
         itemView.setOnLongClickListener ( new View.OnLongClickListener () {
             @Override
             public boolean onLongClick(View v) {
-                listener.onItemLongClickListener ( entityConstructor );
+                listener.onItemLongClickListener ( entityConstructor, v );
                 Log.d ( TAG, "onLongClick" );
                 return true;
             }
