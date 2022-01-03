@@ -96,16 +96,19 @@ public class MainActivity extends AppCompatActivity {
                 //проверяем какой элемент нажат и выполняем действия (логика)
                 if (itemId == R.id.menu_entity_add) {//добавляем элемент
                     Toast.makeText ( MainActivity.this, "Menu: Add", Toast.LENGTH_SHORT ).show ();
+
                     inUpdate ();
                     return true;
 
                 } else if (itemId == R.id.menu_entity_delete) {//удаляем элемент
                     Toast.makeText ( MainActivity.this, "Menu: Delete", Toast.LENGTH_SHORT ).show ();
+                    deleteEntity ( entityConstructor );
                     inUpdate ();
                     return true;
 
                 } else if (itemId == R.id.menu_entity_delete_all) {//удаляем все элементы
                     Toast.makeText ( MainActivity.this, "Menu: Delete_all", Toast.LENGTH_SHORT ).show ();
+                    deleteAllEntity ();
                     inUpdate ();
                     return true;
 
@@ -122,6 +125,14 @@ public class MainActivity extends AppCompatActivity {
         } );
 
         popupMenu.show ();
+    }
+
+    private void deleteEntity(EntityConstructor entityConstructor) {
+        entities.remove ( entityConstructor );
+    }
+
+    private void deleteAllEntity() {
+        entities.clear ();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -155,8 +166,6 @@ public class MainActivity extends AppCompatActivity {
                     receiveTitleMainActivity = data.getStringExtra ( SecondActivity.TITLE_OUT_EXTRA_KEY );
                     receiveDetailMainActivity = data.getStringExtra ( SecondActivity.DETAIL_OUT_EXTRA_KEY );
                     inUpdate ();
-//                    adapter = new EntityListAdapter(entities, listener);
-//                    binding.listEntityRecyclerView.setAdapter ( adapter );
                 }
             }
         } );
