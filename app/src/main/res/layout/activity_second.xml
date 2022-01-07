@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="4dp"
+    android:backgroundTint="@android:color/darker_gray"
+    android:elevation="8dp"
+    tools:context=".SecondActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?selectableItemBackground"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+        <EditText
+            android:id="@+id/echo_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            android:textStyle="bold|italic"
+            tools:text="Заголовок заметки" />
+
+        <EditText
+            android:id="@+id/message_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:ellipsize="end"
+            android:maxLines="50"
+            android:textSize="14sp"
+            android:textStyle="italic"
+            tools:text="\t\t\t\t Заметка жанр публицистики, назначение которого —
+        оперативно сообщать общественно значимые факты. Рубрика: роды и
+        жанры литературы Род: публицистические жанры.
+        Заметка жанр публицистики, назначение которого —
+        оперативно сообщать общественно значимые факты. Рубрика: роды и
+        жанры литературы Род: публицистические жанры.
+        Заметка жанр публицистики, назначение которого —
+        оперативно сообщать общественно значимые факты. Рубрика: роды и
+        жанры литературы Род: публицистические жанры.
+        Заметка жанр публицистики, назначение которого —
+        оперативно сообщать общественно значимые факты. Рубрика: роды и
+        жанры литературы Род: публицистические жанры" />
+
+        <Button
+            android:id="@+id/ok_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="OK" />
+
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>
