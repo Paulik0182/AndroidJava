@@ -83,7 +83,6 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-
     //метод всплывающего меню (и реализация нажатия кнопок: добавить, удалить, удалить все)
     private void showItemEntityPopupMenu(EntityConstructor entityConstructor, View anchor) {//передаем entityConstructor - это запись, anchor - это элемент на который мы нажимаем
         PopupMenu popupMenu = new PopupMenu ( this, anchor );//создали меню, в него передали контекст и view
@@ -173,15 +172,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView ( binding.getRoot () );
 
         fillEntities ( 20 );
-
-        Intent intent = getIntent ();
-        receiveTitleMainActivity = intent.getStringExtra ( TITLE_SAVE_OUT_EXTRA_KEY );
-        receiveDetailMainActivity = intent.getStringExtra ( DETAIL_SAVE_OUT_EXTRA_KEY );
-        entities.add ( new EntityConstructor ( receiveUidMainActivity, receiveTitleMainActivity, receiveDetailMainActivity ) );//выводим данные
-
-//        Toast.makeText ( MainActivity.this,
-//                entities.get ( 1 ).getDetail (),
-//                Toast.LENGTH_SHORT ).show ();
 
         initRecyclerView ();
 //        inUpdate ();
