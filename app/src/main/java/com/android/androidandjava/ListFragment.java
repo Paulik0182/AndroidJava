@@ -21,7 +21,7 @@ public class ListFragment extends Fragment {
 
 
     @Override
-    public void onAttach(@NonNull Context context) {
+    public void onAttach(@NonNull Context context) {//в основном используется для того, чтобы призентер присоединить к фрагменту (при MMVP)
         Log.d ( TAG, "onAttach() called with: context = [" + context + "]" );
         super.onAttach ( context );
     }
@@ -32,6 +32,7 @@ public class ListFragment extends Fragment {
         super.onCreate ( savedInstanceState );
     }
 
+    //у фрагмента несколько стадий создания. Поэтому несколько методов onCreate. Соответственно и несколько onDestroy
     @SuppressLint("ResourceType")
     @Nullable
     @Override
@@ -71,6 +72,7 @@ public class ListFragment extends Fragment {
         super.onStop ();
     }
 
+    //при уничтожении фрагмента, его визуальная часть может остоватся, поэтому View уничтожается отдельно.
     @Override
     public void onDestroyView() {
         Log.d ( TAG, "onDestroyView() called" );
@@ -78,6 +80,7 @@ public class ListFragment extends Fragment {
         super.onDestroyView ();
     }
 
+    //при выполнении этого метода, эначит фрагмент уничтожен полностью.
     @Override
     public void onDestroy() {
         Log.d ( TAG, "onDestroy() called" );
