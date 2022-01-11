@@ -45,7 +45,7 @@ public class ListFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         Log.d ( TAG, "onViewCreated() called with: view = [" + view + "], savedInstanceState = [" + savedInstanceState + "]" );
         super.onViewCreated ( view, savedInstanceState );
-        binding = FragmentListBinding.bind ( view );
+        binding = FragmentListBinding.bind ( view );    //!!!!  binding инициализируем именно в этом методе. при уничтожении фрагмента binding зануляем.
     }
 
     @Override
@@ -76,7 +76,7 @@ public class ListFragment extends Fragment {
     @Override
     public void onDestroyView() {
         Log.d ( TAG, "onDestroyView() called" );
-        binding = null;
+        binding = null;                             //!!!!!! binding обязательно нужно занулить!!!!
         super.onDestroyView ();
     }
 
