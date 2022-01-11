@@ -8,7 +8,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.android.androidandjava.databinding.ActivityMainBinding;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ListFragment.Contract {
 
     private static final String TAG = "@@@ MainActivity";
 
@@ -25,6 +25,17 @@ public class MainActivity extends AppCompatActivity {
         fragmentManager.beginTransaction ()
                 .add ( binding.listFragmentContainer.getId (), new ListFragment () )
                 .commit ();
+    }
+
+    //реализация контракта
+    @Override
+    public void showDetail(String message) {//передаем данные из фрагмента в фрагмент
+        Log.d ( TAG, "showDetail() called" );
+        FragmentManager fragmentManager = getSupportFragmentManager (); //создаем экземпляр фрагмента
+        fragmentManager.beginTransaction () //запускаем транзакцию
+                //replace - заменить фрагмент. Меняем фрагмент контейнера один на другой
+                .replace ( binding.detailFragmentContainer.getId (), DetailFragment.newInstance ( message ) )
+                .commit ();//завершение транзакции
     }
 
     @Override
