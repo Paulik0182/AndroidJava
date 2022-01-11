@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.android.androidandjava.databinding.FragmentListBinding;
 
@@ -38,7 +39,10 @@ public class ListFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         Log.d ( TAG, "onCreateView() called with: inflater = [" + inflater + "], container = [" + container + "], savedInstanceState = [" + savedInstanceState + "]" );
+        //раздувается view на основе созданного макета и корень этой view передается дальше этой системе
         return FragmentListBinding.inflate ( inflater, container, false ).getRoot ();
+        //в данном методе можно инициализировать binding, но при этом нужно будет проверять view, не является ли она нулем.
+        //лучше binding инициализировать в методе onViewCreated, там проверка на ноль не нужна.
     }
 
     @Override
@@ -46,6 +50,18 @@ public class ListFragment extends Fragment {
         Log.d ( TAG, "onViewCreated() called with: view = [" + view + "], savedInstanceState = [" + savedInstanceState + "]" );
         super.onViewCreated ( view, savedInstanceState );
         binding = FragmentListBinding.bind ( view );    //!!!!  binding инициализируем именно в этом методе. при уничтожении фрагмента binding зануляем.
+
+        binding.launchDetailFragmentButton.setOnClickListener ( new View.OnClickListener () {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fragmentManager = requireActivity ().getSupportFragmentManager ();
+                fragmentManager.beginTransaction ()
+                        .add ( R.id.detail_fragment_container, new DetailFragment () )
+                        .addToBackStack ( null )
+                        .commit ();
+            }
+        } );
+
     }
 
     @Override

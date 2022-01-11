@@ -2,7 +2,6 @@ package com.android.androidandjava;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
@@ -22,16 +21,10 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate ( getLayoutInflater () );
         setContentView ( binding.getRoot () );
 
-        binding.launchFragmentButton.setOnClickListener ( new View.OnClickListener () {
-            @Override
-            public void onClick(View v) {
-                FragmentManager fragmentManager = getSupportFragmentManager ();
-                fragmentManager.beginTransaction ()
-                        .add ( binding.listFragmentContainer.getId (), new ListFragment () )
-                        .addToBackStack ( null )
-                        .commit ();
-            }
-        } );
+        FragmentManager fragmentManager = getSupportFragmentManager ();
+        fragmentManager.beginTransaction ()
+                .add ( binding.listFragmentContainer.getId (), new ListFragment () )
+                .commit ();
     }
 
     @Override

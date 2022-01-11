@@ -1,18 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/teal_700"
+    android:gravity="center"
     android:orientation="vertical"
     tools:context=".ListFragment">
 
     <TextView
         android:id="@+id/list_fragment_text_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:gravity="center"
         android:text="List fragment"
         android:textSize="24sp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/launch_detail_fragment_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Launch Detail Fragment"
+        app:cornerRadius="8dp" />
 
 </LinearLayout>
