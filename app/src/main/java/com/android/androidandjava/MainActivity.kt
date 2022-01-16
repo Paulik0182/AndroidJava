@@ -1,36 +1,35 @@
 package com.android.androidandjava
 
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.android.androidandjava.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    //    private lateinit var loginButton: Button
-    private val loginButton: Button by lazy { findViewById(R.id.login_button) }//вариант записи. инициализировали сразу
-    //by lazy - это линивая инициализация. lazy инициализирует первый раз до тех пор пока вы чтото не сделаете с данной переменной,
-    // например, вызовите setOnClickListener. lazy обязательно должна быть val, поэтому во фрагменте мы уже ничего не сделаем,
-    // это можно сделать только в активити.
-    //lazy обычно используют для обращения к репозеториям.
+    private lateinit var binding: ActivityMainBinding //генирируется автоматически binding для всех элементов view
 
-
-    private lateinit var emailEditText: EditText
-    private lateinit var passwordEditText: EditText
+//    //    private lateinit var loginButton: Button
+//    private val loginButton: Button by lazy { findViewById(R.id.login_button) }//вариант записи. инициализировали сразу
+//    //by lazy - это линивая инициализация. lazy инициализирует первый раз до тех пор пока вы чтото не сделаете с данной переменной,
+//    // например, вызовите setOnClickListener. lazy обязательно должна быть val, поэтому во фрагменте мы уже ничего не сделаем,
+//    // это можно сделать только в активити.
+//    //lazy обычно используют для обращения к репозеториям.
+//
+//    private lateinit var emailEditText: EditText
+//    private lateinit var passwordEditText: EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding =
+            ActivityMainBinding.inflate(layoutInflater)// layoutInflater - это системный сервис андройд
+        // который можно получать через контекст. это для раздувания разметки (xml файла)
+        setContentView(binding.root)
 
-//        loginButton = findViewById(R.id.login_button)//вариант записи
-        emailEditText = findViewById(R.id.email_edit_text)
-        passwordEditText = findViewById(R.id.password_edit_text)
-
-        loginButton.setOnClickListener {
+        binding.loginButton.setOnClickListener {
             val toastMassage = if (checkCredentials(
-                    emailEditText.text.toString(),
-                    passwordEditText.text.toString()
+                    binding.emailEditText.text.toString(),
+                    binding.passwordEditText.text.toString()
                 )
             ) {
                 "OK"

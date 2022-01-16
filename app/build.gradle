@@ -27,6 +27,7 @@ android {
         targetCompatibility "1.8"
     }
 
+    //это автоматически , с помощью кода генерации генерирует кнопки поля и т.д.
     buildFeatures {
         viewBinding true
     }
