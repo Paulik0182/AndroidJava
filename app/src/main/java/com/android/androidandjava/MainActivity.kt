@@ -28,13 +28,17 @@ class MainActivity : AppCompatActivity() {
         passwordEditText = findViewById(R.id.password_edit_text)
 
         loginButton.setOnClickListener {
-            if (checkCredentials(emailEditText.text.toString(), passwordEditText.text.toString())) {
-                Toast.makeText(this, "OK", Toast.LENGTH_SHORT).show()
+            val toastMassage = if (checkCredentials(
+                    emailEditText.text.toString(),
+                    passwordEditText.text.toString()
+                )
+            ) {
+                "OK"
             } else {
-                Toast.makeText(this, "ERROR", Toast.LENGTH_SHORT).show()
+                "ERROR"
             }
+            Toast.makeText(this, toastMassage, Toast.LENGTH_SHORT).show()
         }
-
     }
 
     companion object {
