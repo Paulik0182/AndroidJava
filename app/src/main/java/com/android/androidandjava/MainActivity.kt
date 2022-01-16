@@ -19,6 +19,8 @@ class MainActivity : AppCompatActivity() {
 //    private lateinit var emailEditText: EditText
 //    private lateinit var passwordEditText: EditText
 
+    private var noteEntity: KotlinNoteEntity? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding =
@@ -57,6 +59,19 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(baseContext, toastMassage, Toast.LENGTH_SHORT).show()
             }
         }
+
+        val body = noteEntity?.body // кэширование переменной
+        val title = noteEntity?.title // кэширование переменной
+        if (body != null && title != null) {
+            checkCredentials(body, title)
+        }
+
+        //let - это экстэншен который проверяет на нул и если не равно нулу, передает в качестве аргумента в лямду. часто используется
+        noteEntity?.let {
+            checkCredentials(it.body, it.title)
+
+        }
+
     }
 
     companion object {
