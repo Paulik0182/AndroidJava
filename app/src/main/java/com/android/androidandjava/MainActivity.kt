@@ -26,17 +26,20 @@ class MainActivity : AppCompatActivity() {
         // который можно получать через контекст. это для раздувания разметки (xml файла)
         setContentView(binding.root)
 
-        binding.loginButton.setOnClickListener {
-            val toastMassage = if (checkCredentials(
-                    binding.emailEditText.text.toString(),
-                    binding.passwordEditText.text.toString()
-                )
-            ) {
-                "OK"
-            } else {
-                "ERROR"
+        //apply - это экстейшен, это способ передать binding. нет необходимости везде писать binding
+        binding.apply {
+            loginButton.setOnClickListener {
+                val toastMassage = if (checkCredentials(
+                        emailEditText.text.toString(),
+                        passwordEditText.text.toString()
+                    )
+                ) {
+                    "OK"
+                } else {
+                    "ERROR"
+                }
+                Toast.makeText(baseContext, toastMassage, Toast.LENGTH_SHORT).show()
             }
-            Toast.makeText(this, toastMassage, Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -45,5 +48,4 @@ class MainActivity : AppCompatActivity() {
             return email == password
         }
     }
-
 }
