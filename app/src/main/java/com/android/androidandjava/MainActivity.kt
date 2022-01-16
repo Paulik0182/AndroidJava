@@ -26,6 +26,22 @@ class MainActivity : AppCompatActivity() {
         // который можно получать через контекст. это для раздувания разметки (xml файла)
         setContentView(binding.root)
 
+        //with - это экстейшен (в данном случае это аналог apply), это способ передать binding. нет необходимости везде писать binding
+        with(binding) {
+            loginButton.setOnClickListener {
+                val toastMassage = if (checkCredentials(
+                        emailEditText.text.toString(),
+                        passwordEditText.text.toString()
+                    )
+                ) {
+                    "OK"
+                } else {
+                    "ERROR"
+                }
+                Toast.makeText(baseContext, toastMassage, Toast.LENGTH_SHORT).show()
+            }
+        }
+
         //apply - это экстейшен, это способ передать binding. нет необходимости везде писать binding
         binding.apply {
             loginButton.setOnClickListener {
