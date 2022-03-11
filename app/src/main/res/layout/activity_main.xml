@@ -6,23 +6,15 @@
 
     <TextView
         android:id="@+id/result_text_view"
-        style="@style/margin_text_button_style"
-        android:gravity="center"
+        style="@style/color_size_style_text_view"
         android:text="@string/result_text_view"
-        android:textColor="@color/color_text_view"
-        android:textSize="@dimen/result_text_view"
-        android:textStyle="bold"
         tools:ignore="SpUsage" />
 
     <EditText
         android:id="@+id/input_edit_text"
-        style="@style/margin_text_button_style"
-        android:gravity="center"
+        style="@style/color_size_edit_text_style"
         android:hint="@string/volute"
         android:inputType="number"
-        android:textColor="@color/black"
-        android:textSize="@dimen/volute_edit_text"
-        android:textStyle="bold"
         tools:ignore="SpUsage" />
 
     <Button
