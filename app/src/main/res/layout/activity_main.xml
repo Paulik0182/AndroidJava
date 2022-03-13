@@ -22,22 +22,8 @@
         style="@style/margin_text_button_style"
         android:text="@string/result_button" />
 
-    <CheckBox
-        android:id="@+id/usa_check_box"
-        style="@style/margin_text_button_style"
-        android:text="@string/usa" />
-
-    <CheckBox
-        android:id="@+id/eur_check_box"
-        style="@style/margin_text_button_style"
-        android:text="@string/eur" />
-
-    <CheckBox
-        android:id="@+id/chf_check_box"
-        style="@style/margin_text_button_style"
-        android:text="@string/chf" />
-
     <RadioGroup
+        android:id="@+id/radios"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -56,7 +42,6 @@
             android:id="@+id/chf_radio_button"
             style="@style/margin_text_button_style"
             android:text="@string/chf" />
-
 
     </RadioGroup>
 
