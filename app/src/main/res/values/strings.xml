@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">AndroidAndJava</string>
+    <string name="volute_name">Конвертация волют</string>
     <string name="volute">Волюта</string>
     <string name="result_button">Расчет</string>
-    <string name="result_text_view">result</string>
+    <string name="result_text_view">рубли</string>
 </resources>
