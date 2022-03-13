@@ -4,4 +4,7 @@
     <string name="volute">Волюта</string>
     <string name="result_button">Расчет</string>
     <string name="result_text_view">рубли</string>
+    <string name="usa">Доллар США</string>
+    <string name="eur">Евро</string>
+    <string name="chf">Юань</string>
 </resources>

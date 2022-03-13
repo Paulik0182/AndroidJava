@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,6 +15,9 @@ public class MainActivity extends AppCompatActivity {
     private EditText inputEditText = null;
     private Button clickButton = null;
     private TextView resultTextView = null;
+    private RadioButton usaRadioButton = null;
+    private RadioButton eurRadioButton = null;
+    private RadioButton chfRadioButton = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,5 +74,9 @@ public class MainActivity extends AppCompatActivity {
         inputEditText = findViewById ( R.id.input_edit_text );
         clickButton = findViewById ( R.id.result_button );
         resultTextView = findViewById ( R.id.result_text_view );
+
+        usaRadioButton = findViewById ( R.id.usa_radio_button );
+        eurRadioButton = findViewById ( R.id.eur_radio_button );
+        chfRadioButton = findViewById ( R.id.chf_radio_button );
     }
 }
