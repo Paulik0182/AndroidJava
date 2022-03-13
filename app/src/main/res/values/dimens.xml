@@ -4,4 +4,5 @@
     <dimen name="volute_edit_text">30dp</dimen>
     <dimen name="margin_Left_Right">16dp</dimen>
     <dimen name="margin_Top_Bottom">8dp</dimen>
+    <dimen name="Second_Bottom">30dp</dimen>
 </resources>

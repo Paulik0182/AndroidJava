@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/layout"
+    tools:context=".SecondActivity">
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/exit_button"
+        style="@style/margin_text_button_style"
+        android:text="@string/Exit"
+        app:cornerRadius="@dimen/Second_Bottom" />
+
+</LinearLayout>

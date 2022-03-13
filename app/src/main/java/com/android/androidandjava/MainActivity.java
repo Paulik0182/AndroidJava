@@ -1,7 +1,9 @@
 package com.android.androidandjava;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -9,12 +11,16 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String TAG = "@@@MainActivity : ";
+
     private EditText inputEditText = null;
     private Button clickButton = null;
+    private Button secondButton = null;
     private TextView resultTextView = null;
     private RadioButton usaRadioButton = null;
     private RadioButton eurRadioButton = null;
@@ -51,6 +57,15 @@ public class MainActivity extends AppCompatActivity {
                 resultTextView.setText ( resultString );//Кладем результат в поле TextView
 
 //                Toast.makeText ( MainActivity.this, "Расчет окончен", Toast.LENGTH_SHORT ).show ();
+            }
+        } );
+
+        secondButton.setOnClickListener ( new View.OnClickListener () {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent ( MainActivity.this, SecondActivity.class );
+                startActivity ( intent );
+                Toast.makeText ( MainActivity.this, "Second Activity", Toast.LENGTH_SHORT ).show ();
             }
         } );
     }
@@ -100,9 +115,13 @@ public class MainActivity extends AppCompatActivity {
                         break;
                 }
             }
+
         };
 
         final double rubles = volute * currency;
+
+        Log.d ( TAG, "convert() called with: input = [" + input + "]" );
+
         return rubles;
     }
 
@@ -110,10 +129,53 @@ public class MainActivity extends AppCompatActivity {
     private void initViews() {
         inputEditText = findViewById ( R.id.input_edit_text );
         clickButton = findViewById ( R.id.result_button );
+        secondButton = findViewById ( R.id.second_button );
         resultTextView = findViewById ( R.id.result_text_view );
 
         usaRadioButton = findViewById ( R.id.usa_radio_button );
         eurRadioButton = findViewById ( R.id.eur_radio_button );
         chfRadioButton = findViewById ( R.id.chf_radio_button );
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState ( savedInstanceState );
+        Log.d ( TAG, "onRestoreInstanceState() called with: savedInstanceState = [" + savedInstanceState + "]" );
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState ( outState );
+        Log.d ( TAG, "onSaveInstanceState() called with: outState = [" + outState + "]" );
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart ();
+        Log.d ( TAG, "onStart() called" );
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume ();
+        Log.d ( TAG, "onResume() called" );
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause ();
+        Log.d ( TAG, "onPause() called" );
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop ();
+        Log.d ( TAG, "onStop() called" );
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy ();
+        Log.d ( TAG, "onDestroy() called" );
     }
 }

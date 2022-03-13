@@ -43,6 +43,11 @@
             style="@style/margin_text_button_style"
             android:text="@string/chf" />
 
+        <Button
+            android:id="@+id/second_button"
+            style="@style/margin_text_button_style"
+            android:text="@string/view2" />
+
     </RadioGroup>
 
 </LinearLayout>
