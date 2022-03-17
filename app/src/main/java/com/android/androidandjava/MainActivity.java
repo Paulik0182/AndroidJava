@@ -33,7 +33,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initViews();
+        setupListeners();
+    }
 
+    private void setupListeners() {
         conversionButton.setOnClickListener(new View.OnClickListener() {
             //код ниже будет выполняться только после нажатия на кнопку.
             @Override
@@ -95,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
                         default:
                             break;
                     }
-                    Toast.makeText(MainActivity.this, "Конвертация" + currencyStr, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Конвертация " + currencyStr, Toast.LENGTH_SHORT).show();
                 }
             }
         };
