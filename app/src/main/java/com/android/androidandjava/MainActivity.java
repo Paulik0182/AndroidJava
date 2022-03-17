@@ -19,8 +19,8 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "@@@MainActivity : ";
 
     private EditText inputEditText = null;
-    private Button clickButton = null;
-    private Button secondButton = null;
+    private Button conversionButton = null;
+    private Button openScreenSecondButton = null;
     private TextView resultTextView = null;
     private RadioButton usaRadioButton = null;
     private RadioButton eurRadioButton = null;
@@ -30,17 +30,17 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate ( savedInstanceState );
+        super.onCreate(savedInstanceState);
         setContentView ( R.layout.activity_main );
         initViews ();
 
-        clickButton.setOnClickListener ( new View.OnClickListener () {
+        conversionButton.setOnClickListener(new View.OnClickListener() {
             //код ниже будет выполняться только после нажатия на кнопку.
             @Override
             public void onClick(View v) {
 
                 //Создали переменную, присвоили ей значение текстового поля
-                final String inputSrt = inputEditText.getText ().toString ();
+                final String inputSrt = inputEditText.getText().toString();
 
                 // Создали переменную, производим проверку введенного значения, в поле можно ввести только целое число
                 // (если в строке будут буквы, служебные символы, компилятор выдаст ошибку. На View в поле EditText прописать
@@ -60,14 +60,14 @@ public class MainActivity extends AppCompatActivity {
             }
         } );
 
-        secondButton.setOnClickListener ( new View.OnClickListener () {
+        openScreenSecondButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent ( MainActivity.this, SecondActivity.class );
-                startActivity ( intent );
-                Toast.makeText ( MainActivity.this, "Second Activity", Toast.LENGTH_SHORT ).show ();
+                Intent intent = new Intent(MainActivity.this, SecondActivity.class);
+                startActivity(intent);
+                Toast.makeText(MainActivity.this, "Second Activity", Toast.LENGTH_SHORT).show();
             }
-        } );
+        });
     }
 
     //Метод проверки на формат введенного значения в поле EditText
@@ -127,14 +127,14 @@ public class MainActivity extends AppCompatActivity {
 
     //Метод для инициализации элементов на экране (view моделе).
     private void initViews() {
-        inputEditText = findViewById ( R.id.input_edit_text );
-        clickButton = findViewById ( R.id.result_button );
-        secondButton = findViewById ( R.id.second_button );
-        resultTextView = findViewById ( R.id.result_text_view );
+        inputEditText = findViewById(R.id.input_edit_text);
+        conversionButton = findViewById(R.id.result_button);
+        openScreenSecondButton = findViewById(R.id.second_button);
+        resultTextView = findViewById(R.id.result_text_view);
 
-        usaRadioButton = findViewById ( R.id.usa_radio_button );
-        eurRadioButton = findViewById ( R.id.eur_radio_button );
-        chfRadioButton = findViewById ( R.id.chf_radio_button );
+        usaRadioButton = findViewById(R.id.usa_radio_button);
+        eurRadioButton = findViewById(R.id.eur_radio_button);
+        chfRadioButton = findViewById(R.id.chf_radio_button);
     }
 
     @Override
