@@ -75,30 +75,27 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 boolean checked = ((RadioButton) v).isChecked();
-
-                switch (v.getId()) {
-                    case R.id.usa_radio_button:
-                        if (checked) {
+                String currencyStr = "";
+                if (checked) {
+                    switch (v.getId()) {
+                        case R.id.usa_radio_button:
                             currency = 30;
-                        }
-                        Toast.makeText(MainActivity.this, "Конвертация Долларов США", Toast.LENGTH_SHORT).show();
-                        break;
-
-                    case R.id.eur_radio_button:
-                        if (checked) {
+                            currencyStr = "USD";
+                            break;
+                        case R.id.eur_radio_button:
                             currency = 40;
-                        }
-                        Toast.makeText(MainActivity.this, "Конвертация Евро", Toast.LENGTH_SHORT).show();
-                        break;
-
-                    case R.id.chf_radio_button:
-                        if (checked) {
+                            currencyStr = "EUR";
+                            break;
+                        case R.id.chf_radio_button:
                             currency = 10;
-                        }
-                        Toast.makeText(MainActivity.this, "Конвертация Юань", Toast.LENGTH_SHORT).show();
-                        break;
-                    default:
-                        break;
+                            currencyStr = "CHF";
+                            break;
+                        //В данном случае можно не писать потамучто это условие выполняется если,
+                        // не одно условие выше не было выполнено
+                        default:
+                            break;
+                    }
+                    Toast.makeText(MainActivity.this, "Конвертация" + currencyStr, Toast.LENGTH_SHORT).show();
                 }
             }
         };
@@ -119,11 +116,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //Метод принемающий строку EditText и возващает результат (проходит вычисление)
-    private double convert(double input) {
-        final double volute = input;
+    private double convert(double volute) {
         final double rubles = volute * currency;
 
-        Log.d(TAG, "convert() called with: input = [" + input + "]");
+        Log.d(TAG, "convert() called with: input = [" + volute + "]");
 
         return rubles;
     }
