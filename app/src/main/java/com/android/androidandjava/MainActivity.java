@@ -18,6 +18,10 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "@@@MainActivity : ";
 
+    private static final int RUB_IN_USD = 30;
+    private static final int RUB_IN_EUR = 40;
+    private static final int RUB_IN_CHF = 10;
+
     private EditText inputEditText = null;
     private Button conversionButton = null;
     private Button openScreenSecondButton = null;
@@ -82,15 +86,15 @@ public class MainActivity extends AppCompatActivity {
                 if (checked) {
                     switch (v.getId()) {
                         case R.id.usa_radio_button:
-                            currency = 30;
+                            currency = RUB_IN_USD;
                             currencyStr = "USD";
                             break;
                         case R.id.eur_radio_button:
-                            currency = 40;
+                            currency = RUB_IN_EUR;
                             currencyStr = "EUR";
                             break;
                         case R.id.chf_radio_button:
-                            currency = 10;
+                            currency = RUB_IN_CHF;
                             currencyStr = "CHF";
                             break;
                         //В данном случае можно не писать потамучто это условие выполняется если,
@@ -107,6 +111,10 @@ public class MainActivity extends AppCompatActivity {
         usaRadioButton.setOnClickListener(radioButtonClickListener);
         eurRadioButton.setOnClickListener(radioButtonClickListener);
         chfRadioButton.setOnClickListener(radioButtonClickListener);
+
+        //программно кликаем на данный RadioButton. При создании экрана, слушатель ожидает нажатия
+        // на RadioButton, в данном случае мы уже выбрали свой вариант.
+        usaRadioButton.performClick();
     }
 
     //Метод проверки на формат введенного значения в поле EditText

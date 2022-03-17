@@ -19,7 +19,7 @@ public class SecondActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
 
-        initViewsSecond();
+        initViews();
 
         exitButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -29,7 +29,8 @@ public class SecondActivity extends AppCompatActivity {
         });
     }
 
-    private void initViewsSecond() {
+    //Метод для инициализации элементов на экране (view моделе).
+    private void initViews() {
         exitButton = findViewById(R.id.exit_button);
     }
 
