@@ -31,8 +31,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView ( R.layout.activity_main );
-        initViews ();
+        setContentView(R.layout.activity_main);
+        initViews();
 
         conversionButton.setOnClickListener(new View.OnClickListener() {
             //код ниже будет выполняться только после нажатия на кнопку.
@@ -46,19 +46,19 @@ public class MainActivity extends AppCompatActivity {
                 // (если в строке будут буквы, служебные символы, компилятор выдаст ошибку. На View в поле EditText прописать
                 // строку разрешающую ввод только чисел android:inputType="number",
                 // минус данного решения - можно ввести только целое число)
-                final double volute = parseDoubleString ( inputSrt );
+                final double volute = parseDoubleString(inputSrt);
 
                 //Создали переменную, присвоили ей уже обработанный в методе convert результат
                 // (в метод convert положили значение текстового поля EditText)
-                final double rubles = convert ( volute );
+                final double rubles = convert(volute);
 
-                final String resultString = String.valueOf ( rubles );// Создали переменную, привратили ее в строку
+                final String resultString = String.valueOf(rubles);// Создали переменную, привратили ее в строку
 
-                resultTextView.setText ( resultString );//Кладем результат в поле TextView
+                resultTextView.setText(resultString);//Кладем результат в поле TextView
 
 //                Toast.makeText ( MainActivity.this, "Расчет окончен", Toast.LENGTH_SHORT ).show ();
             }
-        } );
+        });
 
         openScreenSecondButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
     //Метод проверки на формат введенного значения в поле EditText
     private double parseDoubleString(String inputSrt) {
         try {
-            return Double.parseDouble ( inputSrt );//Приобразовываем ткст в число
+            return Double.parseDouble(inputSrt);//Приобразовываем ткст в число
         } catch (NumberFormatException nfe) {
             return 0d;
         }
@@ -83,32 +83,32 @@ public class MainActivity extends AppCompatActivity {
     private double convert(double input) {
         final double volute = input;
 
-        View.OnClickListener radioButtonClickListener = new View.OnClickListener () {
+        View.OnClickListener radioButtonClickListener = new View.OnClickListener() {
             @SuppressLint("NonConstantResourceId")
             @Override
             public void onClick(View v) {
-                boolean checked = ((RadioButton) v).isChecked ();
+                boolean checked = ((RadioButton) v).isChecked();
 
-                switch (v.getId ()) {
+                switch (v.getId()) {
                     case R.id.usa_radio_button:
                         if (checked) {
                             currency = 30;
                         }
-                        Toast.makeText ( MainActivity.this, "Конвертация Долларов США", Toast.LENGTH_SHORT ).show ();
+                        Toast.makeText(MainActivity.this, "Конвертация Долларов США", Toast.LENGTH_SHORT).show();
                         break;
 
                     case R.id.eur_radio_button:
                         if (checked) {
                             currency = 40;
                         }
-                        Toast.makeText ( MainActivity.this, "Конвертация Евро", Toast.LENGTH_SHORT ).show ();
+                        Toast.makeText(MainActivity.this, "Конвертация Евро", Toast.LENGTH_SHORT).show();
                         break;
 
                     case R.id.chf_radio_button:
                         if (checked) {
                             currency = 10;
                         }
-                        Toast.makeText ( MainActivity.this, "Конвертация Юань", Toast.LENGTH_SHORT ).show ();
+                        Toast.makeText(MainActivity.this, "Конвертация Юань", Toast.LENGTH_SHORT).show();
                         break;
 
                     default:
@@ -120,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
 
         final double rubles = volute * currency;
 
-        Log.d ( TAG, "convert() called with: input = [" + input + "]" );
+        Log.d(TAG, "convert() called with: input = [" + input + "]");
 
         return rubles;
     }
@@ -139,43 +139,43 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
-        super.onRestoreInstanceState ( savedInstanceState );
-        Log.d ( TAG, "onRestoreInstanceState() called with: savedInstanceState = [" + savedInstanceState + "]" );
+        super.onRestoreInstanceState(savedInstanceState);
+        Log.d(TAG, "onRestoreInstanceState() called with: savedInstanceState = [" + savedInstanceState + "]");
     }
 
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState ( outState );
-        Log.d ( TAG, "onSaveInstanceState() called with: outState = [" + outState + "]" );
+        super.onSaveInstanceState(outState);
+        Log.d(TAG, "onSaveInstanceState() called with: outState = [" + outState + "]");
     }
 
     @Override
     protected void onStart() {
-        super.onStart ();
-        Log.d ( TAG, "onStart() called" );
+        super.onStart();
+        Log.d(TAG, "onStart() called");
     }
 
     @Override
     protected void onResume() {
-        super.onResume ();
-        Log.d ( TAG, "onResume() called" );
+        super.onResume();
+        Log.d(TAG, "onResume() called");
     }
 
     @Override
     protected void onPause() {
-        super.onPause ();
-        Log.d ( TAG, "onPause() called" );
+        super.onPause();
+        Log.d(TAG, "onPause() called");
     }
 
     @Override
     protected void onStop() {
-        super.onStop ();
-        Log.d ( TAG, "onStop() called" );
+        super.onStop();
+        Log.d(TAG, "onStop() called");
     }
 
     @Override
     protected void onDestroy() {
-        super.onDestroy ();
-        Log.d ( TAG, "onDestroy() called" );
+        super.onDestroy();
+        Log.d(TAG, "onDestroy() called");
     }
 }
