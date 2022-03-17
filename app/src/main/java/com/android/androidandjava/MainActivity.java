@@ -68,21 +68,8 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "Second Activity", Toast.LENGTH_SHORT).show();
             }
         });
-    }
 
-    //Метод проверки на формат введенного значения в поле EditText
-    private double parseDoubleString(String inputSrt) {
-        try {
-            return Double.parseDouble(inputSrt);//Приобразовываем ткст в число
-        } catch (NumberFormatException nfe) {
-            return 0d;
-        }
-    }
-
-    //Метод принемающий строку EditText и возващает результат (проходит вычисление)
-    private double convert(double input) {
-        final double volute = input;
-
+//работа с radioButton
         View.OnClickListener radioButtonClickListener = new View.OnClickListener() {
             @SuppressLint("NonConstantResourceId")
             @Override
@@ -110,14 +97,30 @@ public class MainActivity extends AppCompatActivity {
                         }
                         Toast.makeText(MainActivity.this, "Конвертация Юань", Toast.LENGTH_SHORT).show();
                         break;
-
                     default:
                         break;
                 }
             }
-
         };
 
+        //установили нажатие на radio button
+        usaRadioButton.setOnClickListener(radioButtonClickListener);
+        eurRadioButton.setOnClickListener(radioButtonClickListener);
+        chfRadioButton.setOnClickListener(radioButtonClickListener);
+    }
+
+    //Метод проверки на формат введенного значения в поле EditText
+    private double parseDoubleString(String inputSrt) {
+        try {
+            return Double.parseDouble(inputSrt);//Приобразовываем ткст в число
+        } catch (NumberFormatException nfe) {
+            return 0d;
+        }
+    }
+
+    //Метод принемающий строку EditText и возващает результат (проходит вычисление)
+    private double convert(double input) {
+        final double volute = input;
         final double rubles = volute * currency;
 
         Log.d(TAG, "convert() called with: input = [" + input + "]");
