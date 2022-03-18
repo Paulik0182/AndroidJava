@@ -7,8 +7,8 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/exit_button"
-        style="@style/margin_text_button_style"
-        android:text="@string/Exit"
-        app:cornerRadius="@dimen/Second_Bottom" />
+        style="@style/button_style_standard"
+        android:text="@string/exit"
+        app:cornerRadius="@dimen/corner_radius_bottom" />
 
 </LinearLayout>

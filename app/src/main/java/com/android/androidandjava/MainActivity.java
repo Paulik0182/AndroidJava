@@ -85,15 +85,15 @@ public class MainActivity extends AppCompatActivity {
                 String currencyStr = "";
                 if (checked) {
                     switch (v.getId()) {
-                        case R.id.usa_radio_button:
+                        case R.id.usa_currency_radio_button:
                             currency = RUB_IN_USD;
                             currencyStr = "USD";
                             break;
-                        case R.id.eur_radio_button:
+                        case R.id.eur_currency_radio_button:
                             currency = RUB_IN_EUR;
                             currencyStr = "EUR";
                             break;
-                        case R.id.chf_radio_button:
+                        case R.id.chf_currency_radio_button:
                             currency = RUB_IN_CHF;
                             currencyStr = "CHF";
                             break;
@@ -139,12 +139,12 @@ public class MainActivity extends AppCompatActivity {
     private void initViews() {
         inputEditText = findViewById(R.id.input_edit_text);
         conversionButton = findViewById(R.id.result_button);
-        openScreenSecondButton = findViewById(R.id.second_button);
+        openScreenSecondButton = findViewById(R.id.open_second_button);
         resultTextView = findViewById(R.id.result_text_view);
 
-        usaRadioButton = findViewById(R.id.usa_radio_button);
-        eurRadioButton = findViewById(R.id.eur_radio_button);
-        chfRadioButton = findViewById(R.id.chf_radio_button);
+        usaRadioButton = findViewById(R.id.usa_currency_radio_button);
+        eurRadioButton = findViewById(R.id.eur_currency_radio_button);
+        chfRadioButton = findViewById(R.id.chf_currency_radio_button);
     }
 
     @Override

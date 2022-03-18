@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="margin_text_button_style">
+    <style name="button_style_standard">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginLeft">@dimen/margin_Left_Right</item>
-        <item name="android:layout_marginTop">@dimen/margin_Top_Bottom</item>
-        <item name="android:layout_marginRight">@dimen/margin_Left_Right</item>
-        <item name="android:layout_marginBottom">@dimen/margin_Top_Bottom</item>
+        <item name="android:layout_marginLeft">@dimen/margin_left_right</item>
+        <item name="android:layout_marginTop">@dimen/margin_top_bottom</item>
+        <item name="android:layout_marginRight">@dimen/margin_left_right</item>
+        <item name="android:layout_marginBottom">@dimen/margin_top_bottom</item>
     </style>
 
     <style name="layout">
@@ -16,17 +16,17 @@
         <item name="android:orientation">vertical</item>
     </style>
 
-    <style name="gravity_text_style" parent="margin_text_button_style">
+    <style name="gravity_text_style" parent="button_style_standard">
         <item name="android:gravity">center</item>
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="color_size_style_text_view" parent="gravity_text_style">
-        <item name="android:textColor">@color/color_text_view</item>
+    <style name="color_size_style_light_green" parent="gravity_text_style">
+        <item name="android:textColor">@color/color_light_green</item>
         <item name="android:textSize">@dimen/result_text_view</item>
     </style>
 
-    <style name="color_size_edit_text_style" parent="color_size_style_text_view">
+    <style name="color_size_style_black" parent="color_size_style_light_green">
         <item name="android:textColor">@color/black</item>
         <item name="android:textSize">@dimen/volute_edit_text</item>
     </style>

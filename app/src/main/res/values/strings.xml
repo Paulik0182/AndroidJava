@@ -2,10 +2,10 @@
     <string name="app_name">Конвертация волют</string>
     <string name="volute">Волюта</string>
     <string name="result_button">Расчет</string>
-    <string name="result_text_view">рубли</string>
+    <string name="result_conversion">рубли</string>
     <string name="usa">Доллар США</string>
     <string name="eur">Евро</string>
     <string name="chf">Юань</string>
-    <string name="view2">второе View</string>
-    <string name="Exit">Отмена</string>
+    <string name="activity_second">второе View</string>
+    <string name="exit">Отмена</string>
 </resources>
