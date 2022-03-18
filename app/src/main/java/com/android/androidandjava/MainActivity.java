@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private RadioButton eurRadioButton = null;
     private RadioButton chfRadioButton = null;
 
+    //test commits
     private double currency = 0;
 
     @Override
