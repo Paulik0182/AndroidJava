@@ -1,5 +1,6 @@
 package com.android.androidandjava;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -27,6 +28,15 @@ public class SecondActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+
+        Intent intent = getIntent();//принимаем intent с первого окна
+        intent.getDoubleExtra("currency", 0d);
+    }
+
+    //Метод принемающий строку EditText и возващает результат (проходит вычисление)
+    private double convert(double volute, double currency) {
+        return volute * currency;
     }
 
     //Метод для инициализации элементов на экране (view моделе).
@@ -44,35 +54,5 @@ public class SecondActivity extends AppCompatActivity {
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         Log.d(TAG, "onSaveInstanceState() called with: outState = [" + outState + "]");
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Log.d(TAG, "onStart() called");
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Log.d(TAG, "onResume() called");
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Log.d(TAG, "onPause() called");
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        Log.d(TAG, "onStop() called");
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Log.d(TAG, "onDestroy() called");
     }
 }

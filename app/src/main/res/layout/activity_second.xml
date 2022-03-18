@@ -5,6 +5,12 @@
     style="@style/layout"
     tools:context=".SecondActivity">
 
+    <TextView
+        android:id="@+id/result_text_view"
+        style="@style/color_size_style_light_green"
+        android:text="@string/result_conversion"
+        tools:ignore="SpUsage" />
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/exit_button"
         style="@style/button_style_standard"
