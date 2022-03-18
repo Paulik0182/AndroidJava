@@ -1,13 +1,12 @@
 package com.android.androidandjava;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,11 +25,9 @@ public class MainActivity extends AppCompatActivity {
     private Button conversionButton = null;
     private Button openScreenSecondButton = null;
     private TextView resultTextView = null;
-    private RadioButton usaRadioButton = null;
-    private RadioButton eurRadioButton = null;
-    private RadioButton chfRadioButton = null;
 
-    //test commits
+    private RadioGroup currencyRadioGroup = null;
+
     private double currency = 0;
 
     @Override
@@ -76,46 +73,6 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "Second Activity", Toast.LENGTH_SHORT).show();
             }
         });
-
-//работа с radioButton
-        View.OnClickListener radioButtonClickListener = new View.OnClickListener() {
-            @SuppressLint("NonConstantResourceId")
-            @Override
-            public void onClick(View v) {
-                boolean checked = ((RadioButton) v).isChecked();
-                String currencyStr = "";
-                if (checked) {
-                    switch (v.getId()) {
-                        case R.id.usa_currency_radio_button:
-                            currency = RUB_IN_USD;
-                            currencyStr = "USD";
-                            break;
-                        case R.id.eur_currency_radio_button:
-                            currency = RUB_IN_EUR;
-                            currencyStr = "EUR";
-                            break;
-                        case R.id.chf_currency_radio_button:
-                            currency = RUB_IN_CHF;
-                            currencyStr = "CHF";
-                            break;
-                        //В данном случае можно не писать потамучто это условие выполняется если,
-                        // не одно условие выше не было выполнено
-                        default:
-                            break;
-                    }
-                    Toast.makeText(MainActivity.this, "Конвертация " + currencyStr, Toast.LENGTH_SHORT).show();
-                }
-            }
-        };
-
-        //установили нажатие на radio button
-        usaRadioButton.setOnClickListener(radioButtonClickListener);
-        eurRadioButton.setOnClickListener(radioButtonClickListener);
-        chfRadioButton.setOnClickListener(radioButtonClickListener);
-
-        //программно кликаем на данный RadioButton. При создании экрана, слушатель ожидает нажатия
-        // на RadioButton, в данном случае мы уже выбрали свой вариант.
-        usaRadioButton.performClick();
     }
 
     //Метод проверки на формат введенного значения в поле EditText
@@ -129,6 +86,17 @@ public class MainActivity extends AppCompatActivity {
 
     //Метод принемающий строку EditText и возващает результат (проходит вычисление)
     private double convert(double volute) {
+        switch (currencyRadioGroup.getCheckedRadioButtonId()) {
+            case R.id.usa_currency_radio_button:
+                currency = RUB_IN_USD;
+                break;
+            case R.id.eur_currency_radio_button:
+                currency = RUB_IN_EUR;
+                break;
+            case R.id.chf_currency_radio_button:
+                currency = RUB_IN_CHF;
+                break;
+        }
         final double rubles = volute * currency;
 
         Log.d(TAG, "convert() called with: input = [" + volute + "]");
@@ -143,9 +111,7 @@ public class MainActivity extends AppCompatActivity {
         openScreenSecondButton = findViewById(R.id.open_second_button);
         resultTextView = findViewById(R.id.result_text_view);
 
-        usaRadioButton = findViewById(R.id.usa_currency_radio_button);
-        eurRadioButton = findViewById(R.id.eur_currency_radio_button);
-        chfRadioButton = findViewById(R.id.chf_currency_radio_button);
+        currencyRadioGroup = findViewById(R.id.currency_radio_group);
     }
 
     @Override
