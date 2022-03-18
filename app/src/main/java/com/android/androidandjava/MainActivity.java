@@ -96,11 +96,8 @@ public class MainActivity extends AppCompatActivity {
 
     //Метод принемающий строку EditText и возващает результат (проходит вычисление)
     private double convert(double volute) {
-        final double rubles = volute * getCurrencyFromScreen();
-
         Log.d(TAG, "convert() called with: input = [" + volute + "]");
-
-        return rubles;
+        return volute * getCurrencyFromScreen();
     }
 
     //Метод для инициализации элементов на экране (view моделе).
