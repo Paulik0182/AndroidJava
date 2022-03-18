@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView resultTextView = null;
 
     private RadioGroup currencyRadioGroup = null;
+    private RadioButton usaRadioButton = null;
 
     private double currency = 0;
 
@@ -73,6 +75,28 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "Second Activity", Toast.LENGTH_SHORT).show();
             }
         });
+
+        // setOnCheckedChangeListener - повесить слушатель на изменение выбора
+        // Вариант 2. обработка RadioGroup. Менее предпочтителен, необходимо принудительно (программно) кликать на кнопку.
+        currencyRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId) {
+                    case R.id.usa_currency_radio_button:
+                        currency = RUB_IN_USD;
+                        break;
+                    case R.id.eur_currency_radio_button:
+                        currency = RUB_IN_EUR;
+                        break;
+                    case R.id.chf_currency_radio_button:
+                        currency = RUB_IN_CHF;
+                        break;
+                }
+            }
+        });
+        //программно кликаем на данный RadioButton. При создании экрана, слушатель ожидает нажатия
+        // на RadioButton, в данном случае мы уже выбрали свой вариант.
+        usaRadioButton.performClick();
     }
 
     //Метод проверки на формат введенного значения в поле EditText
@@ -86,17 +110,19 @@ public class MainActivity extends AppCompatActivity {
 
     //Метод принемающий строку EditText и возващает результат (проходит вычисление)
     private double convert(double volute) {
-        switch (currencyRadioGroup.getCheckedRadioButtonId()) {
-            case R.id.usa_currency_radio_button:
-                currency = RUB_IN_USD;
-                break;
-            case R.id.eur_currency_radio_button:
-                currency = RUB_IN_EUR;
-                break;
-            case R.id.chf_currency_radio_button:
-                currency = RUB_IN_CHF;
-                break;
-        }
+
+        //Вариант 1. обработка RadioGroup. наиболее предпочтителен
+//        switch (currencyRadioGroup.getCheckedRadioButtonId()) {
+//            case R.id.usa_currency_radio_button:
+//                currency = RUB_IN_USD;
+//                break;
+//            case R.id.eur_currency_radio_button:
+//                currency = RUB_IN_EUR;
+//                break;
+//            case R.id.chf_currency_radio_button:
+//                currency = RUB_IN_CHF;
+//                break;
+//        }
         final double rubles = volute * currency;
 
         Log.d(TAG, "convert() called with: input = [" + volute + "]");
@@ -112,6 +138,7 @@ public class MainActivity extends AppCompatActivity {
         resultTextView = findViewById(R.id.result_text_view);
 
         currencyRadioGroup = findViewById(R.id.currency_radio_group);
+        usaRadioButton = findViewById(R.id.usa_currency_radio_button);
     }
 
     @Override
