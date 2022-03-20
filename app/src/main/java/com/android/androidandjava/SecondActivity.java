@@ -1,5 +1,6 @@
 package com.android.androidandjava;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,8 +15,8 @@ public class SecondActivity extends AppCompatActivity {
 
     private static final String TAG = "@@@MainSecond : ";
 
-    public static final String CURRENCY_EXTRA_KEY = "currency";
-    public static final String VALUE_EXTRA_KEY = "value";
+    private static final String CURRENCY_EXTRA_KEY = "currency";
+    private static final String VALUE_EXTRA_KEY = "value";
 
     private Button exitButton = null;
     private TextView resultTextView = null;
@@ -45,6 +46,19 @@ public class SecondActivity extends AppCompatActivity {
             //передаем в поле полученный результат
             resultTextView.setText(String.valueOf(result));
         }
+    }
+
+    //метод позволяющий другим классам обращатся к данному классу (методу) и выполнять определенные действия
+    //разграничивая область знания между классами по принципу - классы должны как можно меньше знать друг о друге.
+    public static void openScreen(Context context, double value, double currency) {
+        //Открытие второго окна (данного класса)
+        Intent intent = new Intent(context, SecondActivity.class);
+
+        //при открытии второго окна кладем дополнительные значения в формате: ключь, значение.
+        intent.putExtra(SecondActivity.CURRENCY_EXTRA_KEY, currency);//значение - стоимость волюты
+        intent.putExtra(SecondActivity.VALUE_EXTRA_KEY, value);//введенное значение в строку EditText - сколько волюты нужно конвертировать
+
+        context.startActivity(intent);
     }
 
     //Метод принемающий строку EditText и возващает результат (проходит вычисление)
