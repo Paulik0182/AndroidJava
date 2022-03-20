@@ -14,6 +14,9 @@ public class SecondActivity extends AppCompatActivity {
 
     private static final String TAG = "@@@MainSecond : ";
 
+    public static final String CURRENCY_EXTRA_KEY = "currency";
+    public static final String VALUE_EXTRA_KEY = "value";
+
     private Button exitButton = null;
     private TextView resultTextView = null;
 
@@ -33,9 +36,9 @@ public class SecondActivity extends AppCompatActivity {
 
         Intent intent = getIntent();//принимаем intent с первого окна
         //проверка на наличее значений, далее если значение пришли , выполняется код
-        if (intent.hasExtra("currency") && intent.hasExtra("value")) {
-            double currency = intent.getDoubleExtra("currency", 0d);//принимаем значения
-            double value = intent.getDoubleExtra("value", 0d);//принимаем значения
+        if (intent.hasExtra(CURRENCY_EXTRA_KEY) && intent.hasExtra(VALUE_EXTRA_KEY)) {
+            double currency = intent.getDoubleExtra(CURRENCY_EXTRA_KEY, 0d);//принимаем значения
+            double value = intent.getDoubleExtra(VALUE_EXTRA_KEY, 0d);//принимаем значения
 
             //присвоили переменной результат вычисления в методе convert, передали пришедшие значения в метод convert
             double result = convert(value, currency);

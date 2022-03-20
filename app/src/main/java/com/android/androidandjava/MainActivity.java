@@ -80,8 +80,8 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, SecondActivity.class);
 
         //при открытии второго окна кладем дополнительные значения в формате: ключь, значение.
-        intent.putExtra("currency", currency);//значение - стоимость волюты
-        intent.putExtra("value", value);//введенное значение в строку EditText - сколько волюты нужно конвертировать
+        intent.putExtra(SecondActivity.CURRENCY_EXTRA_KEY, currency);//значение - стоимость волюты
+        intent.putExtra(SecondActivity.VALUE_EXTRA_KEY, value);//введенное значение в строку EditText - сколько волюты нужно конвертировать
 
         startActivity(intent);
 
