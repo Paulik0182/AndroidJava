@@ -77,10 +77,12 @@ public class MainActivity extends AppCompatActivity {
         final double currency = getCurrencyFromScreen();
 
         //Открытие второго окна
-        Intent intent = new Intent(MainActivity.this, SecondActivity.class);
+        Intent intent = new Intent(this, SecondActivity.class);
 
         //при открытии второго окна кладем дополнительные значения в формате: ключь, значение.
-        intent.putExtra("currency", value);
+        intent.putExtra("currency", currency);//значение - стоимость волюты
+        intent.putExtra("value", value);//введенное значение в строку EditText - сколько волюты нужно конвертировать
+
         startActivity(intent);
 
         Toast.makeText(MainActivity.this, "Second Activity", Toast.LENGTH_SHORT).show();

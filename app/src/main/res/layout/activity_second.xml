@@ -6,7 +6,7 @@
     tools:context=".SecondActivity">
 
     <TextView
-        android:id="@+id/result_text_view"
+        android:id="@+id/currency_result_text_view"
         style="@style/color_size_style_light_green"
         android:text="@string/result_conversion"
         tools:ignore="SpUsage" />
