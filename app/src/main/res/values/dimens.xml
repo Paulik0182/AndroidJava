@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="result_text_view">40dp</dimen>
+    <dimen name="volute_edit_text">30dp</dimen>
+    <dimen name="margin_left_right">16dp</dimen>
+    <dimen name="margin_top_bottom">8dp</dimen>
+    <dimen name="corner_radius_bottom">30dp</dimen>
+</resources>

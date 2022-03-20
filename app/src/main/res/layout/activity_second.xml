@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/layout"
+    tools:context=".SecondActivity">
+
+    <TextView
+        android:id="@+id/currency_result_text_view"
+        style="@style/color_size_style_light_green"
+        android:text="@string/result_conversion"
+        tools:ignore="SpUsage" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/exit_button"
+        style="@style/button_style_standard"
+        android:text="@string/exit"
+        app:cornerRadius="@dimen/corner_radius_bottom" />
+
+</LinearLayout>
