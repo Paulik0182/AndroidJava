@@ -1,18 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    style="@style/layout"
     tools:context=".MainActivity">
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:id="@+id/result_text_view"
+        style="@style/color_size_style_light_green"
+        android:text="@string/result_conversion"
+        tools:ignore="SpUsage" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <EditText
+        android:id="@+id/input_edit_text"
+        style="@style/color_size_style_black"
+        android:hint="@string/volute"
+        android:inputType="number"
+        tools:ignore="SpUsage" />
+
+    <Button
+        android:id="@+id/result_button"
+        style="@style/button_style_standard"
+        android:text="@string/result_button" />
+
+    <RadioGroup
+        android:id="@+id/currency_radio_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/usa_currency_radio_button"
+            style="@style/button_style_standard"
+            android:checked="true"
+            android:text="@string/usa" />
+
+        <RadioButton
+            android:id="@+id/eur_currency_radio_button"
+            style="@style/button_style_standard"
+            android:text="@string/eur" />
+
+        <RadioButton
+            android:id="@+id/chf_currency_radio_button"
+            style="@style/button_style_standard"
+            android:text="@string/chf" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/open_second_button"
+        style="@style/button_style_standard"
+        android:text="@string/activity_second" />
+</LinearLayout>
