@@ -1,6 +1,6 @@
 package com.android.androidandjava;
 
-import android.content.Context;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,8 +15,9 @@ public class SecondActivity extends AppCompatActivity {
 
     private static final String TAG = "@@@MainSecond : ";
 
-    private static final String CURRENCY_EXTRA_KEY = "currency";
-    private static final String VALUE_EXTRA_KEY = "value";
+    public static final String CURRENCY_EXTRA_KEY = "currency";
+    public static final String VALUE_EXTRA_KEY = "value";
+    public static final String RESULT_EXTRA_KEY = "result";
 
     private Button exitButton = null;
     private TextView resultTextView = null;
@@ -45,20 +46,14 @@ public class SecondActivity extends AppCompatActivity {
             double result = convert(value, currency);
             //передаем в поле полученный результат
             resultTextView.setText(String.valueOf(result));
+
+            Intent data = new Intent();//эта data из метода onActivityResult, это обертка для того чтобы отправить результат обратно
+            setResult(Activity.RESULT_OK, data);
+            data.putExtra(RESULT_EXTRA_KEY, result);// возврат результата
+            //это положительный результат. В данном случае мы всегда делаем конвертацию.
+            // Есть еще RESULT_CANCELED, в этом случае результат обратно не уйдет
+            //Результат зафиксировался, но появится данный результат только после того как Activity будет закрыта
         }
-    }
-
-    //метод позволяющий другим классам обращатся к данному классу (методу) и выполнять определенные действия
-    //разграничивая область знания между классами по принципу - классы должны как можно меньше знать друг о друге.
-    public static void openScreen(Context context, double value, double currency) {
-        //Открытие второго окна (данного класса)
-        Intent intent = new Intent(context, SecondActivity.class);
-
-        //при открытии второго окна кладем дополнительные значения в формате: ключь, значение.
-        intent.putExtra(SecondActivity.CURRENCY_EXTRA_KEY, currency);//значение - стоимость волюты
-        intent.putExtra(SecondActivity.VALUE_EXTRA_KEY, value);//введенное значение в строку EditText - сколько волюты нужно конвертировать
-
-        context.startActivity(intent);
     }
 
     //Метод принемающий строку EditText и возващает результат (проходит вычисление)
